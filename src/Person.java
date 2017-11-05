@@ -10,16 +10,16 @@ public class Person {
     //attributes
     private String name;
     private int wins;
-    private int loss;
+    private int losses;
 
     /**Constructor method
      * @param name the player
      * @param wins of games
-     * @param loss of games*/
-    public Person(String name,int wins,int loss){
+     * @param losses of games*/
+    public Person(String name,int wins,int losses){
         setName(name);
         setWins(wins);
-        setLoss(loss);
+        setLoss(losses);
     }//End of Constructor class
 
 
@@ -43,10 +43,10 @@ public class Person {
 
     /**Mutator method to set the number of losses
      *
-     * @param loss of games
+     * @param losses of games
      */
-    public void setLoss(int loss) {
-        this.loss = loss;
+    public void setLoss(int losses) {
+        this.losses = losses;
     }
 
     /**Accessor method to return the player's name
@@ -70,7 +70,7 @@ public class Person {
      * @return number of losses
      */
     public int getLoss() {
-        return loss;
+        return losses;
     }
 
 
