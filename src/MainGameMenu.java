@@ -8,10 +8,14 @@ import java.awt.event.WindowEvent;
 public class MainGameMenu extends JFrame implements ActionListener{
 
     JMenu gameMenu,playerMenu,fileMenu;
+    Person [] players;//Array of users
+    int count;//No of users in array
 
   public MainGameMenu()
   {
-    Container pane = new Container();
+      newSys();//Creates user array and set count to 0
+
+      Container pane = new Container();
     pane.setLayout(new FlowLayout());
 
     setTitle("Tic Tac Toe");
@@ -48,6 +52,44 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
   }
 
+  public void newSys(){
+     players = new Person[5];
+      count = 0;
+  }
+
+  //Method to register new player for game
+  public void newPlayer()
+  {
+   Person player = new Person();
+  player.setName(JOptionPane.showInputDialog("Please enter a user name for registration"));
+      player.setWins(Integer.parseInt(JOptionPane.showInputDialog("Please enter the starting number of wins(0 recommended)")));
+              player.setLoss(Integer.parseInt(JOptionPane.showInputDialog("Please enter the starting number of losses(0 recommended)")));
+  //player.setWins(0);
+ //player.setLoss(0);
+
+ players[count] = player;
+
+ count++; //Increase users by 1 until list reaches 5.
+  }
+
+
+  //Show list of players in JTextArea
+  public void showUser()
+  {
+      JTextArea jta = new JTextArea();
+      if(count > 0) {
+          jta.setText("Users: \n\n");
+          for (int i = 0; i < count; i++)//Loop of users with list of users available for playing
+             jta.append("User no: " + i + " " + players[i].toString() + "\n");
+             JOptionPane.showMessageDialog(null,jta);
+      }
+      else{
+        JOptionPane.showMessageDialog(null,"There are no users available for play","No users",JOptionPane.ERROR_MESSAGE);
+      }
+  }
+
+
+
  public void createGameMenu(){
       //Creating the menu
   gameMenu = new JMenu("Game");
@@ -72,6 +114,11 @@ public class MainGameMenu extends JFrame implements ActionListener{
         playerMenu.add(item);
 
         item = new JMenuItem("Load User");
+        item.addActionListener(this);
+        playerMenu.add(item);
+
+        playerMenu.addSeparator();//Separates Line between loading user and displaying users.
+        item = new JMenuItem("Display");
         item.addActionListener(this);
         playerMenu.add(item);
 
@@ -102,14 +149,24 @@ public class MainGameMenu extends JFrame implements ActionListener{
                  "diagonal direction in a row to win the game.\nIf no one gets the 3 in one direction and all " +
                  "nine boxes are filled, the game ends in a draw.","Instructions",JOptionPane.INFORMATION_MESSAGE);
      }
+     else if(e.getActionCommand().equals("Exit"))
+     {
+        JOptionPane.showMessageDialog(null,"Quitting the game now. Thank you come again!","Quit",JOptionPane.WARNING_MESSAGE);
+         System.exit(0);
+     }
+   else if(e.getActionCommand().equals("Register User"))
+      {
+       newPlayer();//Link to method
+      }
+      else if(e.getActionCommand().equals("Display"))
+     {
+         showUser();
+     }
+      else if(e.getActionCommand().equals("Load User"))
+     {
 
 
-
-
-
-
-
-
+     }
 
     }
 

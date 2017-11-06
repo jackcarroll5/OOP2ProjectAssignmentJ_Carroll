@@ -12,6 +12,13 @@ public class Person {
     private int wins;
     private int losses;
 
+    public Person()
+    {
+        setName("");
+        setWins(0);
+        setLoss(0);
+    }
+
     /**Constructor method
      * @param name the player
      * @param wins of games
@@ -81,6 +88,6 @@ public class Person {
      */
     @Override
     public String toString() {
-        return String.format("%10s&5d%5d",getName(),getWins(),getLoss());
+        return String.format("%10s%5d%5d",getName(),getWins(),getLoss());
     }
 }//End of class
