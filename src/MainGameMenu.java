@@ -20,7 +20,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
     setTitle("Tic Tac Toe");
     setSize(500,500);
-    setLocation(500,300);
+    setLocation(300,300);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//Default close operation where the app does not close when action performed
 
     createGameMenu();//Adds menus to the MenuBar
@@ -165,6 +165,12 @@ public class MainGameMenu extends JFrame implements ActionListener{
       else if(e.getActionCommand().equals("Load User"))
      {
 
+
+     }
+     else if(e.getActionCommand().equals("Play"))
+     {
+           TicTacToeGame w = new TicTacToeGame();
+           w.setVisible(true);
 
      }
 
