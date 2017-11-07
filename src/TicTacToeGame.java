@@ -15,7 +15,7 @@ public class TicTacToeGame extends JFrame implements ActionListener {
        cPane.setLayout(new FlowLayout());
 
 
-    setSize(500,500);
+    setSize(700,700);
     setTitle("Tic Tac Toe");
     setLocation(300,200);
      setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -69,12 +69,14 @@ public class TicTacToeGame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
        if (e.getActionCommand().equals("Back"))
        {
-
+         dispose();
+      MainGameMenu mnu = new MainGameMenu();
+      mnu.setVisible(true);
 
        }
        else if(e.getActionCommand().equals("Quit"))
        {
-           JOptionPane.showMessageDialog(null,"Quitting the game now. Thank you come again!","Quit",JOptionPane.WARNING_MESSAGE);
+           JOptionPane.showMessageDialog(null,"Shutting the game down. End of Game! Goodbye!","Quit",JOptionPane.WARNING_MESSAGE);
            System.exit(0);
        }
 

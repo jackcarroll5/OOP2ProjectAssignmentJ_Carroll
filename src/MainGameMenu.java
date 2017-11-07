@@ -54,7 +54,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
   public void newSys(){
      players = new Person[5];
-      count = 0;
+      count = 1;
   }
 
   //Method to register new player for game
@@ -79,9 +79,9 @@ public class MainGameMenu extends JFrame implements ActionListener{
       JTextArea jta = new JTextArea();
       if(count > 0) {
           jta.setText("Users: \n\n");
-          for (int i = 0; i < count; i++)//Loop of users with list of users available for playing
+          for (int i = 1; i < count; i++)//Loop of users with list of users available for playing
              jta.append("User no: " + i + " " + players[i].toString() + "\n");
-             JOptionPane.showMessageDialog(null,jta);
+             JOptionPane.showMessageDialog(null,jta,"User List",JOptionPane.INFORMATION_MESSAGE);
       }
       else{
         JOptionPane.showMessageDialog(null,"There are no users available for play","No users",JOptionPane.ERROR_MESSAGE);
@@ -169,6 +169,15 @@ public class MainGameMenu extends JFrame implements ActionListener{
      }
      else if(e.getActionCommand().equals("Play"))
      {
+           dispose();/*Title: How do I close a JFrame while opening another one?
+           Author: Anon
+           Site Owner: stackoverflow.com
+           Date: 2011
+           Code version edited Nov 8'17 at 14:30
+           Availability: https://stackoverflow.com/questions/7256606/jdialog-setvisiblefalse-vs-dispose
+           (Accessed 7 November 2017)
+           Modified: Use dispose() based on JFrame extension
+                      Close down 1 JFrame when opening another JFrame*/
            TicTacToeGame w = new TicTacToeGame();
            w.setVisible(true);
 

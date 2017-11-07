@@ -6,7 +6,7 @@ import java.io.*;
  * @author Jack Carroll
  * version 1.0*/
 
-public class Person {
+public class Person implements PercentWins{
     //attributes
     private String name;
     private int wins;
@@ -81,6 +81,11 @@ public class Person {
     }
 
 
+    @Override
+    public void winsPercentage(float percent) {
+       setWins(getWins() + 1 / 100);
+    }
+
     /**toString method to return current player details
      *
      * @return the name of the player,wins for that player and losses for that player in the game as
@@ -88,6 +93,6 @@ public class Person {
      */
     @Override
     public String toString() {
-        return String.format("%10s%5d%5d",getName(),getWins(),getLoss());
+        return String.format("%6s  Wins%5d:  Losses:%5d   Percentage of Wins:%.2f",getName(),getWins(),getLoss());
     }
 }//End of class
