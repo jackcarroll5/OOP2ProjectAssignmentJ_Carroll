@@ -8,6 +8,8 @@ import java.awt.event.WindowEvent;
 
 public class TicTacToeGame extends JFrame implements ActionListener {
     JMenu options;
+    JPanel panel = new JPanel();//Panel for Tic Tac Toe Grid
+      //Buttons for pressing Xs and Os
 
    public TicTacToeGame(){
 

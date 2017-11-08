@@ -47,7 +47,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
         System.exit(0);
       }
       }
-    });
+    });//End of Window Listener Action to close window in main menu
 
 
   }
@@ -147,7 +147,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
          JOptionPane.showMessageDialog(null,"How to play Tic Tac Toe?\n\n" +
          "The aim of the game is to get 3 consecutive Xs or 3 Os in a horizontal,vertical or a " +
                  "diagonal direction in a row to win the game.\nIf no one gets the 3 in one direction and all " +
-                 "nine boxes are filled, the game ends in a draw.","Instructions",JOptionPane.INFORMATION_MESSAGE);
+                 "nine boxes are filled, the game ends in a draw.\n" +
+                 "This game is only a 2 player game. No AI is used in this game","Instructions",JOptionPane.INFORMATION_MESSAGE);
      }
      else if(e.getActionCommand().equals("Exit"))
      {
@@ -167,6 +168,13 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
 
      }
+
+     else if(e.getActionCommand().equals("Save"))
+     {
+
+
+     }
+
      else if(e.getActionCommand().equals("Play"))
      {
            dispose();/*Title: How do I close a JFrame while opening another one?

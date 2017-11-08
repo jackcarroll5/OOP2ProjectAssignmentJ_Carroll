@@ -12,6 +12,10 @@ public class Person implements PercentWins{
     private int wins;
     private int losses;
 
+
+    /**
+     * Empty argument Constructor for Person
+     */
     public Person()
     {
         setName("");
