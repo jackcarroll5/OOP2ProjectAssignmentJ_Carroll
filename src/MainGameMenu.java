@@ -3,6 +3,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+/**
+* @author Jack Carroll
+        * version 1.0*/
 
 
 public class MainGameMenu extends JFrame implements ActionListener{
@@ -80,7 +83,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
       if(count > 0) {
           jta.setText("Users: \n\n");
           for (int i = 1; i < count; i++)//Loop of users with list of users available for playing
-             jta.append("User no: " + i + " " + players[i].toString() + "\n");
+             jta.append("User no: " + i + "\n" + players[i].toString() + "\n");
              JOptionPane.showMessageDialog(null,jta,"User List",JOptionPane.INFORMATION_MESSAGE);
       }
       else{

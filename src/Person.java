@@ -97,6 +97,6 @@ public class Person implements PercentWins{
      */
     @Override
     public String toString() {
-        return String.format("%6s  Wins%5d:  Losses:%5d   Percentage of Wins:%.2f",getName(),getWins(),getLoss());
+        return String.format("Name: %4s  Wins:%5d  Losses:%5d",getName(),getWins(),getLoss());
     }
 }//End of class
