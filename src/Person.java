@@ -6,7 +6,7 @@ import java.io.*;
  * @author Jack Carroll
  * version 1.0*/
 
-public class Person implements PercentWins{
+public class Person implements PercentWinsAndLosses{
     //attributes
     private String name;
     private int wins;
@@ -85,9 +85,30 @@ public class Person implements PercentWins{
     }
 
 
+    /**To set up the victories if the player wins and forming a percentage of victories
+     * once the player gets 3 consecutive Xs or Os diagonally,vertically or horizontally*/
     @Override
-    public void winsPercentage(float percent) {
-       setWins(getWins() + 1 / 100);
+    public void winsPercentage(int percent) {
+      setWins(getWins() + getLoss()/ (totalGames()) * 100);
+    }
+
+    /**Establishing interface method for incrementing the number of victories
+     * for a player by 1 if the player wins.*/
+    @Override
+    public int updateVictories() {
+        return getWins() + 1;
+    }
+
+    /**Creates method based on interface to increase the number of losses by
+     * 1 if the player loses the game*/
+    @Override
+    public int updateLosses() {
+        return getLoss() + 1;
+    }
+
+    @Override
+    public int totalGames() {
+        return getWins() + getLoss();
     }
 
     /**toString method to return current player details
