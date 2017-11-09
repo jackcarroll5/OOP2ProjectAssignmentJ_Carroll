@@ -6,7 +6,7 @@ import java.io.*;
  * @author Jack Carroll
  * version 1.0*/
 
-public class Person implements PercentWinsAndLosses{
+public class Person extends ButtonPresserXO implements PercentWinsAndLosses{
     //attributes
     private String name;
     private int wins;
@@ -89,7 +89,7 @@ public class Person implements PercentWinsAndLosses{
      * once the player gets 3 consecutive Xs or Os diagonally,vertically or horizontally*/
     @Override
     public void winsPercentage(int percent) {
-      setWins(getWins() + getLoss()/ (totalGames()) * 100);
+      setWins(getWins() + getLoss()/ totalGames() * 100);
     }
 
     /**Establishing interface method for incrementing the number of victories

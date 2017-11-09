@@ -15,85 +15,84 @@ public class TicTacToeGame extends JFrame implements ActionListener {
     JPanel panel = new JPanel();//Panel for Tic Tac Toe Grid
     ButtonPresserXO XOButton[] = new ButtonPresserXO[9];//Buttons for pressing Xs and Os
 
-   public TicTacToeGame(){
+    public TicTacToeGame() {
 
-       Container cPane = new Container();
-       cPane.setLayout(new FlowLayout());
+        Container cPane = new Container();
+        cPane.setLayout(new FlowLayout());
 
-    setSize(700,700);
-    setTitle("Tic Tac Toe");
-    setLocation(300,100);
-     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-       panel.setLayout(new GridLayout(3,3));//Setting up Grid Layout for Tic Tac Toe with the 9 squares in layout.
+        setSize(700, 700);
+        setTitle("Tic Tac Toe");
+        setLocation(300, 100);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        panel.setLayout(new GridLayout(3, 3));//Setting up Grid Layout for Tic Tac Toe with the 9 squares in layout.
 
        /*Adding button array for Tic Tac Toe. Panel adds
        * X and O buttons to the panel for the game, Lined up in the layout
        * of 9 square buttons.*/
-      for (int i = 0; i < 9; i++) {
-          XOButton[i] = new ButtonPresserXO();
-          panel.add(XOButton[i]);
-      }
-   super.add(panel);//Super class = JFrame. Adding panel for X and O Buttons to frame
+        for (int i = 0; i <= 8; i++) {
+            XOButton[i] = new ButtonPresserXO();
+            panel.add(XOButton[i]);
+        }
+        super.add(panel);//Super class = JFrame. Adding panel for X and O Buttons to frame
 
-     optMenu();//Method for options menu in effect
+        optMenu();//Method for options menu in effect
 
-     JMenuBar jmb = new JMenuBar();
-     setJMenuBar(jmb);
-     jmb.add(options);
+        JMenuBar jmb = new JMenuBar();
+        setJMenuBar(jmb);
+        jmb.add(options);
 
-       addWindowListener(new WindowAdapter() {
-           @Override
+
+        addWindowListener(new WindowAdapter() {
+            @Override
       /*When the window is closing, user given a choice to keep playing the game and keep
       the application opened or quit the game and terminate the app.
        */
-           public void windowClosing(WindowEvent e) {
+            public void windowClosing(WindowEvent e) {
 
-               int choice = JOptionPane.showConfirmDialog(null,"Are you sure you want to quit the game?");
-               if(choice == JOptionPane.YES_OPTION) {
-                   JOptionPane.showMessageDialog(null,"Thank you for playing Tic Tac Toe! Bye!","Quitting Game",JOptionPane.CANCEL_OPTION);
-                   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                   System.exit(0);
-               }
-           }
-       });//End of Window Listener class for closing window of game.
-   }//End of TicTacToeGame() class
+                int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit the game?");
+                if (choice == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, "Thank you for playing Tic Tac Toe! Bye!", "Quitting Game", JOptionPane.CANCEL_OPTION);
+                    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                    System.exit(0);
+                }
+            }
+        });//End of Window Listener class for closing window of game.
+    }//End of TicTacToeGame() class
 
-   public void optMenu()
-   {
-     options = new JMenu("Options");
+    public void optMenu() {
+        options = new JMenu("Options");
 
-       JMenuItem item = new JMenuItem("Back");
-       item.addActionListener(this);
-       options.add(item);
+        JMenuItem item = new JMenuItem("Back");
+        item.addActionListener(this);
+        options.add(item);
 
-       item = new JMenuItem("Quit");
-       item.addActionListener(this);
-       options.add(item);
+        item = new JMenuItem("Quit");
+        item.addActionListener(this);
+        options.add(item);
 
-   }//End of optMenu() method
-
+    }//End of optMenu() method
 
 
 
-    public static void main(String[] args) {
-        TicTacToeGame jfw = new TicTacToeGame();
-        jfw.setVisible(true);
-    }//End of main method.
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-       if (e.getActionCommand().equals("Back"))
-       {
-         dispose();//Switching to main menu when you press back by closing down game window and opening main menu window.
-      MainGameMenu mnu = new MainGameMenu();
-      mnu.setVisible(true);
 
-       }
-       else if(e.getActionCommand().equals("Quit"))
-       {
-           JOptionPane.showMessageDialog(null,"Shutting the game down. End of Game! Goodbye!","Quit",JOptionPane.WARNING_MESSAGE);
-           System.exit(0);
-       }
 
-    }//End of method for actionPerformed when pressing menu options.
-}
+        public static void main (String[]args){
+            TicTacToeGame jfw = new TicTacToeGame();
+            jfw.setVisible(true);
+        }//End of main method.
+
+        @Override
+        public void actionPerformed (ActionEvent e){
+            if (e.getActionCommand().equals("Back")) {
+                dispose();//Switching to main menu when you press back by closing down game window and opening main menu window.
+                MainGameMenu mnu = new MainGameMenu();
+                mnu.setVisible(true);
+
+            } else if (e.getActionCommand().equals("Quit")) {
+                JOptionPane.showMessageDialog(null, "Shutting the game down. End of Game! Goodbye!", "Quit", JOptionPane.WARNING_MESSAGE);
+                System.exit(0);
+            }
+
+        }//End of method for actionPerformed when pressing menu options.
+    }

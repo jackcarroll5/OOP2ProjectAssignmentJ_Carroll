@@ -13,17 +13,29 @@ public class MainGameMenu extends JFrame implements ActionListener{
     JMenu gameMenu,playerMenu,fileMenu;
     Person [] players;//Array of users
     int count;//No of users in array
+    JLabel welcome;
+    JButton userAdd,play;
 
   public MainGameMenu()
   {
       newSys();//Creates user array and set count to 0
 
-      Container pane = new Container();
+      Container pane = getContentPane();
     pane.setLayout(new FlowLayout());
+    setLayout(new BorderLayout());//Set up button layout for the shortcut buttons by using border
+
+    welcome = new JLabel();
+    //welcome.setLocation(300,100);
+      welcome.setVerticalAlignment(SwingConstants.VERTICAL);//Moved JLabel to the top of the JFrame
+    welcome.setText("Welcome to Tic Tac Toe! \nPlease choose from the Menu Bar or the shortcuts below and above:");
+    welcome.setFont(new Font("monospaced",Font.PLAIN,14));//Setting up the font for the JLabel in the menu.
+    welcome.setForeground(Color.BLUE);
+    add(welcome);
 
     setTitle("Tic Tac Toe");
-    setSize(500,500);
+    setSize(740,500);
     setLocation(300,300);
+    pane.setBackground(Color.GREEN);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//Default close operation where the app does not close when action performed
 
     createGameMenu();//Adds menus to the MenuBar
@@ -35,6 +47,16 @@ public class MainGameMenu extends JFrame implements ActionListener{
     menuBar.add(gameMenu);
     menuBar.add(playerMenu);
     menuBar.add(fileMenu);
+
+      play = new JButton("Play Game");
+      play.setPreferredSize(new Dimension(10,40));
+      add(play,BorderLayout.PAGE_START);
+
+  userAdd = new JButton("Add User");
+   userAdd.setPreferredSize(new Dimension(10,40));
+    add(userAdd,BorderLayout.SOUTH);
+
+
 
     addWindowListener(new WindowAdapter() {
       @Override
@@ -49,8 +71,29 @@ public class MainGameMenu extends JFrame implements ActionListener{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         System.exit(0);
       }
+      else {
+          JOptionPane.showMessageDialog(null,"Resuming Application","Continue",JOptionPane.INFORMATION_MESSAGE);
+      }
       }
     });//End of Window Listener Action to close window in main menu
+
+
+      userAdd.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              newPlayer();
+          }
+      });
+
+      play.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              dispose();
+              TicTacToeGame w = new TicTacToeGame();
+              w.setVisible(true);
+          }
+      });
+
 
 
   }
@@ -65,8 +108,10 @@ public class MainGameMenu extends JFrame implements ActionListener{
   {
    Person player = new Person();
   player.setName(JOptionPane.showInputDialog("Please enter a user name for registration"));
-      player.setWins(Integer.parseInt(JOptionPane.showInputDialog("Please enter the starting number of wins(0 recommended)")));
-              player.setLoss(Integer.parseInt(JOptionPane.showInputDialog("Please enter the starting number of losses(0 recommended)")));
+  player.setWins(0);
+  player.setLoss(0);
+     // player.setWins(Integer.parseInt(JOptionPane.showInputDialog("Please enter the starting number of wins(0 recommended)")));
+              //player.setLoss(Integer.parseInt(JOptionPane.showInputDialog("Please enter the starting number of losses(0 recommended)")));
   //player.setWins(0);
  //player.setLoss(0);
 
@@ -169,13 +214,13 @@ public class MainGameMenu extends JFrame implements ActionListener{
       else if(e.getActionCommand().equals("Load User"))
      {
 
-
+   JOptionPane.showMessageDialog(null,"File has successfully loaded","Loaded File",JOptionPane.INFORMATION_MESSAGE);
      }
 
      else if(e.getActionCommand().equals("Save"))
      {
 
-
+         JOptionPane.showMessageDialog(null,"Save Successful! File has been saved","Saved File",JOptionPane.INFORMATION_MESSAGE);
      }
 
      else if(e.getActionCommand().equals("Play"))
@@ -197,13 +242,10 @@ public class MainGameMenu extends JFrame implements ActionListener{
     }
 
 
-
-
     public static void main(String[] args)
     {
     MainGameMenu jfw = new MainGameMenu(); //Sets up the JFrame Window
     jfw.setVisible(true);//Displays the JFrame Window to be seen without it being invisible
     }
-
 
 }
