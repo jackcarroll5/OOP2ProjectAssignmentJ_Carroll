@@ -31,8 +31,10 @@ public class ButtonPresserXO extends JButton implements ActionListener{
     public ButtonPresserXO()
     {
         //Getting images for my original X and O Drawings
-       OIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
-       XIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
+       OIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
+        XIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
+        //OIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
+        //XIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
         //OIcon = new ImageIcon("C:\\Users\\T00194823\\Desktop\\OOP2ProjectFolder\\O Image Paint.PNG");
         //XIcon = new ImageIcon("C:\\Users\\T00194823\\Desktop\\OOP2ProjectFolder\\X Image Paint.PNG");
        // XIcon = new ImageIcon("C:\\Users\\Jack\\Pictures\\X Image Paint.PNG");
@@ -48,6 +50,9 @@ public class ButtonPresserXO extends JButton implements ActionListener{
         symbol++;
         //symbol %= 3;
 
+
+        //Doesn't work as cases are set for three symbols including a
+        //null symbol
         /*switch (symbol)
         {
             case 0:
@@ -64,6 +69,9 @@ public class ButtonPresserXO extends JButton implements ActionListener{
         /**Set turns for players 1 and 2 in the game by switching turns
          * on every second go.*/
 
+
+      /*Setting X and O Icons on every click to change the two symbols that are
+      * required for the game.*/
       if(symbol % 2 == 0)
       {
           setIcon(XIcon);
@@ -71,18 +79,35 @@ public class ButtonPresserXO extends JButton implements ActionListener{
      else
           setIcon(OIcon);
 
+      if (symbol == 1 || symbol == 3 || symbol == 5 || symbol == 7 || symbol == 9)
+      {
+          setIcon(XIcon);
+      }
+      else if(symbol == 2 || symbol == 4 || symbol == 6 || symbol == 8)
+      {
+          setIcon(OIcon);
+      }
 
-        /*if()
+
+
+      /*If clause for winning the game if the player gets three xs or os in a diagonal,vertical or horizontal
+       * row*/
+         /* if()
        {
        JOptionPane.showMessageDialog(null,"Well Done! You have won this round. Pat on the back!","Victory",JOptionPane.INFORMATION_MESSAGE);
        user.updateVictories();
-       }
-        else if()
+       }*/
+
+       /*If clause for losing the game if the player does not get three xs or os in a diagonal,vertical or horizontal
+       * row*/
+        /*else if()
         {
         JOptionPane.showMessageDialog(null,"Hard Luck! You have lost this round. Try again!","Lose",JOptionPane.ERROR_MESSAGE);
         user.updateLosses();
-    }
-        else if()
+    }*/
+       /*If clause for a draw if no player gets three xs or os in a diagonal,vertical or horizontal
+       * row and ends up filling all of the squares*/
+       /* else if()
         JOptionPane.showMessageDialog(null,"It's a draw! Great job to both players","Draw",JOptionPane.PLAIN_MESSAGE);*/
 
 

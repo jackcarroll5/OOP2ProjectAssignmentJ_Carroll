@@ -14,7 +14,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
     Person [] players;//Array of users
     int count;//No of users in array
     JLabel welcome;
-    JButton userAdd,play;
+    JButton userAdd,play,display;
 
   public MainGameMenu()
   {
@@ -26,14 +26,14 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
     welcome = new JLabel();
     //welcome.setLocation(300,100);
-      welcome.setVerticalAlignment(SwingConstants.VERTICAL);//Moved JLabel to the top of the JFrame
+      welcome.setVerticalAlignment(SwingConstants.TOP);//Moved JLabel to the top of the JFrame
     welcome.setText("Welcome to Tic Tac Toe! \nPlease choose from the Menu Bar or the shortcuts below and above:");
     welcome.setFont(new Font("monospaced",Font.PLAIN,14));//Setting up the font for the JLabel in the menu.
     welcome.setForeground(Color.BLUE);
     add(welcome);
 
     setTitle("Tic Tac Toe");
-    setSize(740,500);
+    setSize(750,500);
     setLocation(300,300);
     pane.setBackground(Color.GREEN);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//Default close operation where the app does not close when action performed
@@ -49,12 +49,16 @@ public class MainGameMenu extends JFrame implements ActionListener{
     menuBar.add(fileMenu);
 
       play = new JButton("Play Game");
-      play.setPreferredSize(new Dimension(10,40));
+      play.setPreferredSize(new Dimension(8,40));
       add(play,BorderLayout.PAGE_START);
 
   userAdd = new JButton("Add User");
    userAdd.setPreferredSize(new Dimension(10,40));
     add(userAdd,BorderLayout.SOUTH);
+
+      /*display = new JButton("Add User");
+      display.setPreferredSize(new Dimension(10,40));
+      add(display);*/
 
 
 
