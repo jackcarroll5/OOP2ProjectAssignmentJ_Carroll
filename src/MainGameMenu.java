@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.*;
 /**
 * @author Jack Carroll
         * version 1.0*/
@@ -102,6 +103,39 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
   }
 
+  /*Initiate process to save the user file for future use of the game
+  * by placing the user players array into Users.dat*/
+  public void saveUser() throws IOException
+  {
+      File userFile = new File("Users.dat");
+      FileOutputStream fos = new FileOutputStream(userFile);
+      ObjectOutputStream oos = new ObjectOutputStream(fos);
+      oos.writeObject(players);
+      oos.close();
+  }
+
+  /*Loads array of users from Users.dat file*/
+  public void load()
+  {
+      count = 1;
+     try {
+      ObjectInputStream ois;
+      ois = new ObjectInputStream(new FileInputStream("Users.dat"));
+        players = (Person []) ois.readObject();
+        ois.close();
+     }
+       catch (Exception e)
+       {
+         JOptionPane.showMessageDialog(null,"File did not load. Sorry! See if the file name is correctly written",
+                 "Load Failed",JOptionPane.ERROR_MESSAGE);
+           e.printStackTrace();
+       }
+
+     /*Marks valid user accounts*/
+     while(players[count] != null)
+         count++;
+  }
+
   public void newSys(){
      players = new Person[5];
       count = 1;
@@ -185,6 +219,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
         item.addActionListener(this);
         fileMenu.add(item);
 
+        fileMenu.addSeparator();
         item = new JMenuItem("Exit");
         item.addActionListener(this);
         fileMenu.add(item);
@@ -215,17 +250,22 @@ public class MainGameMenu extends JFrame implements ActionListener{
      {
          showUser();
      }
-      else if(e.getActionCommand().equals("Load User"))
-     {
 
-   JOptionPane.showMessageDialog(null,"File has successfully loaded","Loaded File",JOptionPane.INFORMATION_MESSAGE);
-     }
 
      else if(e.getActionCommand().equals("Save"))
      {
+         /*Handling errors for saving with the try-catch block*/
+         try {
+             saveUser();
+             JOptionPane.showMessageDialog(null,"Save Successful! File has been saved","Saved File",JOptionPane.INFORMATION_MESSAGE);
+         }//End of try
+          catch (IOException e1) {
+             JOptionPane.showMessageDialog(null,"File could not be saved! Please" +
+                     "check out console printout for further action","Save Failed!",JOptionPane.ERROR_MESSAGE);
+             e1.printStackTrace();
+         }//End of catch
 
-         JOptionPane.showMessageDialog(null,"Save Successful! File has been saved","Saved File",JOptionPane.INFORMATION_MESSAGE);
-     }
+     }//End of else if for saving array of users.
 
      else if(e.getActionCommand().equals("Play"))
      {
@@ -242,7 +282,14 @@ public class MainGameMenu extends JFrame implements ActionListener{
            w.setVisible(true);
 
      }
-
+     else if(e.getActionCommand().equals("Load User"))
+     {
+         load();
+         JOptionPane.showMessageDialog(null,"File has successfully loaded","Loaded File",JOptionPane.INFORMATION_MESSAGE);
+         showUser();
+     }
+     else
+         JOptionPane.showMessageDialog(null,"No clue about what was chosen","Unknown click",JOptionPane.INFORMATION_MESSAGE);
     }
 
 

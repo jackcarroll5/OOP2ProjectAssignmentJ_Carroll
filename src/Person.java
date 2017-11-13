@@ -1,12 +1,13 @@
+/**Saves the array of Users to the file*/
 import java.io.*;
 
 /**
  * This class will form the details of a person for the OOP2
-* Project on the game It is an Instantiable class.
+* Project on the Tic Tac Toe game. It is an Instantiable class.
  * @author Jack Carroll
  * version 1.0*/
 
-public class Person extends ButtonPresserXO implements PercentWinsAndLosses{
+public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Serializable{ //Serializable required for saving
     //attributes
     private String name;
     private int wins;
