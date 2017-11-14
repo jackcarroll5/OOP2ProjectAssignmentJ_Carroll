@@ -22,7 +22,7 @@ public class TicTacToeGame extends JFrame implements ActionListener {
 
         setSize(700, 700);
         setTitle("Tic Tac Toe");
-        setLocation(300, 100);
+        setLocation(600, 100);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         panel.setLayout(new GridLayout(3, 3));//Setting up Grid Layout for Tic Tac Toe with the 9 squares in layout.
 

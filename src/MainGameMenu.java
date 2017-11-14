@@ -4,6 +4,9 @@ import java.awt.event.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.*;
+
 /**
 * @author Jack Carroll
         * version 1.0*/
@@ -12,7 +15,8 @@ import java.io.*;
 public class MainGameMenu extends JFrame implements ActionListener{
 
     JMenu gameMenu,playerMenu,fileMenu;
-    Person [] players;//Array of users
+    static ArrayList<Person>  players;//Array of users
+
     int count;//No of users in array
     JLabel welcome;
     JButton userAdd,play,display;
@@ -94,12 +98,15 @@ public class MainGameMenu extends JFrame implements ActionListener{
           @Override
           public void actionPerformed(ActionEvent e) {
               dispose();
+              PlayerSelector ps = new PlayerSelector();
+              ps.setVisible(true);
               TicTacToeGame w = new TicTacToeGame();
               w.setVisible(true);
           }
       });
 
-
+      players.add(new Person("Jake",0,0));
+      players.add(new Person("Emily",0,0));
 
   }
 
@@ -120,25 +127,34 @@ public class MainGameMenu extends JFrame implements ActionListener{
       count = 1;
      try {
       ObjectInputStream ois;
-      ois = new ObjectInputStream(new FileInputStream("Users.dat"));
-        players = (Person []) ois.readObject();
+        ois = new ObjectInputStream(new FileInputStream("Users.dat"));
+        players = (ArrayList<Person>) ois.readObject();
         ois.close();
+     }
+     catch (FileNotFoundException e)
+     {
+         JOptionPane.showMessageDialog(null,"File could not be found. Sorry! See if file name is correctly written",
+                 "Load Failed",JOptionPane.ERROR_MESSAGE);
+         e.printStackTrace();
+     }
+     catch (IOException e)
+     {
+         JOptionPane.showMessageDialog(null,"File did not load. Sorry!",
+                 "Load Failed",JOptionPane.ERROR_MESSAGE);
+         e.printStackTrace();
      }
        catch (Exception e)
        {
-         JOptionPane.showMessageDialog(null,"File did not load. Sorry! See if the file name is correctly written",
+         JOptionPane.showMessageDialog(null,"File did not load. Sorry!",
                  "Load Failed",JOptionPane.ERROR_MESSAGE);
            e.printStackTrace();
        }
 
-     /*Marks valid user accounts*/
-     while(players[count] != null)
-         count++;
   }
 
   public void newSys(){
-     players = new Person[5];
-      count = 1;
+     players = new ArrayList<>();
+
   }
 
   //Method to register new player for game
@@ -153,7 +169,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
   //player.setWins(0);
  //player.setLoss(0);
 
- players[count] = player;
+ players.add(player);
 
  count++; //Increase users by 1 until list reaches 5.
   }
@@ -165,8 +181,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
       JTextArea jta = new JTextArea();
       if(count > 0) {
           jta.setText("Users: \n\n");
-          for (int i = 1; i < count; i++)//Loop of users with list of users available for playing
-             jta.append("User no: " + i + "\n" + players[i].toString() + "\n");
+          for (int i = 1; i < players.size(); i++)//Loop of users with list of users available for playing
+             jta.append("User no: " + i + "\n" + players.get(i).toString() + "\n");
              JOptionPane.showMessageDialog(null,jta,"User List",JOptionPane.INFORMATION_MESSAGE);
       }
       else{
@@ -176,6 +192,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
 
 
+  //Create the Game menu segment containing the items to play the game and display the rules of the game
  public void createGameMenu(){
       //Creating the menu
   gameMenu = new JMenu("Game");
@@ -278,6 +295,9 @@ public class MainGameMenu extends JFrame implements ActionListener{
            (Accessed 7 November 2017)
            Modified: Use dispose() based on JFrame extension
                       Close down 1 JFrame when opening another JFrame*/
+
+          PlayerSelector ps = new PlayerSelector();
+          ps.setVisible(true);
            TicTacToeGame w = new TicTacToeGame();
            w.setVisible(true);
 
