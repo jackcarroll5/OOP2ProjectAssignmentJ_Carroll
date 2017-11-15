@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.*;
 import java.awt.*;
 import java.awt.Event.*;
@@ -26,19 +27,25 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
  private ImageIcon OIcon,XIcon;
  private int symbol = 0; //Represents cases for the numerous symbols of nothing,X and O.
-    Person user = new Person();
+    //Person user = new Person();
 
     public ButtonPresserXO()
     {
+        /*Make sure that image is in right folder and file pathname is correct. If image can't show up
+        * type in correct file that image is found for O Image Paint.PNG and X Image Paint.PNG */
         //Getting images for my original X and O Drawings
+        //OIcon = new ImageIcon("OOP2ProjectFolder\\O Image Paint.PNG");
+        // XIcon = new ImageIcon("OOP2ProjectFolder\\X Image Paint.PNG");
        //OIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
-       // XIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
+       //XIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
         OIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
         XIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
-        //OIcon = new ImageIcon("C:\\Users\\T00194823\\Desktop\\OOP2ProjectFolder\\O Image Paint.PNG");
-        //XIcon = new ImageIcon("C:\\Users\\T00194823\\Desktop\\OOP2ProjectFolder\\X Image Paint.PNG");
-       // XIcon = new ImageIcon("C:\\Users\\Jack\\Pictures\\X Image Paint.PNG");
-        //OIcon = new ImageIcon("C:\\Users\\Jack\\Pictures\\O Image Paint.PNG");
+        //OIcon = new ImageIcon("C:\\Users\\ \\Desktop\\OOP2ProjectFolder\\O Image Paint.PNG");
+        //XIcon = new ImageIcon("C:\\Users\\ \\Desktop\\OOP2ProjectFolder\\X Image Paint.PNG");
+       // XIcon = new ImageIcon("C:\\Users\\ \\Pictures\\X Image Paint.PNG");
+        //OIcon = new ImageIcon("C:\\Users\\ \\Pictures\\O Image Paint.PNG");
+
+
         this.addActionListener(this);
     }
 

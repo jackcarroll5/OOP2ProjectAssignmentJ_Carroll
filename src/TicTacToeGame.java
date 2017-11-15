@@ -77,7 +77,7 @@ public class TicTacToeGame extends JFrame implements ActionListener {
 
 
 
-        public static void main (String[]args){
+        public static void main (String[] args){
             TicTacToeGame jfw = new TicTacToeGame();
             jfw.setVisible(true);
         }//End of main method.
@@ -86,6 +86,8 @@ public class TicTacToeGame extends JFrame implements ActionListener {
         public void actionPerformed (ActionEvent e){
             if (e.getActionCommand().equals("Back")) {
                 dispose();//Switching to main menu when you press back by closing down game window and opening main menu window.
+                PlayerSelector playerSelector = new PlayerSelector();
+                playerSelector.setVisible(true);
                 MainGameMenu mnu = new MainGameMenu();
                 mnu.setVisible(true);
 

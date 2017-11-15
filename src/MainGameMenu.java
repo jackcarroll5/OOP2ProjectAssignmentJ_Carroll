@@ -16,10 +16,10 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
     JMenu gameMenu,playerMenu,fileMenu;
     static ArrayList<Person>  players;//Array of users
-
     int count;//No of users in array
     JLabel welcome;
     JButton userAdd,play,display;
+    ImageIcon XOPic;
 
   public MainGameMenu()
   {
@@ -38,8 +38,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
     add(welcome);
 
     setTitle("Tic Tac Toe");
-    setSize(750,500);
-    setLocation(300,300);
+    setSize(750,775);
+    setLocation(300,100);
     pane.setBackground(Color.GREEN);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//Default close operation where the app does not close when action performed
 
@@ -54,12 +54,17 @@ public class MainGameMenu extends JFrame implements ActionListener{
     menuBar.add(fileMenu);
 
       play = new JButton("Play Game");
-      play.setPreferredSize(new Dimension(8,40));
+      play.setPreferredSize(new Dimension(4,25));
       add(play,BorderLayout.PAGE_START);
 
   userAdd = new JButton("Add User");
-   userAdd.setPreferredSize(new Dimension(10,40));
+   userAdd.setPreferredSize(new Dimension(10,25));
     add(userAdd,BorderLayout.SOUTH);
+
+     JLabel XOPic = new JLabel(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Picture.PNG"));
+     add(XOPic,BorderLayout.CENTER);
+     XOPic.setSize(300,300);
+     XOPic.setBounds(10,10,10,10);
 
       /*display = new JButton("Add User");
       display.setPreferredSize(new Dimension(10,40));
@@ -87,22 +92,14 @@ public class MainGameMenu extends JFrame implements ActionListener{
     });//End of Window Listener Action to close window in main menu
 
 
-      userAdd.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-              newPlayer();
-          }
-      });
+      userAdd.addActionListener(e -> newPlayer());
 
-      play.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-              dispose();
-              PlayerSelector ps = new PlayerSelector();
-              ps.setVisible(true);
-              TicTacToeGame w = new TicTacToeGame();
-              w.setVisible(true);
-          }
+      play.addActionListener(e -> {
+          dispose();
+          PlayerSelector ps = new PlayerSelector();
+          ps.setVisible(true);
+          TicTacToeGame w = new TicTacToeGame();
+          w.setVisible(true);
       });
 
       players.add(new Person("Jake",0,0));
@@ -162,6 +159,12 @@ public class MainGameMenu extends JFrame implements ActionListener{
   {
    Person player = new Person();
   player.setName(JOptionPane.showInputDialog("Please enter a user name for registration"));
+  if(player.getName().equals(""))
+  {
+      JOptionPane.showMessageDialog(null,"The person's name has not been entered. Please fill in a name!","No name",
+              JOptionPane.ERROR_MESSAGE);
+      newPlayer();
+  }
   player.setWins(0);
   player.setLoss(0);
      // player.setWins(Integer.parseInt(JOptionPane.showInputDialog("Please enter the starting number of wins(0 recommended)")));

@@ -17,7 +17,7 @@ public class PlayerSelector extends JFrame implements ActionListener {
 
  public PlayerSelector()
  {
-     setSize(400,300);
+     setSize(400,200);
      setTitle("Select Player");
      setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
      setLayout(new FlowLayout());
@@ -33,7 +33,6 @@ public class PlayerSelector extends JFrame implements ActionListener {
 
 
      userbox.setVisible(true);
-
      {
          userbox.setSelectedIndex(1);
      }
@@ -42,6 +41,7 @@ public class PlayerSelector extends JFrame implements ActionListener {
 
 
      ok = new JButton("Select");
+     ok.setPreferredSize(new Dimension(300,100));
      add(ok);
      ok.addActionListener(this);
 
@@ -52,9 +52,14 @@ public class PlayerSelector extends JFrame implements ActionListener {
         app.setVisible(true);
     }
 
+
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
+       userbox.getSelectedItem();
 
+    };
 
-    }
 }
+
