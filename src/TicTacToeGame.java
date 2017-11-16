@@ -55,6 +55,9 @@ public class TicTacToeGame extends JFrame implements ActionListener {
                     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                     System.exit(0);
                 }
+                else {
+                    JOptionPane.showMessageDialog(null,"Resuming Game","Continue Game",JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });//End of Window Listener class for closing window of game.
     }//End of TicTacToeGame() class

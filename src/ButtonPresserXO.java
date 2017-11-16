@@ -36,10 +36,10 @@ public class ButtonPresserXO extends JButton implements ActionListener{
         //Getting images for my original X and O Drawings
         //OIcon = new ImageIcon("OOP2ProjectFolder\\O Image Paint.PNG");
         // XIcon = new ImageIcon("OOP2ProjectFolder\\X Image Paint.PNG");
-       //OIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
-       //XIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
-        OIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
-        XIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
+       OIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
+       XIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
+        //OIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
+        //XIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
         //OIcon = new ImageIcon("C:\\Users\\ \\Desktop\\OOP2ProjectFolder\\O Image Paint.PNG");
         //XIcon = new ImageIcon("C:\\Users\\ \\Desktop\\OOP2ProjectFolder\\X Image Paint.PNG");
        // XIcon = new ImageIcon("C:\\Users\\ \\Pictures\\X Image Paint.PNG");
@@ -96,11 +96,21 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
       /*If clause for winning the game if the player gets three xs or os in a diagonal,vertical or horizontal
        * row*/
-         /* if()
+          /*if()
        {
-       JOptionPane.showMessageDialog(null,"Well Done! You have won this round. Pat on the back! "+
-               "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
        user.updateVictories();
+       repeat = JOptionPane.showConfirmDialog(null,"Well Done! You have won this round. Pat on the back! "+
+               "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
+                if(repeat == JOptionPane.YES_OPTION) {
+        TicTacToeGame ttt = new TicTacToeGame();
+        ttt.dispose();
+        new TicTacToeGame();
+      }
+      else {
+          JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
+          TicTacToeGame ttt = new TicTacToeGame();
+          ttt.setVisible(true);
+         }
        }*/
 
 
@@ -109,25 +119,39 @@ public class ButtonPresserXO extends JButton implements ActionListener{
        * row*/
         /*else if()
         {
-        JOptionPane.showConfirmDialog(null,"Hard Luck! You have lost this round. Try again!" +
+        user.updateLosses();
+        repeat = JOptionPane.showConfirmDialog(null,"Hard Luck! You have lost this round. Try again!" +
                 "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
-               user.updateLosses();
+                 if(repeat == JOptionPane.YES_OPTION) {
+        TicTacToeGame ttt = new TicTacToeGame();
+        ttt.dispose();
+        new TicTacToeGame();
+      }
+      else {
+          JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
+          TicTacToeGame ttt = new TicTacToeGame();
+          ttt.setVisible(true);
+      }
+
     }*/
 
 
        /*If clause for a draw if no player gets three xs or os in a diagonal,vertical or horizontal
        * row and ends up filling all of the squares*/
-        /*else if() {
+       /* else if() {
         repeat = JOptionPane.showConfirmDialog(null,"It's a draw! Great job to both players" +
                 "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
-
-
+                 if(repeat == JOptionPane.YES_OPTION) {
+        TicTacToeGame ttt = new TicTacToeGame();
+        ttt.dispose();
+        new TicTacToeGame();
+      }
+      else {
+          JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
+          TicTacToeGame ttt = new TicTacToeGame();
+          ttt.setVisible(true);
+      }
 
     }*/
-
-
-
-
-
     }
 }

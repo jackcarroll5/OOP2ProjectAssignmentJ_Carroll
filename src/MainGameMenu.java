@@ -18,8 +18,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
     static ArrayList<Person>  players;//Array of users
     int count;//No of users in array
     JLabel welcome;
-    JButton userAdd,play,display;
-    ImageIcon XOPic;
+    JButton userAdd,play;
 
   public MainGameMenu()
   {
@@ -61,7 +60,10 @@ public class MainGameMenu extends JFrame implements ActionListener{
    userAdd.setPreferredSize(new Dimension(10,25));
     add(userAdd,BorderLayout.SOUTH);
 
-     JLabel XOPic = new JLabel(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Picture.PNG"));
+    /*Set up a decorative XO Image in the centre of the main menu to replace JLabel. No text needed.
+    * Picture makes user aware of the game to play*/
+    // JLabel XOPic = new JLabel(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Picture.PNG"));
+      JLabel XOPic = new JLabel(new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Picture.PNG"));
      add(XOPic,BorderLayout.CENTER);
      XOPic.setSize(300,300);
      XOPic.setBounds(10,10,10,10);

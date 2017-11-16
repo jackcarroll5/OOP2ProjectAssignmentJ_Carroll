@@ -55,6 +55,9 @@ public class PlayerSelector extends JFrame implements ActionListener {
 
 
 
+
+    /*Intended to select player and save its details while the game is played
+    * Player 2 should then be selected*/
     @Override
     public void actionPerformed(ActionEvent e) {
        userbox.getSelectedItem();
