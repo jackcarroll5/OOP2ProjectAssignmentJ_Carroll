@@ -17,7 +17,6 @@ public class MainGameMenu extends JFrame implements ActionListener{
     JMenu gameMenu,playerMenu,fileMenu;
     static ArrayList<Person>  players;//Array of users
     int count;//No of users in array
-    JLabel welcome;
     JButton userAdd,play;
 
   public MainGameMenu()
@@ -28,16 +27,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
     pane.setLayout(new FlowLayout());
     setLayout(new BorderLayout());//Set up button layout for the shortcut buttons by using border
 
-    welcome = new JLabel();
-    //welcome.setLocation(300,100);
-      welcome.setVerticalAlignment(SwingConstants.TOP);//Moved JLabel to the top of the JFrame
-    welcome.setText("Welcome to Tic Tac Toe! \nPlease choose from the Menu Bar or the shortcuts below and above:");
-    welcome.setFont(new Font("monospaced",Font.PLAIN,14));//Setting up the font for the JLabel in the menu.
-    welcome.setForeground(Color.BLUE);
-    add(welcome);
-
     setTitle("Tic Tac Toe");
-    setSize(750,775);
+    setSize(575,760);
     setLocation(300,100);
     pane.setBackground(Color.GREEN);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//Default close operation where the app does not close when action performed
@@ -61,9 +52,9 @@ public class MainGameMenu extends JFrame implements ActionListener{
     add(userAdd,BorderLayout.SOUTH);
 
     /*Set up a decorative XO Image in the centre of the main menu to replace JLabel. No text needed.
-    * Picture makes user aware of the game to play*/
-    // JLabel XOPic = new JLabel(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Picture.PNG"));
-      JLabel XOPic = new JLabel(new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Picture.PNG"));
+    * Picture makes user aware of the game that is going to be played*/
+     JLabel XOPic = new JLabel(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Picture.PNG"));
+      //JLabel XOPic = new JLabel(new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Picture.PNG"));
      add(XOPic,BorderLayout.CENTER);
      XOPic.setSize(300,300);
      XOPic.setBounds(10,10,10,10);
@@ -94,8 +85,10 @@ public class MainGameMenu extends JFrame implements ActionListener{
     });//End of Window Listener Action to close window in main menu
 
 
+      //Switches to new player registration when add user button is selected
       userAdd.addActionListener(e -> newPlayer());
 
+      //Switches to new game along with the player selector menu when the play button is pressed.
       play.addActionListener(e -> {
           dispose();
           PlayerSelector ps = new PlayerSelector();
@@ -104,6 +97,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
           w.setVisible(true);
       });
 
+      //Example of Players for the game to be added alongside the array list of the remaining users
       players.add(new Person("Jake",0,0));
       players.add(new Person("Emily",0,0));
 
@@ -135,14 +129,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
          JOptionPane.showMessageDialog(null,"File could not be found. Sorry! See if file name is correctly written",
                  "Load Failed",JOptionPane.ERROR_MESSAGE);
          e.printStackTrace();
-     }
-     catch (IOException e)
-     {
-         JOptionPane.showMessageDialog(null,"File did not load. Sorry!",
-                 "Load Failed",JOptionPane.ERROR_MESSAGE);
-         e.printStackTrace();
-     }
-       catch (Exception e)
+     } catch (Exception e)
        {
          JOptionPane.showMessageDialog(null,"File did not load. Sorry!",
                  "Load Failed",JOptionPane.ERROR_MESSAGE);
@@ -186,7 +173,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
       JTextArea jta = new JTextArea();
       if(count > 0) {
           jta.setText("Users: \n\n");
-          for (int i = 1; i < players.size(); i++)//Loop of users with list of users available for playing
+          for (int i = 1; i < players.size(); i++)//Loop of users with array list of users available for playing
              jta.append("User no: " + i + "\n" + players.get(i).toString() + "\n");
              JOptionPane.showMessageDialog(null,jta,"User List",JOptionPane.INFORMATION_MESSAGE);
       }
@@ -199,7 +186,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
   //Create the Game menu segment containing the items to play the game and display the rules of the game
  public void createGameMenu(){
-      //Creating the menu
+      //Creating the Game menu
   gameMenu = new JMenu("Game");
 
  JMenuItem item = new JMenuItem("Play");
@@ -214,7 +201,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
  }
 
     public void createPlayerMenu(){
-        //Creating the menu
+        //Creating the Player menu
         playerMenu = new JMenu("User");
 
         JMenuItem item = new JMenuItem("Register User");
@@ -234,7 +221,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
     }
 
     public void createFileMenu(){
-        //Creating the menu
+        //Creating the File menu
         fileMenu = new JMenu("File");
 
         JMenuItem item = new JMenuItem("Save");
@@ -245,8 +232,6 @@ public class MainGameMenu extends JFrame implements ActionListener{
         item = new JMenuItem("Exit");
         item.addActionListener(this);
         fileMenu.add(item);
-
-
     }
 
 
@@ -255,9 +240,10 @@ public class MainGameMenu extends JFrame implements ActionListener{
      if (e.getActionCommand().equals("Info")){ //If Info button pressed,Message shows up of how to play game
          JOptionPane.showMessageDialog(null,"How to play Tic Tac Toe?\n\n" +
          "The aim of the game is to get 3 consecutive Xs or 3 Os in a horizontal,vertical or a " +
-                 "diagonal direction in a row to win the game.\nIf no one gets the 3 in one direction and all " +
+                 "diagonal direction in a row to win the game.\nOne player uses the X while the other uses the O.\nIf no one gets the 3 in one direction and all " +
                  "nine boxes are filled, the game ends in a draw.\n" +
-                 "This game is only a 2 player game. No AI is used in this game","Instructions",JOptionPane.INFORMATION_MESSAGE);
+                 "This game is only a 2 player game. No AI is used in this game" +
+                 "\nBest of Luck with the game!","Instructions",JOptionPane.INFORMATION_MESSAGE);
      }
      else if(e.getActionCommand().equals("Exit"))
      {
@@ -286,7 +272,6 @@ public class MainGameMenu extends JFrame implements ActionListener{
                      "check out console printout for further action","Save Failed!",JOptionPane.ERROR_MESSAGE);
              e1.printStackTrace();
          }//End of catch
-
      }//End of else if for saving array of users.
 
      else if(e.getActionCommand().equals("Play"))
@@ -307,6 +292,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
            w.setVisible(true);
 
      }
+     //Method to load up user files when Load Menu item is pressed and shows the loaded users from the program
      else if(e.getActionCommand().equals("Load User"))
      {
          load();

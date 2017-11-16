@@ -13,19 +13,19 @@ import java.util.ArrayList;
 public class PlayerSelector extends JFrame implements ActionListener {
    JComboBox userbox;
    ArrayList <Person> players;
-   JButton ok;
 
  public PlayerSelector()
  {
      setSize(400,200);
-     setTitle("Select Player");
+     setTitle("Select Player ");
      setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
      setLayout(new FlowLayout());
 
-     players = MainGameMenu.players;
+     players = MainGameMenu.players; //Array for the users to be shown in the drop down menu
 
-     userbox = new JComboBox();
+     userbox = new JComboBox(); //Create combo box to display the players in the drop down menu.
 
+     /*User Items are added to the combo box using the enhanced for loop*/
      for (Person p : players)
      {
          userbox.addItem(p);
@@ -34,16 +34,10 @@ public class PlayerSelector extends JFrame implements ActionListener {
 
      userbox.setVisible(true);
      {
-         userbox.setSelectedIndex(1);
+         userbox.setSelectedIndex(1); //Presets first item of the first user added to the program
      }
      userbox.addActionListener(this);
      add(userbox);
-
-
-     ok = new JButton("Select");
-     ok.setPreferredSize(new Dimension(300,100));
-     add(ok);
-     ok.addActionListener(this);
 
  }
 
@@ -55,14 +49,14 @@ public class PlayerSelector extends JFrame implements ActionListener {
 
 
 
-
     /*Intended to select player and save its details while the game is played
-    * Player 2 should then be selected*/
+    * Player 2 should then be selected
+    * Allows the selection box to disappear once the user is selected*/
     @Override
     public void actionPerformed(ActionEvent e) {
-       userbox.getSelectedItem();
-
-    };
+       userbox.setSelectedItem(players);
+       setVisible(false);
+    }
 
 }
 

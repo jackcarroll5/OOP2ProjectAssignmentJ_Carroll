@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
 import java.util.*;
 import java.awt.*;
 import java.awt.Event.*;
@@ -10,7 +9,7 @@ import java.awt.Event.*;
  * @author Jack Carroll
  * version 1.0*/
 
-/**
+/**Reference 1
  * Title: Java Swing #2 "Grid Layout & Action Listener" Tutorial
  * Author: Arend Peter C(Arend Peter Teaches = Channel)
  * Site Owner/sponsor: youtube.com
@@ -27,24 +26,27 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
  private ImageIcon OIcon,XIcon;
  private int symbol = 0; //Represents cases for the numerous symbols of nothing,X and O.
-    //Person user = new Person();
+    Person user;
+    int repeat = 100;
+    int switchTurn = 0;//Represents the player's turns
 
     public ButtonPresserXO()
     {
         /*Make sure that image is in right folder and file pathname is correct. If image can't show up
         * type in correct file that image is found for O Image Paint.PNG and X Image Paint.PNG */
+
         //Getting images for my original X and O Drawings
+
         //OIcon = new ImageIcon("OOP2ProjectFolder\\O Image Paint.PNG");
         // XIcon = new ImageIcon("OOP2ProjectFolder\\X Image Paint.PNG");
-       OIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
-       XIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
-        //OIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
-        //XIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
+      // OIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
+       //XIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
+        OIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
+        XIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
         //OIcon = new ImageIcon("C:\\Users\\ \\Desktop\\OOP2ProjectFolder\\O Image Paint.PNG");
         //XIcon = new ImageIcon("C:\\Users\\ \\Desktop\\OOP2ProjectFolder\\X Image Paint.PNG");
        // XIcon = new ImageIcon("C:\\Users\\ \\Pictures\\X Image Paint.PNG");
         //OIcon = new ImageIcon("C:\\Users\\ \\Pictures\\O Image Paint.PNG");
-
 
         this.addActionListener(this);
     }
@@ -53,7 +55,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        int repeat = 100;
+
         /*Add X and O symbol when button is pressed.
         * Cases apply for the different symbols*/
         symbol++;
@@ -76,27 +78,29 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
 
         /**Set turns for players 1 and 2 in the game by switching turns
-         * on every second go.*/
-
-
-      /*Setting X and O Icons on every click to change the two symbols that are
+         * on every second go.
+      *Setting X and O Icons on every click to change the two symbols that are
       * required for the game.*/
-        if (symbol % 2 == 0) {
-            setIcon(XIcon);
-        } else
-            setIcon(OIcon);
 
-        if (symbol == 1 || symbol == 3 || symbol == 5 || symbol == 7 || symbol == 9) {
+
+        /*Switching turns between players 1 and 2*/
+        /*if (symbol == 1 || symbol == 3 || symbol == 5 || symbol == 7 || symbol == 9) {
             setIcon(XIcon);
         } else if (symbol == 2 || symbol == 4 || symbol == 6 || symbol == 8) {
             setIcon(OIcon);
-        }
+        }*/
+
+        /*Easier code to switch turns between Players 1 and 2 to alter the shapes on every click*/
+        if (symbol == 1 || symbol == 3 || symbol == 5 || symbol == 7 || symbol == 9) {
+            setIcon(XIcon);
+        } else
+            setIcon(OIcon);
 
 
 
       /*If clause for winning the game if the player gets three xs or os in a diagonal,vertical or horizontal
        * row*/
-          /*if()
+          if(symbol == 8)
        {
        user.updateVictories();
        repeat = JOptionPane.showConfirmDialog(null,"Well Done! You have won this round. Pat on the back! "+
@@ -104,20 +108,20 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                 if(repeat == JOptionPane.YES_OPTION) {
         TicTacToeGame ttt = new TicTacToeGame();
         ttt.dispose();
-        new TicTacToeGame();
+
       }
       else {
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
           TicTacToeGame ttt = new TicTacToeGame();
           ttt.setVisible(true);
          }
-       }*/
+       }
 
 
 
        /*If clause for losing the game if the player does not get three xs or os in a diagonal,vertical or horizontal
        * row*/
-        /*else if()
+        else if(symbol == 8)
         {
         user.updateLosses();
         repeat = JOptionPane.showConfirmDialog(null,"Hard Luck! You have lost this round. Try again!" +
@@ -125,7 +129,6 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                  if(repeat == JOptionPane.YES_OPTION) {
         TicTacToeGame ttt = new TicTacToeGame();
         ttt.dispose();
-        new TicTacToeGame();
       }
       else {
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
@@ -133,25 +136,29 @@ public class ButtonPresserXO extends JButton implements ActionListener{
           ttt.setVisible(true);
       }
 
-    }*/
-
+    }
 
        /*If clause for a draw if no player gets three xs or os in a diagonal,vertical or horizontal
        * row and ends up filling all of the squares*/
-       /* else if() {
-        repeat = JOptionPane.showConfirmDialog(null,"It's a draw! Great job to both players" +
+     else if(symbol == 9) {
+        repeat = JOptionPane.showConfirmDialog(null,"It's a draw! Great job to both players." +
                 "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
                  if(repeat == JOptionPane.YES_OPTION) {
         TicTacToeGame ttt = new TicTacToeGame();
         ttt.dispose();
-        new TicTacToeGame();
+
+
       }
       else {
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
           TicTacToeGame ttt = new TicTacToeGame();
-          ttt.setVisible(true);
+          ttt.dispose();
+          MainGameMenu TicTT = new MainGameMenu();
+          TicTT.setVisible(true);
       }
 
-    }*/
     }
+    }
+
 }
+

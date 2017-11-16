@@ -41,7 +41,6 @@ public class TicTacToeGame extends JFrame implements ActionListener {
         setJMenuBar(jmb);
         jmb.add(options);
 
-
         addWindowListener(new WindowAdapter() {
             @Override
       /*When the window is closing, user given a choice to keep playing the game and keep
@@ -76,10 +75,6 @@ public class TicTacToeGame extends JFrame implements ActionListener {
     }//End of optMenu() method
 
 
-
-
-
-
         public static void main (String[] args){
             TicTacToeGame jfw = new TicTacToeGame();
             jfw.setVisible(true);
@@ -90,7 +85,7 @@ public class TicTacToeGame extends JFrame implements ActionListener {
             if (e.getActionCommand().equals("Back")) {
                 dispose();//Switching to main menu when you press back by closing down game window and opening main menu window.
                 PlayerSelector playerSelector = new PlayerSelector();
-                playerSelector.setVisible(true);
+                playerSelector.setVisible(false);
                 MainGameMenu mnu = new MainGameMenu();
                 mnu.setVisible(true);
 
