@@ -27,6 +27,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
     pane.setLayout(new FlowLayout());
     setLayout(new BorderLayout());//Set up button layout for the shortcut buttons by using border
 
+
+     setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());//Sets up icon for the game at the top corner of the app
     setTitle("Tic Tac Toe");
     setSize(575,760);
     setLocation(300,100);
@@ -59,9 +61,6 @@ public class MainGameMenu extends JFrame implements ActionListener{
      XOPic.setSize(300,300);
      XOPic.setBounds(10,10,10,10);
 
-      /*display = new JButton("Add User");
-      display.setPreferredSize(new Dimension(10,40));
-      add(display);*/
 
 
 

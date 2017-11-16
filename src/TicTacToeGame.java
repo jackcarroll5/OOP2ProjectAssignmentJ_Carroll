@@ -20,6 +20,7 @@ public class TicTacToeGame extends JFrame implements ActionListener {
         Container cPane = new Container();
         cPane.setLayout(new FlowLayout());
 
+        setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
         setSize(700, 700);
         setTitle("Tic Tac Toe");
         setLocation(600, 100);
@@ -31,6 +32,12 @@ public class TicTacToeGame extends JFrame implements ActionListener {
        * of 9 square buttons.*/
         for (int i = 0; i <= 8; i++) {
             XOButton[i] = new ButtonPresserXO();
+
+            XOButton[i].addActionListener(e -> {
+
+
+
+            });
             panel.add(XOButton[i]);
         }
         super.add(panel);//Super class = JFrame. Adding panel for X and O Buttons to frame

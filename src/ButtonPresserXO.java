@@ -24,12 +24,11 @@ import java.awt.Event.*;
 
 public class ButtonPresserXO extends JButton implements ActionListener{
 
- private ImageIcon OIcon,XIcon;
- private int symbol = 0; //Represents cases for the numerous symbols of nothing,X and O.
+ private ImageIcon OIcon,XIcon,letter;
     Person user;
     int repeat = 100;
-    int switchTurn = 0;//Represents the player's turns
-
+   private int switchTurn = 0;//Represents the player's turns
+    //Represents cases for the numerous symbols of nothing,X and O.
     public ButtonPresserXO()
     {
         /*Make sure that image is in right folder and file pathname is correct. If image can't show up
@@ -58,7 +57,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
         /*Add X and O symbol when button is pressed.
         * Cases apply for the different symbols*/
-        symbol++;
+        switchTurn++;
         //symbol %= 3;
 
 
@@ -91,29 +90,46 @@ public class ButtonPresserXO extends JButton implements ActionListener{
         }*/
 
         /*Easier code to switch turns between Players 1 and 2 to alter the shapes on every click*/
-        if (symbol == 1 || symbol == 3 || symbol == 5 || symbol == 7 || symbol == 9) {
+        /*if (symbol == 1 || symbol == 3 || symbol == 5 || symbol == 7 || symbol == 9) {
             setIcon(XIcon);
         } else
+            setIcon(OIcon);*/
+
+        /*Switching turns between players 1 and 2*/
+        if(switchTurn % 2 == 1)
+        {
+            setIcon(XIcon);
+            JOptionPane.showMessageDialog(null,"Player 2's Turn","P2 Turn",
+                   JOptionPane.INFORMATION_MESSAGE);
+
+        }
+        if(switchTurn % 2 == 0)
+        {
             setIcon(OIcon);
+            JOptionPane.showMessageDialog(null,"Player 1's Turn","P1 Turn",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
 
 
 
       /*If clause for winning the game if the player gets three xs or os in a diagonal,vertical or horizontal
        * row*/
-          if(symbol == 8)
+          if(switchTurn == 8)
        {
        user.updateVictories();
        repeat = JOptionPane.showConfirmDialog(null,"Well Done! You have won this round. Pat on the back! "+
                "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
                 if(repeat == JOptionPane.YES_OPTION) {
-        TicTacToeGame ttt = new TicTacToeGame();
-        ttt.dispose();
+        TicTacToeGame tttg = new TicTacToeGame();
+        tttg.dispose();
 
       }
       else {
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
-          TicTacToeGame ttt = new TicTacToeGame();
-          ttt.setVisible(true);
+          TicTacToeGame tttg = new TicTacToeGame();
+          tttg.setVisible(true);
          }
        }
 
@@ -121,32 +137,31 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
        /*If clause for losing the game if the player does not get three xs or os in a diagonal,vertical or horizontal
        * row*/
-        else if(symbol == 8)
+        else if(switchTurn == 8)
         {
         user.updateLosses();
         repeat = JOptionPane.showConfirmDialog(null,"Hard Luck! You have lost this round. Try again!" +
                 "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
                  if(repeat == JOptionPane.YES_OPTION) {
-        TicTacToeGame ttt = new TicTacToeGame();
-        ttt.dispose();
+        TicTacToeGame ticTacToeGame = new TicTacToeGame();
+        ticTacToeGame.dispose();
       }
       else {
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
-          TicTacToeGame ttt = new TicTacToeGame();
-          ttt.setVisible(true);
+          TicTacToeGame ticTacToeGame = new TicTacToeGame();
+          ticTacToeGame.setVisible(true);
       }
 
     }
 
        /*If clause for a draw if no player gets three xs or os in a diagonal,vertical or horizontal
        * row and ends up filling all of the squares*/
-     else if(symbol == 9) {
+     else if(switchTurn == 9) {
         repeat = JOptionPane.showConfirmDialog(null,"It's a draw! Great job to both players." +
                 "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
                  if(repeat == JOptionPane.YES_OPTION) {
         TicTacToeGame ttt = new TicTacToeGame();
         ttt.dispose();
-
 
       }
       else {
