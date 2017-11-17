@@ -65,12 +65,30 @@ public class PlayerSelector extends JFrame implements ActionListener {
 
     /*Intended to select player and save its details while the game is played
     * Player 2 should then be selected
-    * Allows the selection box to disappear once the user is selected*/
+    * Allows the selection box to disappear once the user is selected
+    * Outputs the names of the players participating in the game*/
     @Override
     public void actionPerformed(ActionEvent e) {
        userbox.setSelectedItem(players);
-       userbox.setSelectedItem(players);
+      JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox.getSelectedItem().toString() + " as Player 1");
 
+        /**Reference 1
+         * Title: Preferred way of getting the selected item of a JComboBox
+         * Author: Anonymous
+         * Site Owner/sponsor: stackoverflow.com
+         * Date: 2011
+         * Code Version: Edited Nov 17 '17 at 18:25
+         * Availability: https://stackoverflow.com/questions/4962416/preferred-way-of-getting-the-selected-item-of-a-jcombobox
+         * (Accessed 17 November 2017)
+         * Modified: Modifying code based on the selected item for the JComboBox
+         * where its text is got from the combo box. Planning to output the names
+         * of Players 1 and 2 separately using Message Dialogs
+         */
+
+       userbox2.setSelectedItem(players);
+        JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox2.getSelectedItem().toString() + " as Player 2","Player 2 Selection",
+                JOptionPane.INFORMATION_MESSAGE);
+       dispose();
     }
 
 }

@@ -9,7 +9,7 @@ import java.awt.Event.*;
  * @author Jack Carroll
  * version 1.0*/
 
-/**Reference 1
+/**Reference
  * Title: Java Swing #2 "Grid Layout & Action Listener" Tutorial
  * Author: Arend Peter C(Arend Peter Teaches = Channel)
  * Site Owner/sponsor: youtube.com
@@ -122,13 +122,16 @@ public class ButtonPresserXO extends JButton implements ActionListener{
        repeat = JOptionPane.showConfirmDialog(null,"Well Done! You have won this round. Pat on the back! "+
                "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
                 if(repeat == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(null,"Wins percentage: " );
+                    JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
+                            "\nTotal Games Played: " + user.totalGames());
         TicTacToeGame tttg = new TicTacToeGame();
         tttg.dispose();
 
       }
       else {
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
+                            "\nTotal Games Played: " + user.totalGames());
           TicTacToeGame tttg = new TicTacToeGame();
           tttg.setVisible(true);
          }
@@ -138,13 +141,14 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
        /*If clause for losing the game if the player does not get three xs or os in a diagonal,vertical or horizontal
        * row*/
-        else if(switchTurn == 8)
+        else if(switchTurn == 7)
         {
         user.updateLosses();
         repeat = JOptionPane.showConfirmDialog(null,"Hard Luck! You have lost this round. Try again!" +
                 "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
                  if(repeat == JOptionPane.YES_OPTION) {
-                     JOptionPane.showMessageDialog(null,"Wins percentage: " );
+                     /*JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
+                             "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/ //Displays the percentage of wins during a series of games
         TicTacToeGame ticTacToeGame = new TicTacToeGame();
         ticTacToeGame.dispose();
       }
@@ -162,17 +166,22 @@ public class ButtonPresserXO extends JButton implements ActionListener{
         repeat = JOptionPane.showConfirmDialog(null,"It's a draw! Great job to both players." +
                 "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
                  if(repeat == JOptionPane.YES_OPTION) {
-                     JOptionPane.showMessageDialog(null,"Wins percentage: " );
+                    /* JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
+                     "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
         TicTacToeGame ttt = new TicTacToeGame();
         ttt.dispose();
 
       }
       else {
+                     /*JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
+                         "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
+
           TicTacToeGame ttt = new TicTacToeGame();
           ttt.dispose();
           MainGameMenu TicTT = new MainGameMenu();
           TicTT.setVisible(true);
+
       }
 
     }

@@ -89,8 +89,9 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
     /**To set up the victories if the player wins and forming a percentage of victories
      * once the player gets 3 consecutive Xs or Os diagonally,vertically or horizontally*/
     @Override
-    public void winsPercentage(int percent) {
-      setWins(getWins() + getLoss()/ totalGames() * 100);
+    public int winsPercentage(int percentWins) {
+     setWins(getWins() + getLoss()/ totalGames() * 100);
+        return percentWins;
     }
 
     /**Establishing interface method for incrementing the number of victories

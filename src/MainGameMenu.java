@@ -155,6 +155,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
   }
   player.setWins(0);
   player.setLoss(0);
+  JOptionPane.showMessageDialog(null,"This users's name has been added","User Added",
+          JOptionPane.INFORMATION_MESSAGE);
      // player.setWins(Integer.parseInt(JOptionPane.showInputDialog("Please enter the starting number of wins(0 recommended)")));
               //player.setLoss(Integer.parseInt(JOptionPane.showInputDialog("Please enter the starting number of losses(0 recommended)")));
   //player.setWins(0);
