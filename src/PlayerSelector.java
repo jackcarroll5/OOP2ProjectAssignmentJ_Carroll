@@ -16,8 +16,9 @@ public class PlayerSelector extends JFrame implements ActionListener {
 
  public PlayerSelector()
  {
-     setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
-     setSize(400,100);
+     setIconImage(new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
+     //setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
+     setSize(400,150);
      setTitle("Select Player ");
      setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
      setLayout(new FlowLayout());

@@ -26,7 +26,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
  private ImageIcon OIcon,XIcon,letter;
     Person user;
-    int repeat = 100;
+    int repeat = 100,percentWins;
    private int switchTurn = 0;//Represents the player's turns
     //Represents cases for the numerous symbols of nothing,X and O.
     public ButtonPresserXO()
@@ -38,10 +38,10 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
         //OIcon = new ImageIcon("OOP2ProjectFolder\\O Image Paint.PNG");
         // XIcon = new ImageIcon("OOP2ProjectFolder\\X Image Paint.PNG");
-      // OIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
-       //XIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
-        OIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
-        XIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
+       OIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
+       XIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
+        //OIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
+        //XIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
         //OIcon = new ImageIcon("C:\\Users\\ \\Desktop\\OOP2ProjectFolder\\O Image Paint.PNG");
         //XIcon = new ImageIcon("C:\\Users\\ \\Desktop\\OOP2ProjectFolder\\X Image Paint.PNG");
        // XIcon = new ImageIcon("C:\\Users\\ \\Pictures\\X Image Paint.PNG");
@@ -122,6 +122,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
        repeat = JOptionPane.showConfirmDialog(null,"Well Done! You have won this round. Pat on the back! "+
                "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
                 if(repeat == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null,"Wins percentage: " );
         TicTacToeGame tttg = new TicTacToeGame();
         tttg.dispose();
 
@@ -143,6 +144,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
         repeat = JOptionPane.showConfirmDialog(null,"Hard Luck! You have lost this round. Try again!" +
                 "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
                  if(repeat == JOptionPane.YES_OPTION) {
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " );
         TicTacToeGame ticTacToeGame = new TicTacToeGame();
         ticTacToeGame.dispose();
       }
@@ -160,6 +162,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
         repeat = JOptionPane.showConfirmDialog(null,"It's a draw! Great job to both players." +
                 "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
                  if(repeat == JOptionPane.YES_OPTION) {
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " );
         TicTacToeGame ttt = new TicTacToeGame();
         ttt.dispose();
 

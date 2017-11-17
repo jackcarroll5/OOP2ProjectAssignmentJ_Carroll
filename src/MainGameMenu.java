@@ -27,8 +27,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
     pane.setLayout(new FlowLayout());
     setLayout(new BorderLayout());//Set up button layout for the shortcut buttons by using border
 
-
-     setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());//Sets up icon for the game at the top corner of the app
+      setIconImage(new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
+     //setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());//Sets up icon for the game at the top corner of the app
     setTitle("Tic Tac Toe");
     setSize(575,760);
     setLocation(300,100);
@@ -55,8 +55,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
     /*Set up a decorative XO Image in the centre of the main menu to replace JLabel. No text needed.
     * Picture makes user aware of the game that is going to be played*/
-     JLabel XOPic = new JLabel(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Picture.PNG"));
-      //JLabel XOPic = new JLabel(new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Picture.PNG"));
+     //JLabel XOPic = new JLabel(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Picture.PNG"));
+      JLabel XOPic = new JLabel(new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Picture.PNG"));
      add(XOPic,BorderLayout.CENTER);
      XOPic.setSize(300,300);
      XOPic.setBounds(10,10,10,10);
