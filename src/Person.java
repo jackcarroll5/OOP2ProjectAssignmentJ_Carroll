@@ -7,7 +7,7 @@ import java.io.*;
  * @author Jack Carroll
  * version 1.0*/
 
-public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Serializable{ //Serializable required for saving
+public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Serializable,PercentWins{ //Serializable required for saving
     //attributes
     private String name;
     private int wins;
@@ -90,8 +90,13 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
      * once the player gets 3 consecutive Xs or Os diagonally,vertically or horizontally*/
     @Override
     public int winsPercentage(int percentWins) {
-     setWins(getWins() + getLoss()/ totalGames() * 100);
+     setWins(getWins() / totalGames() * 100);
         return percentWins;
+    }
+
+    @Override
+    public void winsPercentage(float percent) {
+        setWins(getWins() + getLoss()/ totalGames() * 100);
     }
 
     /**Establishing interface method for incrementing the number of victories

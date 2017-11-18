@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class PlayerSelector extends JFrame implements ActionListener {
+public class PlayerSelector extends JFrame implements ActionListener,PercentWinsAndLosses,PercentWins {
    JComboBox userbox,userbox2;
    ArrayList <Person> players;
 
@@ -43,7 +43,7 @@ public class PlayerSelector extends JFrame implements ActionListener {
      userbox2.setVisible(true);
 
      userbox.setSelectedIndex(1); //Presets first item of the first user added to the program
-     userbox2.setSelectedIndex(2);
+     userbox2.setSelectedIndex(1);
 
      userbox.addActionListener(this);
      userbox2.addActionListener(this);
@@ -91,5 +91,29 @@ public class PlayerSelector extends JFrame implements ActionListener {
        dispose();
     }
 
+    @Override
+    public void winsPercentage(float percent) {
+
+    }
+
+    @Override
+    public int winsPercentage(int percent) {
+        return 0;
+    }
+
+    @Override
+    public int updateVictories() {
+        return 0;
+    }
+
+    @Override
+    public int updateLosses() {
+        return 0;
+    }
+
+    @Override
+    public int totalGames() {
+        return 0;
+    }
 }
 

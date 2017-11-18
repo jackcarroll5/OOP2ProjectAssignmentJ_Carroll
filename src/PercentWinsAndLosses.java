@@ -1,5 +1,6 @@
 
-//Interface for the percentage of victories by the user in Tic Tac Toe
+//Interface for the number of victories and losses
+// by the user in Tic Tac Toe
 
 public interface PercentWinsAndLosses {
     /*Interface method for establishing the percentage of victories according to the number of
