@@ -24,16 +24,17 @@ import java.awt.Event.*;
 
 public class ButtonPresserXO extends JButton implements ActionListener{
 
- private ImageIcon OIcon,XIcon,letter;
+ private ImageIcon OIcon,XIcon;
     Person user;
     int repeat = 100,percentWins;
     float winsPercentage;
     PlayerSelector player1,player2;
-    ArrayList <Person> people;
+   static ArrayList <Person> people;
    private static int switchTurn = 0;//Represents the player's turns
     //Represents cases for the numerous symbols of nothing,X and O.
     public ButtonPresserXO()
     {
+
         /*Make sure that image is in right folder and file pathname is correct. If image can't show up
         * type in correct file that image is found for O Image Paint.PNG and X Image Paint.PNG */
         //Getting images for my original X and O Drawings
@@ -61,6 +62,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
 
 
         /*Add X and O symbol when button is pressed.
@@ -104,7 +106,6 @@ public class ButtonPresserXO extends JButton implements ActionListener{
             setIcon(OIcon);*/
 
 
-
         /*Switching turns between players 1 and 2*/
         if(switchTurn % 2 == 1)
         {
@@ -141,16 +142,33 @@ public class ButtonPresserXO extends JButton implements ActionListener{
       }
       else {
 
+                   // player1.userbox.setSelectedItem(user);
+                   // player1.userbox.setSelectedItem(user);
+
+
+                    player1.getUserbox().getSelectedItem();
+                    player2.getUserbox2().getSelectedItem();
+                    //people = PlayerSelector.players;
+
+                   // player1.userbox.setSelectedItem(people);
+                    //player2.userbox2.setSelectedItem(people);
+
+
+                    player1.winsPercentage(winsPercentage);
+
+                    JOptionPane.showMessageDialog(null,"Wins percentage: " + player1.userbox.getSelectedItem().toString());
+                    JOptionPane.showMessageDialog(null,"\nTotal Games Played: " + player1.totalGames());
+
+
 
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
                    /* JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
                             "\nTotal Games Played: " + user.totalGames());*/
-                    player1.winsPercentage(winsPercentage);
-                    JOptionPane.showMessageDialog(null,"Wins percentage: " + player1.userbox.getSelectedItem().toString());
-                            JOptionPane.showMessageDialog(null,"\nTotal Games Played: " + player1.totalGames());
-          TicTacToeGame tttg = new TicTacToeGame();
 
-          tttg.setVisible(true);
+          TicTacToeGame tttg = new TicTacToeGame();
+            tttg.dispose();
+            MainGameMenu mnu = new MainGameMenu();
+            mnu.setVisible(true);
 
          }
        }
@@ -165,15 +183,19 @@ public class ButtonPresserXO extends JButton implements ActionListener{
         repeat = JOptionPane.showConfirmDialog(null,"Hard Luck! You have lost this round. Try again!" +
                 "\nDo you want to play again","You lose!",JOptionPane.YES_NO_OPTION);
                  if(repeat == JOptionPane.YES_OPTION) {
-                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
-                             "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE); //Displays the percentage of wins during a series of games
+                     /*JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
+                             "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/ //Displays the percentage of wins during a series of games
         TicTacToeGame ticTacToeGame = new TicTacToeGame();
         ticTacToeGame.dispose();
       }
       else {
+                     /*JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
+                             "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
           TicTacToeGame ticTacToeGame = new TicTacToeGame();
-          ticTacToeGame.setVisible(true);
+          ticTacToeGame.dispose();
+          MainGameMenu mgm = new MainGameMenu();
+          mgm.setVisible(true);
       }
 
     }
@@ -188,7 +210,6 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                      player2.userbox2.getSelectedItem();
                     /* JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
                      "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
-
 
 
                      JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.userbox.getSelectedItem().toString() +

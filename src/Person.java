@@ -10,8 +10,8 @@ import java.io.*;
 public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Serializable,PercentWins{ //Serializable required for saving
     //attributes
     private String name;
-    private int wins;
-    private int losses;
+    private static int wins;
+    private static int losses;
 
 
     /**
@@ -48,8 +48,8 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
      *
      * @param wins of games
      */
-    public void setWins(int wins) {
-        this.wins = wins;
+    public static void setWins(int wins) {
+        Person.wins = wins;
     }
 
 
@@ -73,7 +73,7 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
      *
      * @return number of wins
      */
-    public int getWins() {
+    public static int getWins() {
         return wins;
     }
 
@@ -81,7 +81,7 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
      *
      * @return number of losses
      */
-    public int getLoss() {
+    public static int getLoss() {
         return losses;
     }
 

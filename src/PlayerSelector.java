@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class PlayerSelector extends JFrame implements ActionListener,PercentWinsAndLosses,PercentWins {
    JComboBox userbox,userbox2;
-   ArrayList <Person> players;
+  static ArrayList <Person> players;
 
  public PlayerSelector()
  {
@@ -49,7 +49,7 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
      userbox2.addActionListener(this);
 
      add(userbox);
-     add(userbox2);
+     add(userbox2); //Adding both combo boxes to the JFrame
 
      userbox2.setLocation(300,300);
 
@@ -61,18 +61,42 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
     }
 
 
+    /*Instances to set a combo box from another class to allow the
+    * userboxes to reach the ButtonPresserXO Class for the implementation
+    * of updating victories*/
+    /**Reference
+     * Title: Setting combobox from another class
+     * Author: Anonymous
+     * Site Owner/sponsor: stackoverflow.com
+     * Date: 2015
+     * Code Version: Edited Nov 19 '17 at 15:27
+     * Availability: https://stackoverflow.com/questions/34802809/setting-combobox-from-another-class
+     * (Accessed 19 November 2017)
+     * Modified: Change the userbox JComboBox class to a suitable name for my
+     * combo box class so the ButtonPresserXO class can gain access to the selected player
+     * from the combo box and display its details at the end of the game to
+     * show the updating of wins and losses in action
+     */
+    public JComboBox getUserbox() {
+        return userbox;
+    }
 
+    public JComboBox getUserbox2() {
+        return userbox2;
+    }
 
     /*Intended to select player and save its details while the game is played
-    * Player 2 should then be selected
-    * Allows the selection box to disappear once the user is selected
-    * Outputs the names of the players participating in the game*/
+            * Player 2 should then be selected
+            * Allows the selection box to disappear once the user is selected
+            * Outputs the names of the players participating in the game*/
     @Override
     public void actionPerformed(ActionEvent e) {
+        /*Select the chosen item from the combo box and display the player's name and wins and losses using an output.*/
        userbox.setSelectedItem(players);
-      JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox.getSelectedItem().toString() + " as Player 1");
+      JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox.getSelectedItem().toString() + " as Player 1","Player 1 Selection",
+              JOptionPane.INFORMATION_MESSAGE);
 
-        /**Reference 1
+        /**Reference
          * Title: Preferred way of getting the selected item of a JComboBox
          * Author: Anonymous
          * Site Owner/sponsor: stackoverflow.com
@@ -88,32 +112,33 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
        userbox2.setSelectedItem(players);
         JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox2.getSelectedItem().toString() + " as Player 2","Player 2 Selection",
                 JOptionPane.INFORMATION_MESSAGE);
-       dispose();
+       dispose(); //The combo box disappears when the user presses OK after seeing the name of Player 2.
     }
 
     @Override
     public void winsPercentage(float percent) {
-
+        Person.setWins(Person.getWins() + Person.getLoss()/ totalGames() * 100);
     }
 
     @Override
-    public int winsPercentage(int percent) {
-        return 0;
+    public int winsPercentage(int percentWins) {
+        Person.setWins(Person.getWins() / totalGames() * 100);
+        return percentWins;
     }
 
     @Override
     public int updateVictories() {
-        return 0;
+        return Person.getWins() + 1;
     }
 
     @Override
     public int updateLosses() {
-        return 0;
+        return Person.getLoss() + 1;
     }
 
     @Override
     public int totalGames() {
-        return 0;
+        return Person.getWins() + Person.getLoss();
     }
 }
 

@@ -15,7 +15,7 @@ import java.util.*;
 public class MainGameMenu extends JFrame implements ActionListener{
 
     JMenu gameMenu,playerMenu,fileMenu;
-    static ArrayList<Person>  players;//Array of users
+    static ArrayList <Person>  players;//Array of users
     int count;//No of users in array
     JButton userAdd,play;
 
@@ -27,7 +27,10 @@ public class MainGameMenu extends JFrame implements ActionListener{
     pane.setLayout(new FlowLayout());
     setLayout(new BorderLayout());//Set up button layout for the shortcut buttons by using border
 
+      /*Set up an icon of an O mashed up with an X symbol for the display  of the icon on the
+      * top left corner of the screen*/
       setIconImage(new ImageIcon("src\\images\\XO Icon.PNG").getImage());
+
      //setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());//Sets up icon for the game at the top corner of the app
     setTitle("Tic Tac Toe");
     setSize(575,760);
