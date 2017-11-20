@@ -22,6 +22,7 @@ public class TicTacToeGame extends JFrame implements ActionListener {
 
         setIconImage(new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
         //setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
+
         setSize(700, 700);
         setTitle("Tic Tac Toe");
         setLocation(600, 100);
@@ -33,18 +34,13 @@ public class TicTacToeGame extends JFrame implements ActionListener {
        * of 9 square buttons.*/
         for (int i = 0; i <= 8; i++) {
             XOButton[i] = new ButtonPresserXO();
-
-            XOButton[i].addActionListener(e -> {
-
-
-
-            });
-            panel.add(XOButton[i]);
+            panel.add(XOButton[i]); //Adds the array of buttons to the panel using a for loop.
         }
         super.add(panel);//Super class = JFrame. Adding panel for X and O Buttons to frame
 
         optMenu();//Method for options menu in effect
 
+        /*Adds the menu var to the top of the JFrame in this class*/
         JMenuBar jmb = new JMenuBar();
         setJMenuBar(jmb);
         jmb.add(options);
@@ -58,14 +54,14 @@ public class TicTacToeGame extends JFrame implements ActionListener {
 
                 int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit the game?");
                 if (choice == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(null, "Thank you for playing Tic Tac Toe! Bye!", "Quitting Game", JOptionPane.CANCEL_OPTION);
+                    JOptionPane.showMessageDialog(null, "Thank you for playing Tic Tac Toe! Bye!", "Quitting Game", JOptionPane.WARNING_MESSAGE);
                     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                     System.exit(0);
                 }
                 else {
                     JOptionPane.showMessageDialog(null,"Resuming Game","Continue Game",JOptionPane.INFORMATION_MESSAGE);
                 }
-            }
+            }//End of windowClosing() void class
         });//End of Window Listener class for closing window of game.
     }//End of TicTacToeGame() class
 
@@ -103,4 +99,4 @@ public class TicTacToeGame extends JFrame implements ActionListener {
             }
 
         }//End of method for actionPerformed when pressing menu options.
-    }
+    }//End of TicTacToeGame Class

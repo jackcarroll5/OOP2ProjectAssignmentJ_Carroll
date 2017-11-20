@@ -18,8 +18,9 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
  {
      setIconImage(new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
      //setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
+
      setSize(400,150);
-     setTitle("Select Player ");
+     setTitle("Select Player");
      setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
      setLayout(new FlowLayout());
 
@@ -40,7 +41,7 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
      }
 
      userbox.setVisible(true);
-     userbox2.setVisible(true);
+     userbox2.setVisible(true); //Allow both combo boxes to appear.
 
      userbox.setSelectedIndex(1); //Presets first item of the first user added to the program
      userbox2.setSelectedIndex(1);
@@ -52,8 +53,9 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
      add(userbox2); //Adding both combo boxes to the JFrame
 
      userbox2.setLocation(300,300);
-
  }
+
+
 
     public static void main(String[] args) {
         PlayerSelector app = new PlayerSelector();
@@ -77,6 +79,17 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
      * from the combo box and display its details at the end of the game to
      * show the updating of wins and losses in action
      */
+
+
+    public void setPlayers(ArrayList<Person> players) {
+        PlayerSelector.players = players;
+    }
+
+    public ArrayList<Person> getPlayers() {
+        return players;
+    }
+
+
     public JComboBox getUserbox() {
         return userbox;
     }
@@ -91,8 +104,11 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
             * Outputs the names of the players participating in the game*/
     @Override
     public void actionPerformed(ActionEvent e) {
+
         /*Select the chosen item from the combo box and display the player's name and wins and losses using an output.*/
        userbox.setSelectedItem(players);
+
+
       JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox.getSelectedItem().toString() + " as Player 1","Player 1 Selection",
               JOptionPane.INFORMATION_MESSAGE);
 
@@ -110,6 +126,8 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
          */
 
        userbox2.setSelectedItem(players);
+
+
         JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox2.getSelectedItem().toString() + " as Player 2","Player 2 Selection",
                 JOptionPane.INFORMATION_MESSAGE);
        dispose(); //The combo box disappears when the user presses OK after seeing the name of Player 2.
@@ -122,7 +140,7 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
 
     @Override
     public int winsPercentage(int percentWins) {
-        Person.setWins(Person.getWins() / totalGames() * 100);
+        Person.setWins((Person.getWins() / totalGames()) * 100);
         return percentWins;
     }
 
@@ -140,5 +158,6 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
     public int totalGames() {
         return Person.getWins() + Person.getLoss();
     }
+
 }
 

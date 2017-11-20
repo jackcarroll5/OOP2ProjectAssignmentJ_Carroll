@@ -29,13 +29,12 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
       /*Set up an icon of an O mashed up with an X symbol for the display  of the icon on the
       * top left corner of the screen*/
-      setIconImage(new ImageIcon("src\\images\\XO Icon.PNG").getImage());
+      setIconImage(new ImageIcon("src\\images\\XO Icon.PNG").getImage());//Sets up icon for the game at the top corner of the app
+     //setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
 
-     //setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());//Sets up icon for the game at the top corner of the app
     setTitle("Tic Tac Toe");
     setSize(575,760);
     setLocation(300,100);
-    pane.setBackground(Color.GREEN);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//Default close operation where the app does not close when action performed
 
     createGameMenu();//Adds menus to the MenuBar
@@ -50,11 +49,11 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
       play = new JButton("Play Game");
       play.setPreferredSize(new Dimension(4,25));
-      add(play,BorderLayout.PAGE_START);
+      add(play,BorderLayout.PAGE_START);//Place the play game button at the top of the frame just below the menu bar.
 
   userAdd = new JButton("Add User");
    userAdd.setPreferredSize(new Dimension(10,25));
-    add(userAdd,BorderLayout.SOUTH);
+    add(userAdd,BorderLayout.SOUTH);//Place the add user game button at the bottom of the frame.
 
     /*Set up a decorative XO Image in the centre of the main menu to replace JLabel. No text needed.
     * Picture makes user aware of the game that is going to be played*/
@@ -63,7 +62,6 @@ public class MainGameMenu extends JFrame implements ActionListener{
      add(XOPic,BorderLayout.CENTER);
      XOPic.setSize(300,300);
      XOPic.setBounds(10,10,10,10);
-
 
 
 
@@ -102,8 +100,10 @@ public class MainGameMenu extends JFrame implements ActionListener{
       //Example of Players for the game to be added alongside the array list of the remaining users
       players.add(new Person("Jake",0,0));
       players.add(new Person("Emily",0,0));
-
   }
+
+
+
 
   /*Initiate process to save the user file for future use of the game
   * by placing the user players array into Users.dat*/
@@ -115,6 +115,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
       oos.writeObject(players);
       oos.close();
   }
+
+
 
   /*Loads array of users from Users.dat file*/
   public void load()
@@ -131,7 +133,16 @@ public class MainGameMenu extends JFrame implements ActionListener{
          JOptionPane.showMessageDialog(null,"File could not be found. Sorry! See if file name is correctly written",
                  "Load Failed",JOptionPane.ERROR_MESSAGE);
          e.printStackTrace();
-     } catch (Exception e)
+     }
+
+     catch (IOException e)
+     {
+         JOptionPane.showMessageDialog(null,"File could not load. Sorry!",
+                 "Load Fail",JOptionPane.ERROR_MESSAGE);
+         e.printStackTrace();
+     }
+
+     catch (Exception e)
        {
          JOptionPane.showMessageDialog(null,"File did not load. Sorry!",
                  "Load Failed",JOptionPane.ERROR_MESSAGE);
@@ -140,10 +151,16 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
   }
 
+
+
+
   public void newSys(){
      players = new ArrayList<>();
 
   }
+
+
+
 
   //Method to register new player for game
   public void newPlayer()
@@ -168,7 +185,9 @@ public class MainGameMenu extends JFrame implements ActionListener{
  players.add(player);
 
  count++; //Increase users by 1 until list reaches 5.
-  }
+  }//End of newPlayer() method
+
+
 
 
   //Show list of players in JTextArea
@@ -181,10 +200,11 @@ public class MainGameMenu extends JFrame implements ActionListener{
              jta.append("User no: " + i + "\n" + players.get(i).toString() + "\n");
              JOptionPane.showMessageDialog(null,jta,"User List",JOptionPane.INFORMATION_MESSAGE);
       }
-      else{
+      else
+          {
         JOptionPane.showMessageDialog(null,"There are no users available for play","No users",JOptionPane.ERROR_MESSAGE);
       }
-  }
+  }//End of showUser() method
 
 
 
@@ -200,9 +220,9 @@ public class MainGameMenu extends JFrame implements ActionListener{
      item = new JMenuItem("Info");
      item.addActionListener(this);
      gameMenu.add(item);
-
-
  }
+
+
 
     public void createPlayerMenu(){
         //Creating the Player menu
@@ -220,9 +240,9 @@ public class MainGameMenu extends JFrame implements ActionListener{
         item = new JMenuItem("Display");
         item.addActionListener(this);
         playerMenu.add(item);
+    }//End of createPlayerMenu() method
 
 
-    }
 
     public void createFileMenu(){
         //Creating the File menu
@@ -236,7 +256,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
         item = new JMenuItem("Exit");
         item.addActionListener(this);
         fileMenu.add(item);
-    }
+    }//End of createFileMenu() method
 
 
     @Override
@@ -258,11 +278,11 @@ public class MainGameMenu extends JFrame implements ActionListener{
       {
        newPlayer();//Link to method
       }
+
       else if(e.getActionCommand().equals("Display"))
      {
          showUser();
      }
-
 
      else if(e.getActionCommand().equals("Save"))
      {
@@ -280,7 +300,9 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
      else if(e.getActionCommand().equals("Play"))
      {
-           dispose();/*Title: How do I close a JFrame while opening another one?
+           dispose();
+           /*Reference
+           Title: How do I close a JFrame while opening another one?
            Author: Anon
            Site Owner: stackoverflow.com
            Date: 2011
@@ -305,7 +327,9 @@ public class MainGameMenu extends JFrame implements ActionListener{
      }
      else
          JOptionPane.showMessageDialog(null,"No clue about what was chosen","Unknown click",JOptionPane.INFORMATION_MESSAGE);
-    }
+    }//End of actionPerformed method
+
+
 
 
     public static void main(String[] args)
