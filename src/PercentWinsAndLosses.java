@@ -8,6 +8,8 @@ public interface PercentWinsAndLosses {
 
     public int winsPercentage(int percent);
 
+    public float winsPercent (float percent);
+
 /*The method for incrementing the number of games won by 1*/
     public int updateVictories();
 

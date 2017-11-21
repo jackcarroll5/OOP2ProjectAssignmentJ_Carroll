@@ -95,8 +95,14 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
     }
 
     @Override
+    public float winsPercent(float percent) {
+        setWins(getWins() / totalGames() * 100);
+        return percent;
+    }
+
+    @Override
     public void winsPercentage(float percent) {
-        setWins(getWins() + getLoss()/ totalGames() * 100);
+        setWins(getWins()  / totalGames() * 100);
     }
 
     /**Establishing interface method for incrementing the number of victories

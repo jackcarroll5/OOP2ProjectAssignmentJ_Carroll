@@ -135,13 +135,19 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
 
     @Override
     public void winsPercentage(float percent) {
-        Person.setWins(Person.getWins() + Person.getLoss()/ totalGames() * 100);
+        Person.setWins(Person.getWins() / totalGames() * 100);
     }
 
     @Override
     public int winsPercentage(int percentWins) {
         Person.setWins((Person.getWins() / totalGames()) * 100);
         return percentWins;
+    }
+
+    @Override
+    public float winsPercent(float percent) {
+        Person.setWins((Person.getWins() / totalGames()) * 100);
+        return percent;
     }
 
     @Override
@@ -158,6 +164,7 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
     public int totalGames() {
         return Person.getWins() + Person.getLoss();
     }
+
 
 }
 
