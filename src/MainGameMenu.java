@@ -19,6 +19,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
     int count;//No of users in array
     JButton userAdd,play;
 
+
+
   public MainGameMenu()
   {
       newSys();//Creates user array and set count to 0
@@ -27,37 +29,48 @@ public class MainGameMenu extends JFrame implements ActionListener{
     pane.setLayout(new FlowLayout());
     setLayout(new BorderLayout());//Set up button layout for the shortcut buttons by using border
 
+
+
       /*Set up an icon of an O mashed up with an X symbol for the display  of the icon on the
       * top left corner of the screen*/
       setIconImage(new ImageIcon("src\\images\\XO Icon.PNG").getImage());//Sets up icon for the game at the top corner of the app
-     //setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
 
     setTitle("Tic Tac Toe");
     setSize(575,760);
     setLocation(300,100);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//Default close operation where the app does not close when action performed
 
+
+
     createGameMenu();//Adds menus to the MenuBar
       createPlayerMenu();
       createFileMenu();
 
+
+
+ /*Form the JMenuBar which will have the drop down menu items*/
     JMenuBar menuBar = new JMenuBar();
     setJMenuBar(menuBar);
     menuBar.add(gameMenu);
     menuBar.add(playerMenu);
     menuBar.add(fileMenu);
 
+
+
       play = new JButton("Play Game");
       play.setPreferredSize(new Dimension(4,25));
       add(play,BorderLayout.PAGE_START);//Place the play game button at the top of the frame just below the menu bar.
+
+
 
   userAdd = new JButton("Add User");
    userAdd.setPreferredSize(new Dimension(10,25));
     add(userAdd,BorderLayout.SOUTH);//Place the add user game button at the bottom of the frame.
 
+
+
     /*Set up a decorative XO Image in the centre of the main menu to replace JLabel. No text needed.
     * Picture makes user aware of the game that is going to be played*/
-     //JLabel XOPic = new JLabel(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Picture.PNG"));
       JLabel XOPic = new JLabel(new ImageIcon("src\\images\\XO Picture.PNG"));
      add(XOPic,BorderLayout.CENTER);
      XOPic.setSize(300,300);
@@ -74,7 +87,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
       int choice = JOptionPane.showConfirmDialog(null,"Are you sure you want to quit the game?");
       if(choice == JOptionPane.YES_OPTION) {
-        JOptionPane.showMessageDialog(null,"Thanks for playing Tic Tac Toe! Goodbye","Quit",JOptionPane.CANCEL_OPTION);
+        JOptionPane.showMessageDialog(null,"Thanks for playing Tic Tac Toe! Goodbye","Quit", JOptionPane.WARNING_MESSAGE);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         System.exit(0);
       }
@@ -100,7 +113,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
       //Example of Players for the game to be added alongside the array list of the remaining users
       players.add(new Person("Jake",0,0));
       players.add(new Person("Emily",0,0));
-  }
+  }//End of constructor
 
 
 
@@ -114,7 +127,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
       ObjectOutputStream oos = new ObjectOutputStream(fos);
       oos.writeObject(players);
       oos.close();
-  }
+  }//End of saveUser() method
 
 
 
@@ -149,15 +162,15 @@ public class MainGameMenu extends JFrame implements ActionListener{
            e.printStackTrace();
        }
 
-  }
+  }//End of load() method
 
 
 
 
   public void newSys(){
-     players = new ArrayList<>();
+     players = new ArrayList<>(); //Form new player array list to be displayed and list them later on
 
-  }
+  }//End of newSys() Class
 
 
 
@@ -165,7 +178,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
   //Method to register new player for game
   public void newPlayer()
   {
-   Person player = new Person();
+   Person player = new Person(); //Create new user by using an instance of Person.
   player.setName(JOptionPane.showInputDialog("Please enter a user name for registration"));
   if(player.getName().equals(""))
   {
@@ -220,7 +233,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
      item = new JMenuItem("Info");
      item.addActionListener(this);
      gameMenu.add(item);
- }
+ }//End of createGameMenu() method
 
 
 
@@ -291,6 +304,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
              saveUser();
              JOptionPane.showMessageDialog(null,"Save Successful! File has been saved","Saved File",JOptionPane.INFORMATION_MESSAGE);
          }//End of try
+
+
           catch (IOException e1) {
              JOptionPane.showMessageDialog(null,"File could not be saved! Please" +
                      "check out console printout for further action","Save Failed!",JOptionPane.ERROR_MESSAGE);
@@ -336,6 +351,6 @@ public class MainGameMenu extends JFrame implements ActionListener{
     {
     MainGameMenu jfw = new MainGameMenu(); //Sets up the JFrame Window
     jfw.setVisible(true);//Displays the JFrame Window to be seen without it being invisible
-    }
+    }//End of main method
 
-}
+}//End of Class

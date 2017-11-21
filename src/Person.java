@@ -107,14 +107,12 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
 
     /**Establishing interface method for incrementing the number of victories
      * for a player by 1 if the player wins.*/
-    @Override
     public int updateVictories() {
         return getWins() + 1;
     }
 
     /**Creates method based on interface to increase the number of losses by
      * 1 if the player loses the game*/
-    @Override
     public int updateLosses() {
         return getLoss() + 1;
     }

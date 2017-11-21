@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
-import java.awt.*;
-import java.awt.Event.*;
 
 /**
  * @author Jack Carroll
@@ -29,7 +27,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
  private ImageIcon OIcon,XIcon;
     Person user;
-    int repeat = 100;
+    int repeat = 100,wins = 0,losses = 0;
     float winsPercentage;
     PlayerSelector player1,player2;
    static ArrayList <Person> people;
@@ -43,23 +41,13 @@ public class ButtonPresserXO extends JButton implements ActionListener{
         * type in correct file that image is found for O Image Paint.PNG and X Image Paint.PNG */
         //Getting images for my original X and O Drawings
 
-        //OIcon = new ImageIcon("OOP2ProjectFolder\\O Image Paint.PNG");
-        // XIcon = new ImageIcon("OOP2ProjectFolder\\X Image Paint.PNG");
-      // OIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
-      // XIcon = new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
-        //OIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\O Image Paint.PNG");
-        //XIcon = new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\X Image Paint.PNG");
-        //OIcon = new ImageIcon("C:\\Users\\ \\Desktop\\OOP2ProjectFolder\\O Image Paint.PNG");
-        //XIcon = new ImageIcon("C:\\Users\\ \\Desktop\\OOP2ProjectFolder\\X Image Paint.PNG");
-       // XIcon = new ImageIcon("C:\\Users\\ \\Pictures\\X Image Paint.PNG");
-        //OIcon = new ImageIcon("C:\\Users\\ \\Pictures\\O Image Paint.PNG");
 
         OIcon = new ImageIcon("src\\images\\O Image Paint.PNG");
         XIcon = new ImageIcon("src\\images\\X Image Paint.PNG");
 
 
         this.addActionListener(this);
-    }
+    }//End of constructor
 
 
 
@@ -92,7 +80,8 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
 
 
-        /*Switching turns between players 1 and 2*/
+        /*Switching turns between players 1 and 2
+        * Works as well but modulus method is easier in the game*/
         /*if (symbol == 1 || symbol == 3 || symbol == 5 || symbol == 7 || symbol == 9) {
             setIcon(XIcon);
         } else if (symbol == 2 || symbol == 4 || symbol == 6 || symbol == 8) {
@@ -113,8 +102,6 @@ public class ButtonPresserXO extends JButton implements ActionListener{
          * required for the game.
          * The symbols vary when one player presses a button on one of the nine squares.
          * After that, the other player can choose one of the eight remaining squares.*/
-
-
             if (switchTurn % 2 == 1) {
                 setIcon(XIcon);
                 JOptionPane.showMessageDialog(null, "Player 2's Turn", "P2 Turn",
@@ -144,13 +131,16 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                     can be shown at the very end of the game*/
                     people = PlayerSelector.players;
 
+
                     player1 = new PlayerSelector();
                     player1.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
-                    player1.getUserbox().getSelectedItem();//Gets selected player for Player 1 from the PlayerSelector class.
+                    player1.updateVictories();
+                    JOptionPane.showMessageDialog(null,"Winner:" + player1.getUserbox().getSelectedItem().toString());//Gets selected player for Player 1 from the PlayerSelector class.
 
                     player2 = new PlayerSelector();
                     player2.getUserbox2().setSelectedItem(people);
-                    player2.getUserbox2().getSelectedItem();
+                    player2.updateLosses();
+                    JOptionPane.showMessageDialog(null,"Runner-Up:" + player2.getUserbox2().getSelectedItem().toString());
 
 
                     /*JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
@@ -160,8 +150,11 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
                             "\nTotal Games Played: " + player1.totalGames() + " games");
 
-                    player1.updateVictories();
-                    player2.updateLosses();
+
+
+
+
+
 
         TicTacToeGame tttg = new TicTacToeGame(); /*The game should reset with the clearance of the images from the nine buttons
         and the resetting of the Tic Tac toe layout by restarting the game again and allow a different player selection*/
@@ -175,9 +168,11 @@ public class ButtonPresserXO extends JButton implements ActionListener{
       else {
                     people = PlayerSelector.players;
 
+
                     player1 = new PlayerSelector();
-                    player1.getUserbox().setSelectedItem(people);
-                    player1.getUserbox().getSelectedItem();
+                    player1.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
+                    player1.updateVictories();
+                    JOptionPane.showMessageDialog(null,"Winner:" + player1.getUserbox().getSelectedItem().toString());//Gets selected player for Player 1 from the PlayerSelector class.
 
                     // player1.userbox.setSelectedItem(user);
                    // player2.userbox2.setSelectedItem(user);
@@ -187,7 +182,8 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
                     player2 = new PlayerSelector();
                     player2.getUserbox2().setSelectedItem(people);
-                    player2.getUserbox2().getSelectedItem();
+                    player2.updateLosses();
+                    JOptionPane.showMessageDialog(null,"Runner-Up:" + player2.getUserbox2().getSelectedItem().toString());
                     
 
                    // player1.userbox.setSelectedItem(people);
@@ -203,12 +199,11 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
 
 
+
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
                    /* JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
                             "\nTotal Games Played: " + user.totalGames());*/
 
-                    player1.updateVictories();
-                    player2.updateLosses();
 
                     /*Should enable the game board to close and return to the main menu class where the TicTacToeGame class is disposed
                     * and cleared of all its images and buttons as well as the frame to allow the player to restartt a new game if possible and
@@ -238,13 +233,17 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
                      people = PlayerSelector.players;
 
+
+
                      player1 = new PlayerSelector();
-                     player1.getUserbox().setSelectedItem(people);
-                     player1.getUserbox().getSelectedItem();
+                     player1.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
+                     player1.updateVictories();
+                     JOptionPane.showMessageDialog(null,"Winner:" + player1.getUserbox().getSelectedItem().toString());//Gets selected player for Player 1 from the PlayerSelector class.
 
                      player2 = new PlayerSelector();
                      player2.getUserbox2().setSelectedItem(people);
-                     player2.getUserbox2().getSelectedItem();
+                     player2.updateLosses();
+                     JOptionPane.showMessageDialog(null,"Runner-Up:" + player2.getUserbox2().getSelectedItem().toString());
 
                      //Displays the percentage of wins during a series of games
 
@@ -253,6 +252,10 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
                      JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
                              "\nTotal Games Played: " + player1.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);
+
+                     JOptionPane.showMessageDialog(null,"Player 1's score: " + player1.toString());
+
+                     JOptionPane.showMessageDialog(null,"Player 2's score: " + player2.toString());
 
                      player2.updateVictories();
                      player1.updateLosses();
@@ -264,12 +267,14 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                      people = PlayerSelector.players;
 
                      player1 = new PlayerSelector();
-                     player1.getUserbox().setSelectedItem(people);
-                     player1.getUserbox().getSelectedItem();
+                     player1.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
+                     player1.updateVictories();
+                     JOptionPane.showMessageDialog(null,"Winner:" + player1.getUserbox().getSelectedItem().toString());//Gets selected player for Player 1 from the PlayerSelector class.
 
                      player2 = new PlayerSelector();
                      player2.getUserbox2().setSelectedItem(people);
-                     player2.getUserbox2().getSelectedItem();
+                     player2.updateLosses();
+                     JOptionPane.showMessageDialog(null,"Runner-Up:" + player2.getUserbox2().getSelectedItem().toString());
 
                      /*JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
                              "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
@@ -277,8 +282,10 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                      JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
                              "\nTotal Games Played: " + player1.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);
 
-                     player2.updateVictories();
-                     player1.updateLosses();
+                     JOptionPane.showMessageDialog(null,"Player 1's score: " + player1.toString());
+
+                     JOptionPane.showMessageDialog(null,"Player 2's score: " + player2.toString());
+
 
 
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
@@ -302,21 +309,26 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                      people = PlayerSelector.players;
 
                      player1 = new PlayerSelector();
-                     player1.getUserbox().setSelectedItem(people);
-                     player1.getUserbox().getSelectedItem();
+                     player1.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
+                     player1.updateVictories();
+                     JOptionPane.showMessageDialog(null,"Winner:" + player1.getUserbox().getSelectedItem().toString());//Gets selected player for Player 1 from the PlayerSelector class.
 
                      player2 = new PlayerSelector();
                      player2.getUserbox2().setSelectedItem(people);
-                     player2.getUserbox2().getSelectedItem();
+                     player2.updateLosses();
+                     JOptionPane.showMessageDialog(null,"Runner-Up:" + player2.getUserbox2().getSelectedItem().toString());
 
 
-                    // player1.userbox.getSelectedItem();
+
+                     // player1.userbox.getSelectedItem();
                      //player2.userbox2.getSelectedItem();
                     /* JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
                      "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
 
                      JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
                              "\nTotal Games Played: " + player1.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);
+
+
 
         TicTacToeGame ttt = new TicTacToeGame();
         ttt.dispose();
@@ -327,18 +339,22 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                      people = PlayerSelector.players;
 
                      player1 = new PlayerSelector();
-                     player1.getUserbox().setSelectedItem(people);
-                     player1.getUserbox().getSelectedItem();
+                     player1.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
+                     player1.updateVictories();
+                     JOptionPane.showMessageDialog(null,"Winner:" + player1.getUserbox().getSelectedItem().toString());//Gets selected player for Player 1 from the PlayerSelector class.
+
 
                      player2 = new PlayerSelector();
                      player2.getUserbox2().setSelectedItem(people);
-                     player2.getUserbox2().getSelectedItem();
+                     player2.updateLosses();
+                     JOptionPane.showMessageDialog(null,"Runner-Up:" + player2.getUserbox2().getSelectedItem().toString());
 
                      JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
                              "\nTotal Games Played: " + player1.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);
 
                      /*JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
                          "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
+
 
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
 

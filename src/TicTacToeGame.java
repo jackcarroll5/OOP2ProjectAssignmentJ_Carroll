@@ -21,7 +21,7 @@ public class TicTacToeGame extends JFrame implements ActionListener {
         cPane.setLayout(new FlowLayout());
 
         setIconImage(new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
-        //setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
+
 
         setSize(700, 700);
         setTitle("Tic Tac Toe");

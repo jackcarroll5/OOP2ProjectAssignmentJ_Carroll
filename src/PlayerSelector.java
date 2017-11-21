@@ -3,7 +3,6 @@ It is useful for picking two players for a multiplayer game.*/
 
 
 import javax.swing.*;
-import java.awt.Event.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +16,6 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
  public PlayerSelector()
  {
      setIconImage(new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
-     //setIconImage(new ImageIcon("I:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
 
      setSize(400,150);
      setTitle("Select Player");
@@ -53,14 +51,14 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
      add(userbox2); //Adding both combo boxes to the JFrame
 
      userbox2.setLocation(300,300);
- }
+ }//End of constructor
 
 
 
     public static void main(String[] args) {
         PlayerSelector app = new PlayerSelector();
         app.setVisible(true);
-    }
+    }//End of main method
 
 
     /*Instances to set a combo box from another class to allow the
@@ -90,6 +88,7 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
     }
 
 
+    /*Allows the user to retrieve the selected player from the combo box to be used in the ButtonPresserXO Class*/
     public JComboBox getUserbox() {
         return userbox;
     }
@@ -107,7 +106,6 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
 
         /*Select the chosen item from the combo box and display the player's name and wins and losses using an output.*/
        userbox.setSelectedItem(players);
-
 
       JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox.getSelectedItem().toString() + " as Player 1","Player 1 Selection",
               JOptionPane.INFORMATION_MESSAGE);
@@ -127,7 +125,6 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
 
        userbox2.setSelectedItem(players);
 
-
         JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox2.getSelectedItem().toString() + " as Player 2","Player 2 Selection",
                 JOptionPane.INFORMATION_MESSAGE);
        dispose(); //The combo box disappears when the user presses OK after seeing the name of Player 2.
@@ -146,7 +143,13 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
 
     @Override
     public float winsPercent(float percent) {
-        Person.setWins((Person.getWins() / totalGames()) * 100);
+        try {
+            Person.setWins((Person.getWins() / (Person.getWins() + Person.getLoss())) * 100);
+        }
+        catch (ArithmeticException e)
+        {
+           JOptionPane.showMessageDialog(null,"Could not calculate wins percentage");
+        }
         return percent;
     }
 
