@@ -111,8 +111,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
       });
 
       //Example of Players for the game to be added alongside the array list of the remaining users
-      players.add(new Person("Jake",0,0));
-      players.add(new Person("Emily",0,0));
+      players.add(new Person("Jake",0,0,0));
+      players.add(new Person("Emily",0,0,0));
   }//End of constructor
 
 
@@ -140,6 +140,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
         ois = new ObjectInputStream(new FileInputStream("Users.dat"));
         players = (ArrayList<Person>) ois.readObject();
         ois.close();
+         JOptionPane.showMessageDialog(null,"File has successfully loaded","Loaded File",JOptionPane.INFORMATION_MESSAGE);
      }
      catch (FileNotFoundException e)
      {
@@ -188,6 +189,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
   }
   player.setWins(0);
   player.setLoss(0);
+  player.setDraws(0);
   JOptionPane.showMessageDialog(null,"This users's name has been added","User Added",
           JOptionPane.INFORMATION_MESSAGE);
      // player.setWins(Integer.parseInt(JOptionPane.showInputDialog("Please enter the starting number of wins(0 recommended)")));
@@ -337,7 +339,6 @@ public class MainGameMenu extends JFrame implements ActionListener{
      else if(e.getActionCommand().equals("Load User"))
      {
          load();
-         JOptionPane.showMessageDialog(null,"File has successfully loaded","Loaded File",JOptionPane.INFORMATION_MESSAGE);
          showUser();
      }
      else

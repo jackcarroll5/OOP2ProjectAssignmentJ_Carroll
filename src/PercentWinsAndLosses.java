@@ -16,6 +16,8 @@ public interface PercentWinsAndLosses {
     /*The method for incrementing the number of games lost by 1*/
     public int updateLosses();
 
+    public int updateDraws();
+
     /*The method for calculating the number of games altogether*/
     public int totalGames();
 

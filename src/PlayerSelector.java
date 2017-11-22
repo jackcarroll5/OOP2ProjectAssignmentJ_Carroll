@@ -41,8 +41,11 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
      userbox.setVisible(true);
      userbox2.setVisible(true); //Allow both combo boxes to appear.
 
-     userbox.setSelectedIndex(1); //Presets first item of the first user added to the program
+     userbox.setSelectedIndex(0); //Presets first item of the first user added to the program
      userbox2.setSelectedIndex(1);
+
+     userbox.getSelectedIndex();
+     userbox2.getSelectedIndex();
 
      userbox.addActionListener(this);
      userbox2.addActionListener(this);
@@ -79,13 +82,6 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
      */
 
 
-    public void setPlayers(ArrayList<Person> players) {
-        PlayerSelector.players = players;
-    }
-
-    public ArrayList<Person> getPlayers() {
-        return players;
-    }
 
 
     /*Allows the user to retrieve the selected player from the combo box to be used in the ButtonPresserXO Class*/
@@ -144,7 +140,7 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
     @Override
     public float winsPercent(float percent) {
         try {
-            Person.setWins((Person.getWins() / (Person.getWins() + Person.getLoss())) * 100);
+            Person.setWins((Person.getWins() / (Person.getWins() + Person.getLoss() + Person.getDraws())) * 100);
         }
         catch (ArithmeticException e)
         {
@@ -164,8 +160,13 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
     }
 
     @Override
+    public int updateDraws() {
+        return Person.getDraws() + 1;
+    }
+
+    @Override
     public int totalGames() {
-        return Person.getWins() + Person.getLoss();
+        return Person.getWins() + Person.getLoss() + Person.getDraws();
     }
 
 

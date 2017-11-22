@@ -12,7 +12,7 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
     private String name;
     private static int wins;
     private static int losses;
-
+    private static int draws;
 
     /**
      * Empty argument Constructor for Person
@@ -22,16 +22,19 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
         setName("");
         setWins(0);
         setLoss(0);
+        setDraws(0);
     }
 
     /**Constructor method
      * @param name the player
      * @param wins of games
-     * @param losses of games*/
-    public Person(String name,int wins,int losses){
+     * @param losses of games
+     * @param draws of games*/
+    public Person(String name,int wins,int losses,int draws){
         setName(name);
         setWins(wins);
         setLoss(losses);
+        setDraws(draws);
     }//End of Constructor class
 
 
@@ -61,6 +64,15 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
         this.losses = losses;
     }
 
+
+    /**Mutator method to set the number of draws
+     *
+     * @param draws of games
+     */
+    public static void setDraws(int draws) {
+        Person.draws = draws;
+    }
+
     /**Accessor method to return the player's name
      *
      * @return name of player
@@ -85,24 +97,31 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
         return losses;
     }
 
+    /**Accessor method to return the number of draws for that player
+     *
+     * @return number of draws
+     */
+    public static int getDraws() {
+        return draws;
+    }
 
     /**To set up the victories if the player wins and forming a percentage of victories
      * once the player gets 3 consecutive Xs or Os diagonally,vertically or horizontally*/
     @Override
     public int winsPercentage(int percentWins) {
-     setWins(getWins() / totalGames() * 100);
+     setWins(getWins() /  (getWins() + getLoss() + getDraws()) * 100);
         return percentWins;
     }
 
     @Override
     public float winsPercent(float percent) {
-        setWins(getWins() / totalGames() * 100);
+        setWins(getWins() /  (getWins() + getLoss() + getDraws()) * 100);
         return percent;
     }
 
     @Override
     public void winsPercentage(float percent) {
-        setWins(getWins()  / totalGames() * 100);
+        setWins(getWins()  / (getWins() + getLoss() + getDraws()) * 100);
     }
 
     /**Establishing interface method for incrementing the number of victories
@@ -117,18 +136,27 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
         return getLoss() + 1;
     }
 
+    /**Creates method based on interface to increase the number of draws by
+     * 1 if the player loses the game*/
+    @Override
+    public int updateDraws() {
+        return getDraws() + 1;
+    }
+
+    /**Creates method based on interface to increase the number of losses by
+     * 1 if the player loses the game*/
     @Override
     public int totalGames() {
-        return getWins() + getLoss();
+        return getWins() + getLoss() + getDraws();
     }
 
     /**toString method to return current player details
      *
-     * @return the name of the player,wins for that player and losses for that player in the game as
+     * @return the name of the player,wins, losses and draws for that player in the game as a
      * String
      */
     @Override
     public String toString() {
-        return String.format("Name: %4s  Wins:%5d  Losses:%5d",getName(),getWins(),getLoss());
+        return String.format("Name: %4s  Wins:%3d  Losses:%3d  Draws:%3d",getName(),getWins(),getLoss(),getDraws());
     }
 }//End of class
