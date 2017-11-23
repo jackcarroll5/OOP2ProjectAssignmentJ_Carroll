@@ -13,7 +13,7 @@ import java.awt.event.WindowEvent;
 public class TicTacToeGame extends JFrame implements ActionListener {
     JMenu options;
     JPanel panel = new JPanel();//Panel for Tic Tac Toe Grid
-    ButtonPresserXO XOButton[] = new ButtonPresserXO[9];//Buttons for pressing Xs and Os
+    private static ButtonPresserXO XOButton[] = new ButtonPresserXO[9];//Buttons for pressing Xs and Os
 
     public TicTacToeGame() {
 
@@ -63,6 +63,22 @@ public class TicTacToeGame extends JFrame implements ActionListener {
                 }
             }//End of windowClosing() void class
         });//End of Window Listener class for closing window of game.
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowIconified (WindowEvent e){
+                JOptionPane.showMessageDialog(null, "Minimizing the window", "Minimizing", JOptionPane.INFORMATION_MESSAGE);
+                setExtendedState(Frame.ICONIFIED);
+            }
+        });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+                JOptionPane.showMessageDialog(null, "Restoring the window", "Restoration", JOptionPane.INFORMATION_MESSAGE);
+                setExtendedState(Frame.NORMAL);
+            }
+        });
     }//End of TicTacToeGame() class
 
     public void optMenu() {
@@ -79,7 +95,11 @@ public class TicTacToeGame extends JFrame implements ActionListener {
     }//End of optMenu() method
 
 
-        public static void main (String[] args){
+    public static ButtonPresserXO[] getXOButton() {
+        return XOButton;
+    }
+
+    public static void main (String[] args){
             TicTacToeGame jfw = new TicTacToeGame();
             jfw.setVisible(true);
         }//End of main method.

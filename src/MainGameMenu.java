@@ -113,6 +113,22 @@ public class MainGameMenu extends JFrame implements ActionListener{
       //Example of Players for the game to be added alongside the array list of the remaining users
       players.add(new Person("Jake",0,0,0));
       players.add(new Person("Emily",0,0,0));
+
+      addWindowListener(new WindowAdapter() {
+          @Override
+          public void windowIconified (WindowEvent e){ //Minimising the window
+              JOptionPane.showMessageDialog(null, "Minimizing the window", "Minimizing", JOptionPane.INFORMATION_MESSAGE);
+              setExtendedState(Frame.ICONIFIED);
+          }
+      });
+
+      addWindowListener(new WindowAdapter() {
+          @Override
+          public void windowDeiconified(WindowEvent e) { //Maximising the window
+              JOptionPane.showMessageDialog(null, "Restoring the window", "Restoration", JOptionPane.INFORMATION_MESSAGE);
+              setExtendedState(Frame.NORMAL);
+          }
+      });
   }//End of constructor
 
 

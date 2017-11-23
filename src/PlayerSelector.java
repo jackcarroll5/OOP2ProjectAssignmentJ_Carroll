@@ -6,12 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 
 public class PlayerSelector extends JFrame implements ActionListener,PercentWinsAndLosses,PercentWins {
    JComboBox userbox,userbox2;
   static ArrayList <Person> players;
+  int wins, losses, draws;
 
  public PlayerSelector()
  {
@@ -54,6 +57,22 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
      add(userbox2); //Adding both combo boxes to the JFrame
 
      userbox2.setLocation(300,300);
+
+     addWindowListener(new WindowAdapter() {
+         @Override
+         public void windowIconified (WindowEvent e){
+             JOptionPane.showMessageDialog(null, "Minimizing the window", "Minimizing", JOptionPane.INFORMATION_MESSAGE);
+             setExtendedState(Frame.ICONIFIED);
+         }
+     });
+
+     addWindowListener(new WindowAdapter() {
+         @Override
+         public void windowDeiconified(WindowEvent e) {
+             JOptionPane.showMessageDialog(null, "Restoring the window", "Restoration", JOptionPane.INFORMATION_MESSAGE);
+             setExtendedState(Frame.NORMAL);
+         }
+     });
  }//End of constructor
 
 
@@ -102,6 +121,7 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
 
         /*Select the chosen item from the combo box and display the player's name and wins and losses using an output.*/
        userbox.setSelectedItem(players);
+       userbox.getSelectedItem();
 
       JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox.getSelectedItem().toString() + " as Player 1","Player 1 Selection",
               JOptionPane.INFORMATION_MESSAGE);
@@ -120,6 +140,7 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
          */
 
        userbox2.setSelectedItem(players);
+       userbox2.getSelectedItem();
 
         JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox2.getSelectedItem().toString() + " as Player 2","Player 2 Selection",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -144,7 +165,8 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
         }
         catch (ArithmeticException e)
         {
-           JOptionPane.showMessageDialog(null,"Could not calculate wins percentage");
+           JOptionPane.showMessageDialog(null,"Could not calculate wins percentage","No Calculation",
+                   JOptionPane.ERROR_MESSAGE);
         }
         return percent;
     }
