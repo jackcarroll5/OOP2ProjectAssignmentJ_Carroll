@@ -18,7 +18,7 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
 
  public PlayerSelector()
  {
-     setIconImage(new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
+     setIconImage(new ImageIcon("src\\images\\XO Icon.PNG").getImage());
 
      setSize(400,150);
      setTitle("Select Player");
@@ -123,6 +123,9 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
        userbox.setSelectedItem(players);
        userbox.getSelectedItem();
 
+       userbox.getSelectedIndex();
+
+
       JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox.getSelectedItem().toString() + " as Player 1","Player 1 Selection",
               JOptionPane.INFORMATION_MESSAGE);
 
@@ -141,6 +144,8 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
 
        userbox2.setSelectedItem(players);
        userbox2.getSelectedItem();
+       userbox2.getSelectedIndex();
+
 
         JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox2.getSelectedItem().toString() + " as Player 2","Player 2 Selection",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -152,11 +157,6 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
         Person.setWins(Person.getWins() / totalGames() * 100);
     }
 
-    @Override
-    public int winsPercentage(int percentWins) {
-        Person.setWins((Person.getWins() / totalGames()) * 100);
-        return percentWins;
-    }
 
     @Override
     public float winsPercent(float percent) {
@@ -172,18 +172,18 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
     }
 
     @Override
-    public int updateVictories() {
-        return Person.getWins() + 1;
+    public void updateVictories() {
+        Person.setWins( Person.getWins() + 1);
     }
 
     @Override
-    public int updateLosses() {
-        return Person.getLoss() + 1;
+    public void updateLosses() {
+        Person.setLoss(Person.getLoss() + 1);
     }
 
     @Override
-    public int updateDraws() {
-        return Person.getDraws() + 1;
+    public void updateDraws() {
+        Person.setDraws(Person.getDraws() + 1);
     }
 
     @Override

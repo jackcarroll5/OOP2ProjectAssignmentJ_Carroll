@@ -6,17 +6,16 @@ public interface PercentWinsAndLosses {
     /*Interface method for establishing the percentage of victories according to the number of
     games won and the games played altogether*/
 
-    public int winsPercentage(int percent);
 
     public float winsPercent (float percent);
 
 /*The method for incrementing the number of games won by 1*/
-    public int updateVictories();
+    public void updateVictories();
 
     /*The method for incrementing the number of games lost by 1*/
-    public int updateLosses();
+    public void updateLosses();
 
-    public int updateDraws();
+    public void updateDraws();
 
     /*The method for calculating the number of games altogether*/
     public int totalGames();

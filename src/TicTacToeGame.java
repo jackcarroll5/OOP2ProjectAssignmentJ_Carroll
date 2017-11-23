@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -20,7 +19,7 @@ public class TicTacToeGame extends JFrame implements ActionListener {
         Container cPane = new Container();
         cPane.setLayout(new FlowLayout());
 
-        setIconImage(new ImageIcon("G:\\Yr 2 Semester 1\\OOP2\\OOP2ProjectFolder\\XO Icon.PNG").getImage());
+        setIconImage(new ImageIcon("src\\images\\XO Icon.PNG").getImage());
 
 
         setSize(700, 700);
@@ -94,6 +93,9 @@ public class TicTacToeGame extends JFrame implements ActionListener {
 
     }//End of optMenu() method
 
+    public static void setXOButton(ButtonPresserXO[] XOButton) {
+        TicTacToeGame.XOButton = XOButton;
+    }
 
     public static ButtonPresserXO[] getXOButton() {
         return XOButton;
@@ -119,4 +121,7 @@ public class TicTacToeGame extends JFrame implements ActionListener {
             }
 
         }//End of method for actionPerformed when pressing menu options.
-    }//End of TicTacToeGame Class
+
+
+
+}//End of TicTacToeGame Class

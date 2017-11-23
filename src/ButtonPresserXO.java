@@ -33,7 +33,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
    static ArrayList <Person> people;
    private static int switchTurn = 0;//Represents the player's turns
     //Represents cases for the numerous symbols of nothing,X and O.
-   static ButtonPresserXO[] buttons = new ButtonPresserXO[9];
+    ButtonPresserXO[] buttons = new ButtonPresserXO[9];
 
     public ButtonPresserXO()
     {
@@ -41,8 +41,6 @@ public class ButtonPresserXO extends JButton implements ActionListener{
         /*Make sure that image is in right folder and file pathname is correct. If image can't show up
         * type in correct file that image is found for O Image Paint.PNG and X Image Paint.PNG */
         //Getting images for my original X and O Drawings
-
-
         OIcon = new ImageIcon("src\\images\\O Image Paint.PNG");
         XIcon = new ImageIcon("src\\images\\X Image Paint.PNG");
 
@@ -58,24 +56,10 @@ public class ButtonPresserXO extends JButton implements ActionListener{
         /*Add X and O symbol when button is pressed.
         * Cases apply for the different symbols*/
         switchTurn++;
-        //symbol %= 3;
 
 
 
 
-        //Doesn't work as cases are set for three symbols including a
-        //null symbol
-        /*switch (symbol)
-        {
-            case 0:
-              setIcon(null);
-                break;
-            case 1:
-                setIcon(XIcon);
-                break;
-            case 2:
-               setIcon(OIcon);
-        }//End of switch statement*/
 
 
 
@@ -136,16 +120,18 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                     player1 = new PlayerSelector();
                     player1.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
                     player1.updateVictories();
-                    /**Update the victory for the player*/
+                    /**Should update the victory for the player on its own rather than the entire
+                     * array in the combo box*/
 
                     JOptionPane.showMessageDialog(null,"Winner:\n" + player1.getUserbox().getSelectedItem().toString(),"Winner",
                             JOptionPane.INFORMATION_MESSAGE);//Gets selected player for Player 1 from the PlayerSelector class.
 
                     player2 = new PlayerSelector();
                     player2.getUserbox2().setSelectedItem(people);
+
                     player2.updateLosses();
                     /**Update the victory for the
-                     * loss for the other player*/
+                     * loss for the other player on its own*/
 
                     JOptionPane.showMessageDialog(null,"Runner-Up:\n" + player2.getUserbox2().getSelectedItem().toString(),"Runner-Up",
                             JOptionPane.INFORMATION_MESSAGE);
@@ -156,20 +142,30 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
                     /**Should display the winning players's victory percentage and the total number of games played.*/
                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
-                            "\nTotal Games Played: " + player1.totalGames() + " games","Result",JOptionPane.INFORMATION_MESSAGE);
+                            "\nTotal Games Played: " + player1.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
 
-
+                    JOptionPane.showMessageDialog(null,"Wins percentage: " +  player2.winsPercent(winsPercentage) + "%" +
+                            "\nTotal Games Played: " + player2.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
 
 
         TicTacToeGame tttg = new TicTacToeGame();
+
         /*The game should reset with the clearance of the images from the nine buttons
         and the resetting of the Tic Tac toe layout by restarting the game again and allow a different player selection*/
-
+                  tttg.setVisible(false);
+                   tttg.dispose();
                     removeAll();
                     tttg.removeAll();
                     tttg.panel.removeAll();
+
+
+
+                    //Try to form a new game with a brand new frame along with the buttons and images
+                   TicTacToeGame tacToeGame = new TicTacToeGame();
+                   tacToeGame.setVisible(true);
+
 
 
                     /*Attempt to remove the buttons along with the images once the game restarts
@@ -221,7 +217,10 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
 
                     JOptionPane.showMessageDialog(null,"Wins percentage: " + player1.winsPercent(winsPercentage) + "%" +
-                    "\nTotal Games Played: " + player1.totalGames() + " games","Result",JOptionPane.INFORMATION_MESSAGE);
+                    "\nTotal Games Played: " + player1.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+
+                    JOptionPane.showMessageDialog(null,"Wins percentage: " +  player2.winsPercent(winsPercentage) + "%" +
+                            "\nTotal Games Played: " + player2.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
 
 
@@ -235,12 +234,13 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                     * and cleared of all its images and buttons as well as the frame to allow the player to restartt a new game if possible and
                     * add new users or save/load them.*/
           TicTacToeGame tttg = new TicTacToeGame();
+          tttg.setVisible(false);
             tttg.dispose();
+
             MainGameMenu mnu = new MainGameMenu();
             mnu.setVisible(true);
 
-                    PlayerSelector reset2 = new PlayerSelector();
-                    reset2.setVisible(true);
+
 
          }
        }
@@ -283,12 +283,18 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                      JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
                              "\nTotal Games Played: " + player1.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
-
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player2.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + player2.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
 
 
         TicTacToeGame ticTacToeGame = new TicTacToeGame();
+        ticTacToeGame.setVisible(false);
         ticTacToeGame.dispose();
+
+                     TicTacToeGame tacToeGame = new TicTacToeGame();
+                     tacToeGame.setVisible(true);
+
 
                      PlayerSelector reset3 = new PlayerSelector();
                      reset3.setVisible(true);
@@ -314,6 +320,9 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                      JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
                              "\nTotal Games Played: " + player1.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player2.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + player2.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+
                      //JOptionPane.showMessageDialog(null,"Player 1's score: " + player1.toString());
 
                     // JOptionPane.showMessageDialog(null,"Player 2's score: " + player2.toString());
@@ -321,13 +330,15 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
 
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
+
           TicTacToeGame ticTacToeGame = new TicTacToeGame();
+          ticTacToeGame.setVisible(false);
           ticTacToeGame.dispose();
+
           MainGameMenu mgm = new MainGameMenu();
           mgm.setVisible(true);
 
-                     PlayerSelector reset4 = new PlayerSelector();
-                     reset4.setVisible(true);
+
       }
 
     }
@@ -365,9 +376,17 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                              "\nTotal Games Played: " + player1.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
 
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player2.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + player2.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
         TicTacToeGame ttt = new TicTacToeGame();
+        ttt.setVisible(false);
         ttt.dispose();
+
+
+
+                     TicTacToeGame tacToeGame = new TicTacToeGame();
+                     tacToeGame.setVisible(true);
 
                      PlayerSelector reset5 = new PlayerSelector();
                      reset5.setVisible(true);
@@ -391,6 +410,9 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                      JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
                              "\nTotal Games Played: " + player1.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player2.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + player2.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+
                      /*JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
                          "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
 
@@ -398,12 +420,13 @@ public class ButtonPresserXO extends JButton implements ActionListener{
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
 
           TicTacToeGame ttt = new TicTacToeGame();
+          ttt.setVisible(false);
           ttt.dispose();
+
           MainGameMenu TicTT = new MainGameMenu();
           TicTT.setVisible(true);
 
-                     PlayerSelector reset6 = new PlayerSelector();
-                     reset6.setVisible(true);
+
 
       }
 

@@ -60,8 +60,8 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
      *
      * @param losses of games
      */
-    public void setLoss(int losses) {
-        this.losses = losses;
+    public static void setLoss(int losses) {
+        Person.losses = losses;
     }
 
 
@@ -106,13 +106,8 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
     }
 
     /**To set up the victories if the player wins and forming a percentage of victories
-     * once the player gets 3 consecutive Xs or Os diagonally,vertically or horizontally*/
-    @Override
-    public int winsPercentage(int percentWins) {
-     setWins(getWins() /  (getWins() + getLoss() + getDraws()) * 100);
-        return percentWins;
-    }
-
+     * once the player gets 3 consecutive Xs or Os diagonally,vertically or horizontally in
+     * a certain number of moves before nine moves are made and a draw occurs.*/
     @Override
     public float winsPercent(float percent) {
         setWins(getWins() /  (getWins() + getLoss() + getDraws()) * 100);
@@ -124,24 +119,32 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
         setWins(getWins()  / (getWins() + getLoss() + getDraws()) * 100);
     }
 
+
+
     /**Establishing interface method for incrementing the number of victories
      * for a player by 1 if the player wins.*/
-    public int updateVictories() {
-        return getWins() + 1;
+    public void updateVictories() {
+        setWins(getWins() + 1);
     }
+
+
 
     /**Creates method based on interface to increase the number of losses by
      * 1 if the player loses the game*/
-    public int updateLosses() {
-        return getLoss() + 1;
+    public void updateLosses() {
+        setLoss(getLoss() + 1);
     }
+
+
 
     /**Creates method based on interface to increase the number of draws by
      * 1 if the player loses the game*/
     @Override
-    public int updateDraws() {
-        return getDraws() + 1;
+    public void updateDraws() {
+        setDraws(getDraws() + 1);
     }
+
+
 
     /**Creates method based on interface to increase the number of losses by
      * 1 if the player loses the game*/
