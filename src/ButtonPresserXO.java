@@ -179,6 +179,12 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
 
 
+                    /*Once the game ends, the turns will reset at zero
+                    * so the selected new players for the next game
+                    * can go ahead with playing the new game.*/
+                    switchTurn = 0;
+
+
                     /*Restart the player selection frame to pick new players or choose the same players again*/
                   PlayerSelector reset1 = new PlayerSelector();
                   reset1.setVisible(true);
@@ -236,6 +242,8 @@ public class ButtonPresserXO extends JButton implements ActionListener{
           TicTacToeGame tttg = new TicTacToeGame();
           tttg.setVisible(false);
             tttg.dispose();
+
+                    switchTurn = 0;
 
             MainGameMenu mnu = new MainGameMenu();
             mnu.setVisible(true);
@@ -295,6 +303,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                      TicTacToeGame tacToeGame = new TicTacToeGame();
                      tacToeGame.setVisible(true);
 
+                     switchTurn = 0;
 
                      PlayerSelector reset3 = new PlayerSelector();
                      reset3.setVisible(true);
@@ -334,6 +343,8 @@ public class ButtonPresserXO extends JButton implements ActionListener{
           TicTacToeGame ticTacToeGame = new TicTacToeGame();
           ticTacToeGame.setVisible(false);
           ticTacToeGame.dispose();
+
+                     switchTurn = 0;
 
           MainGameMenu mgm = new MainGameMenu();
           mgm.setVisible(true);
@@ -388,6 +399,8 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                      TicTacToeGame tacToeGame = new TicTacToeGame();
                      tacToeGame.setVisible(true);
 
+                     switchTurn = 0;
+
                      PlayerSelector reset5 = new PlayerSelector();
                      reset5.setVisible(true);
 
@@ -422,6 +435,8 @@ public class ButtonPresserXO extends JButton implements ActionListener{
           TicTacToeGame ttt = new TicTacToeGame();
           ttt.setVisible(false);
           ttt.dispose();
+
+                     switchTurn = 0;
 
           MainGameMenu TicTT = new MainGameMenu();
           TicTT.setVisible(true);
