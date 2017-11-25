@@ -69,7 +69,7 @@ public class TicTacToeGame extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Minimizing the window", "Minimizing", JOptionPane.INFORMATION_MESSAGE);
                 setExtendedState(Frame.ICONIFIED);
             }
-        });
+        });//End of Window Listener method for minimising the window of the frame.
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -77,7 +77,7 @@ public class TicTacToeGame extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Restoring the window", "Restoration", JOptionPane.INFORMATION_MESSAGE);
                 setExtendedState(Frame.NORMAL);
             }
-        });
+        });//End of Window Listener method for maximising the window of the frame.
     }//End of TicTacToeGame() class
 
     public void optMenu() {

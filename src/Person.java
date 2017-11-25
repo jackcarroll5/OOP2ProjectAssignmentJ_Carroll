@@ -7,12 +7,18 @@ import java.io.*;
  * @author Jack Carroll
  * version 1.0*/
 
-public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Serializable,PercentWins{ //Serializable required for saving
+//JB - modified this to remove some static attributes that were present and altered the corresponding getters and setters
+//Also commented out some duplicate methods
+//Modified name of some methods
+//Also removed any references to the interfaces PercentWinsAndLosses and PercentWins which are not necessary at all for this
+//application and are doing more harm than good
+
+public class Person extends ButtonPresserXO implements Serializable{ //Serializable required for saving
     //attributes
     private String name;
-    private static int wins;
-    private static int losses;
-    private static int draws;
+    private int wins;
+    private int losses;
+    private int draws;
 
     /**
      * Empty argument Constructor for Person
@@ -20,10 +26,7 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
     public Person()
     {
         setName("");
-        setWins(0);
-        setLoss(0);
-        setDraws(0);
-    }
+    }//End of empty constructor
 
     /**Constructor method
      * @param name the player
@@ -32,9 +35,6 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
      * @param draws of games*/
     public Person(String name,int wins,int losses,int draws){
         setName(name);
-        setWins(wins);
-        setLoss(losses);
-        setDraws(draws);
     }//End of Constructor class
 
 
@@ -49,28 +49,25 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
 
     /**Mutator method to set the number of wins
      *
-     * @param wins of games
      */
-    public static void setWins(int wins) {
-        Person.wins = wins;
+    public void updateWins() {
+       wins++;
     }
 
 
     /**Mutator method to set the number of losses
      *
-     * @param losses of games
      */
-    public static void setLoss(int losses) {
-        Person.losses = losses;
+    public void updateLosses() {
+       losses++;
     }
 
 
     /**Mutator method to set the number of draws
      *
-     * @param draws of games
      */
-    public static void setDraws(int draws) {
-        Person.draws = draws;
+    public void updateDraws() {
+       draws++;
     }
 
     /**Accessor method to return the player's name
@@ -85,7 +82,7 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
      *
      * @return number of wins
      */
-    public static int getWins() {
+    public int getWins() {
         return wins;
     }
 
@@ -93,7 +90,7 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
      *
      * @return number of losses
      */
-    public static int getLoss() {
+    public int getLoss() {
         return losses;
     }
 
@@ -101,14 +98,16 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
      *
      * @return number of draws
      */
-    public static int getDraws() {
+    public int getDraws() {
         return draws;
     }
+
+
 
     /**To set up the victories if the player wins and forming a percentage of victories
      * once the player gets 3 consecutive Xs or Os diagonally,vertically or horizontally in
      * a certain number of moves before nine moves are made and a draw occurs.*/
-    @Override
+   /* @Override
     public float winsPercent(float percent) {
         setWins(getWins() /  (getWins() + getLoss() + getDraws()) * 100);
         return percent;
@@ -117,38 +116,38 @@ public class Person extends ButtonPresserXO implements PercentWinsAndLosses,Seri
     @Override
     public void winsPercentage(float percent) {
         setWins(getWins()  / (getWins() + getLoss() + getDraws()) * 100);
-    }
+    }*/
 
 
 
     /**Establishing interface method for incrementing the number of victories
      * for a player by 1 if the player wins.*/
-    public void updateVictories() {
+   /* public void updateVictories() {
         setWins(getWins() + 1);
-    }
+    }*/
 
 
 
     /**Creates method based on interface to increase the number of losses by
      * 1 if the player loses the game*/
-    public void updateLosses() {
+   /* public void updateLosses() {
         setLoss(getLoss() + 1);
-    }
+    }*/
 
 
 
     /**Creates method based on interface to increase the number of draws by
      * 1 if the player loses the game*/
-    @Override
+   /* @Override
     public void updateDraws() {
         setDraws(getDraws() + 1);
-    }
+    }/*
 
 
 
     /**Creates method based on interface to increase the number of losses by
      * 1 if the player loses the game*/
-    @Override
+    //@Override
     public int totalGames() {
         return getWins() + getLoss() + getDraws();
     }

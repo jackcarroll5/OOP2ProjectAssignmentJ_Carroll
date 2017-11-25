@@ -11,10 +11,18 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 
-public class PlayerSelector extends JFrame implements ActionListener,PercentWinsAndLosses,PercentWins {
+//JB - removed all references to the interfaces PercentWinsAndLosses and PercentWins as their functionality is
+//contained within Person class
+//Removed all methods that were being overridden in these interfaces
+//added getters and setters to deal with keeping track of the indices of the first and second players in the combo-box
+//so they can be accessed elsewhere in the app and means you can update wins/losses/draws for a player and have that
+//render in the "new" combo-box (I'm really only hiding it and making it visible again)
+
+public class PlayerSelector extends JFrame implements ActionListener /*,PercentWinsAndLosses,PercentWins*/ {
    JComboBox userbox,userbox2;
   static ArrayList <Person> players;
-  int wins, losses, draws;
+  int wins, losses, draws, numPlayerSelected = 0;
+  int indexFirstPlayer, indexSecondPlayer;
 
  public PlayerSelector()
  {
@@ -28,35 +36,47 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
      players = MainGameMenu.players; //Array for the users to be shown in the drop down menu
 
      userbox = new JComboBox(); //Create combo box to display the players in the drop down menu. Represents Player 1 Selection
-     userbox2 = new JComboBox();//Represents Player 2 Selection
+     //userbox2 = new JComboBox();//Represents Player 2 Selection
 
      /*User Items are added to the combo box using the enhanced for loop*/
+
+
+     Person p1 = new Person("John",0,0,0);
+     Person p2 = new Person("Anna",0,0,0);
+     Person p3 = new Person("Amy",0,0,0);
+     Person p4 = new Person("Max",0,0,0);
+
+     players.add(p1);
+     players.add(p2);
+     players.add(p3);
+     players.add(p4);
+
      for (Person p : players)
      {
          userbox.addItem(p);
      }
 
-     for (Person p : players)
+     /*for (Person p : players)
      {
          userbox2.addItem(p);
-     }
+     }*/
 
      userbox.setVisible(true);
-     userbox2.setVisible(true); //Allow both combo boxes to appear.
+     //userbox2.setVisible(true); //Allow both combo boxes to appear.
 
      userbox.setSelectedIndex(0); //Presets first item of the first user added to the program
-     userbox2.setSelectedIndex(1);
+     //userbox2.setSelectedIndex(1);
 
      userbox.getSelectedIndex();
-     userbox2.getSelectedIndex();
+     //userbox2.getSelectedIndex();
 
      userbox.addActionListener(this);
-     userbox2.addActionListener(this);
+     //userbox2.addActionListener(this);
 
      add(userbox);
-     add(userbox2); //Adding both combo boxes to the JFrame
+     //add(userbox2); //Adding both combo boxes to the JFrame
 
-     userbox2.setLocation(300,300);
+     //userbox2.setLocation(300,300);
 
      addWindowListener(new WindowAdapter() {
          @Override
@@ -120,14 +140,37 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
     public void actionPerformed(ActionEvent e) {
 
         /*Select the chosen item from the combo box and display the player's name and wins and losses using an output.*/
-       userbox.setSelectedItem(players);
-       userbox.getSelectedItem();
+       //userbox.setSelectedItem(players);
+       //userbox.getSelectedItem();
 
-       userbox.getSelectedIndex();
+       //userbox.getSelectedIndex();
 
 
-      JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox.getSelectedItem().toString() + " as Player 1","Player 1 Selection",
-              JOptionPane.INFORMATION_MESSAGE);
+        if(numPlayerSelected == 0)
+        {
+           indexFirstPlayer = userbox.getSelectedIndex();
+            JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox.getSelectedItem().toString() + " as Player 1","Player 1 Selection",
+                    JOptionPane.INFORMATION_MESSAGE);
+            numPlayerSelected++;
+        }
+         else
+             if (userbox.getSelectedIndex() == indexFirstPlayer){
+                 JOptionPane.showMessageDialog(null, "You have already selected \n" +  userbox.getSelectedItem().toString() + " as Player 1","Same Player Selection",
+                         JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+                 JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox.getSelectedItem().toString() + " as Player 2","Player 2 Selection",
+                         JOptionPane.INFORMATION_MESSAGE);
+                 numPlayerSelected++;
+                indexSecondPlayer = userbox.getSelectedIndex();
+             }
+             if(numPlayerSelected == 2)
+             {
+                 dispose();
+                 numPlayerSelected = 0;
+             }
+
+
 
         /**Reference
          * Title: Preferred way of getting the selected item of a JComboBox
@@ -142,17 +185,17 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
          * of Players 1 and 2 separately using Message Dialogs
          */
 
-       userbox2.setSelectedItem(players);
-       userbox2.getSelectedItem();
-       userbox2.getSelectedIndex();
+      // userbox2.setSelectedItem(players);
+       //userbox2.getSelectedItem();
+       //userbox2.getSelectedIndex();
 
 
-        JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox2.getSelectedItem().toString() + " as Player 2","Player 2 Selection",
-                JOptionPane.INFORMATION_MESSAGE);
-       dispose(); //The combo box disappears when the user presses OK after seeing the name of Player 2.
+       // JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox2.getSelectedItem().toString() + " as Player 2","Player 2 Selection",
+                //JOptionPane.INFORMATION_MESSAGE);
+       //dispose(); //The combo box disappears when the user presses OK after seeing the name of Player 2.
     }
 
-    @Override
+  /*  @Override
     public void winsPercentage(float percent) {
         Person.setWins(Person.getWins() / totalGames() * 100);
     }
@@ -190,7 +233,26 @@ public class PlayerSelector extends JFrame implements ActionListener,PercentWins
     public int totalGames() {
         return Person.getWins() + Person.getLoss() + Person.getDraws();
     }
+*/
 
+  public void setIndexOfFirstPlayer(int index)
+  {
+     indexFirstPlayer = index;
+  }
 
+    public int getIndexFirstPlayer()
+    {
+        return indexFirstPlayer;
+    }
+
+    public void setIndexSecondPlayer(int index)
+    {
+        indexSecondPlayer = index;
+    }
+
+    public int getIndexSecondPlayer()
+    {
+        return indexSecondPlayer;
+    }
 }
 

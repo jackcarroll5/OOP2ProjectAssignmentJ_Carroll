@@ -29,11 +29,12 @@ public class ButtonPresserXO extends JButton implements ActionListener{
     Person user;
     int repeat = 100,wins = 0,losses = 0,draws = 0;
     float winsPercentage;
-    PlayerSelector player1,player2;
+    PlayerSelector ps;
    static ArrayList <Person> people;
    private static int switchTurn = 0;//Represents the player's turns
     //Represents cases for the numerous symbols of nothing,X and O.
     ButtonPresserXO[] buttons = new ButtonPresserXO[9];
+    Person firstPlayer, secondPlayer;
 
     public ButtonPresserXO()
     {
@@ -116,24 +117,46 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                     can be shown at the very end of the game*/
                     people = PlayerSelector.players;
 
+                    ps = MainGameMenu.getCurrentPlayerSelector();
 
-                    player1 = new PlayerSelector();
-                    player1.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
-                    player1.updateVictories();
+                    //ps = new PlayerSelector();
+
+                    //player1 = new PlayerSelector();
+
+                    firstPlayer = (Person)ps.getUserbox().getItemAt(ps.getIndexFirstPlayer());
+                    secondPlayer = (Person)ps.getUserbox().getItemAt(ps.getIndexSecondPlayer());
+
+
+
+                    //ps.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
+                    //ps.updateVictories();
                     /**Should update the victory for the player on its own rather than the entire
                      * array in the combo box*/
 
-                    JOptionPane.showMessageDialog(null,"Winner:\n" + player1.getUserbox().getSelectedItem().toString(),"Winner",
+                    firstPlayer.updateWins();
+                    secondPlayer.updateLosses();
+
+
+                    JOptionPane.showMessageDialog(null,"Winner:\n" + firstPlayer,"Winner",
                             JOptionPane.INFORMATION_MESSAGE);//Gets selected player for Player 1 from the PlayerSelector class.
 
-                    player2 = new PlayerSelector();
-                    player2.getUserbox2().setSelectedItem(people);
 
-                    player2.updateLosses();
+                    //ps = new PlayerSelector();
+
+                    //ps.getUserbox().insertItemAt(firstPlayer,ps.getIndexOfFirstPlayer());
+                    //ps.getUserbox().insertItemAt(secondPlayer,ps.getIndexOfSecondPlayer());
+
+                    //MainGameMenu.setCurrentPlayerSelector(ps);
+                    //ps.getUserbox2().setSelectedItem(people);
+
+                    //ps.updateLosses();
+
+
+
                     /**Update the victory for the
                      * loss for the other player on its own*/
 
-                    JOptionPane.showMessageDialog(null,"Runner-Up:\n" + player2.getUserbox2().getSelectedItem().toString(),"Runner-Up",
+                    JOptionPane.showMessageDialog(null,"Runner-Up:\n" + secondPlayer,"Runner-Up",
                             JOptionPane.INFORMATION_MESSAGE);
 
 
@@ -141,41 +164,48 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                             "\nTotal Games Played: " + user.totalGames());*/
 
                     /**Should display the winning players's victory percentage and the total number of games played.*/
-                    JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
-                            "\nTotal Games Played: " + player1.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Wins percentage: " +  (double)firstPlayer.getWins() / firstPlayer.totalGames() * 100 /*ps.winsPercent(winsPercentage)*/ + "%" +
+                            "\nTotal Games Played: " + firstPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
 
-                    JOptionPane.showMessageDialog(null,"Wins percentage: " +  player2.winsPercent(winsPercentage) + "%" +
-                            "\nTotal Games Played: " + player2.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Wins percentage: " +  (double)secondPlayer.getWins() / secondPlayer.totalGames() * 100 + "%" + /*ps.winsPercent(winsPercentage)*/
+                            "\nTotal Games Played: " + secondPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
 
 
-        TicTacToeGame tttg = new TicTacToeGame();
+        //TicTacToeGame tttg = new TicTacToeGame();
 
         /*The game should reset with the clearance of the images from the nine buttons
-        and the resetting of the Tic Tac toe layout by restarting the game again and allow a different player selection*/
+        and the resetting of the Tic Tac toe layout by restarting the game again and allow a different player selection
                   tttg.setVisible(false);
                    tttg.dispose();
                     removeAll();
                     tttg.removeAll();
-                    tttg.panel.removeAll();
+                    tttg.panel.removeAll();*/
 
 
 
                     //Try to form a new game with a brand new frame along with the buttons and images
-                   TicTacToeGame tacToeGame = new TicTacToeGame();
-                   tacToeGame.setVisible(true);
+                  MainGameMenu.getCurrentGame().dispose();
+                  MainGameMenu.getCurrentGame().setVisible(false);
 
+                  TicTacToeGame ticTacToeGame = new TicTacToeGame();
+                  ticTacToeGame.setVisible(true);
+                 MainGameMenu.setCurrentGame(ticTacToeGame);
 
+                 ps.setVisible(true);
+                 ps.setIndexOfFirstPlayer(-1);
+                 ps.setIndexSecondPlayer(-1);
 
                     /*Attempt to remove the buttons along with the images once the game restarts
-                    * Reload the buttons with no images shown on the buttons*/
+                    * Reload the buttons with no images shown on the buttons
                     for (int i = 0; i <= 8; i++)
                     {
                         buttons = TicTacToeGame.getXOButton();
                         buttons[i].setVisible(false);
                         buttons[i] = null;
-                    }
+                    }*/
+
 
 
 
@@ -186,47 +216,71 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
 
                     /*Restart the player selection frame to pick new players or choose the same players again*/
-                  PlayerSelector reset1 = new PlayerSelector();
-                  reset1.setVisible(true);
+                  //PlayerSelector reset1 = new PlayerSelector();
+                  //reset1.setVisible(true);
 
 
       }
       else {
-                    people = PlayerSelector.players;
+                   people = PlayerSelector.players;
+
+                   /* ps = ps;
+                    ps = new PlayerSelector();
+                    ps.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
+                    ps.updateWins();*/
+
+                      ps = MainGameMenu.getCurrentPlayerSelector();
+
+                      firstPlayer = (Person)ps.getUserbox().getItemAt(ps.getIndexFirstPlayer());
+                    secondPlayer = (Person)ps.getUserbox().getItemAt(ps.getIndexSecondPlayer());
+
+                     firstPlayer.updateWins();
+                    secondPlayer.updateLosses();
 
 
-                    player1 = new PlayerSelector();
-                    player1.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
-                    player1.updateVictories();
-                    JOptionPane.showMessageDialog(null,"Winner:\n" + player1.getUserbox().getSelectedItem().toString(),"Winner",
-                            JOptionPane.INFORMATION_MESSAGE);//Gets selected player for Player 1 from the PlayerSelector class.
-
-                    // player1.userbox.setSelectedItem(user);
-                   // player2.userbox2.setSelectedItem(user);
-
-                    //player1.setPlayers(people);
-                    //player1.getPlayers();
-
-                    player2 = new PlayerSelector();
-                    player2.getUserbox2().setSelectedItem(people);
-                    player2.updateLosses();
-                    JOptionPane.showMessageDialog(null,"Runner-Up:\n" + player2.getUserbox2().getSelectedItem().toString(),"Runner-Up",
+                    JOptionPane.showMessageDialog(null,"Winner:\n" + firstPlayer,"Winner",
                             JOptionPane.INFORMATION_MESSAGE);
-                    
 
-                   // player1.userbox.setSelectedItem(people);
-                    //player2.userbox2.setSelectedItem(people);
+                    /*JOptionPane.showMessageDialog(null,"Winner:\n" + ps.getUserbox().getSelectedItem().toString(),"Winner",
+                            JOptionPane.INFORMATION_MESSAGE);*///Gets selected player for Player 1 from the PlayerSelector class.
+
+                    // ps.userbox.setSelectedItem(user);
+                   // ps.userbox2.setSelectedItem(user);
+
+                    //ps.setPlayers(people);
+                    //ps.getPlayers();
+
+                   /* ps = new PlayerSelector();
+                    ps.getUserbox2().setSelectedItem(people);
+                    ps.updateLosses();*/
+                    //JOptionPane.showMessageDialog(null,"Runner-Up:\n" + ps.getUserbox2().getSelectedItem().toString(),"Runner-Up",
+                            //JOptionPane.INFORMATION_MESSAGE);
+
+                             JOptionPane.showMessageDialog(null,"Runner-Up:\n" + secondPlayer,"Runner-Up",
+                            JOptionPane.INFORMATION_MESSAGE);
 
 
-                    //player1.winsPercentage(winsPercentage);
+                   // ps.userbox.setSelectedItem(people);
+                    //ps.userbox2.setSelectedItem(people);
+
+
+                    //ps.winsPercentage(winsPercentage);
+
+
+                   JOptionPane.showMessageDialog(null,"Wins percentage: " +  (double)firstPlayer.getWins()/firstPlayer.totalGames()*100 + "%" +
+                            "\nTotal Games Played: " + firstPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+
+
+                    JOptionPane.showMessageDialog(null,"Wins percentage: " +  (double)secondPlayer.getWins()/secondPlayer.totalGames()*100 + "%" +
+                            "\nTotal Games Played: " + secondPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
 
 
-                    JOptionPane.showMessageDialog(null,"Wins percentage: " + player1.winsPercent(winsPercentage) + "%" +
-                    "\nTotal Games Played: " + player1.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+                    /*JOptionPane.showMessageDialog(null,"Wins percentage: " + ps.winsPercent(winsPercentage) + "%" +
+                    "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
-                    JOptionPane.showMessageDialog(null,"Wins percentage: " +  player2.winsPercent(winsPercentage) + "%" +
-                            "\nTotal Games Played: " + player2.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
+                            "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);*/
 
 
 
@@ -239,19 +293,28 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                     /*Should enable the game board to close and return to the main menu class where the TicTacToeGame class is disposed
                     * and cleared of all its images and buttons as well as the frame to allow the player to restartt a new game if possible and
                     * add new users or save/load them.*/
-          TicTacToeGame tttg = new TicTacToeGame();
-          tttg.setVisible(false);
-            tttg.dispose();
+
+                    MainGameMenu.getCurrentGame().dispose();
+                    MainGameMenu.getCurrentGame().setVisible(false);
+
+                    TicTacToeGame tacToeGame = new TicTacToeGame();
+                    tacToeGame.setVisible(true);
+                    MainGameMenu.setCurrentGame(tacToeGame);
 
                     switchTurn = 0;
 
+          /*TicTacToeGame tttg = new TicTacToeGame();
+          tttg.setVisible(false);
+            tttg.dispose();
+
             MainGameMenu mnu = new MainGameMenu();
-            mnu.setVisible(true);
+            mnu.setVisible(true);*/
 
 
 
-         }
+                }
        }
+
 
 
 
@@ -268,19 +331,35 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                 "\nDo you want to play again","You lose!",JOptionPane.YES_NO_OPTION);
                  if(repeat == JOptionPane.YES_OPTION) {
 
+
                      people = PlayerSelector.players;
 
+                      ps = MainGameMenu.getCurrentPlayerSelector();
 
-                     player1 = new PlayerSelector();
-                     player1.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
-                     player1.updateLosses();
-                     JOptionPane.showMessageDialog(null,"Winner:\n" + player2.getUserbox2().getSelectedItem().toString(),"Winner",
+                     firstPlayer = (Person)ps.getUserbox().getItemAt(ps.getIndexFirstPlayer());
+                     secondPlayer = (Person)ps.getUserbox().getItemAt(ps.getIndexSecondPlayer());
+
+                     firstPlayer.updateLosses();
+                     secondPlayer.updateWins();
+
+
+                     JOptionPane.showMessageDialog(null,"Winner:\n" + secondPlayer,"Winner",
+                             JOptionPane.INFORMATION_MESSAGE);
+
+                     JOptionPane.showMessageDialog(null,"Runner-Up:\n" + firstPlayer,"Runner-Up",
+                             JOptionPane.INFORMATION_MESSAGE);
+
+
+                    /* ps = new PlayerSelector();
+                     ps.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
+                     ps.updateLosses();
+                     JOptionPane.showMessageDialog(null,"Winner:\n" + ps.getUserbox2().getSelectedItem().toString(),"Winner",
                              JOptionPane.INFORMATION_MESSAGE);//Gets selected player for Player 1 from the PlayerSelector class.
 
-                     player2 = new PlayerSelector();
-                     player2.getUserbox2().setSelectedItem(people);
-                     player2.updateVictories();
-                     JOptionPane.showMessageDialog(null,"Runner-Up:\n" + player1.getUserbox().getSelectedItem().toString(),"Runner-Up",
+                     ps = new PlayerSelector();
+                     ps.getUserbox2().setSelectedItem(people);
+                     ps.updateVictories();
+                     JOptionPane.showMessageDialog(null,"Runner-Up:\n" + ps.getUserbox().getSelectedItem().toString(),"Runner-Up",
                              JOptionPane.INFORMATION_MESSAGE);
 
                      //Displays the percentage of wins during a series of games
@@ -288,71 +367,123 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                      /*JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
                              "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
 
-                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
-                             "\nTotal Games Played: " + player1.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+        /*             JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
-                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player2.winsPercent(winsPercentage) + "%" +
-                             "\nTotal Games Played: " + player2.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);*/
+
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  (double)firstPlayer.getWins()/firstPlayer.totalGames()*100 + "%" +
+                             "\nTotal Games Played: " + firstPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+
+
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  (double)secondPlayer.getWins()/secondPlayer.totalGames()*100 + "%" +
+                             "\nTotal Games Played: " + secondPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
 
 
-        TicTacToeGame ticTacToeGame = new TicTacToeGame();
+                     MainGameMenu.getCurrentGame().dispose();
+                     MainGameMenu.getCurrentGame().setVisible(false);
+
+                     TicTacToeGame tacToeGame = new TicTacToeGame();
+                     tacToeGame.setVisible(true);
+                     MainGameMenu.setCurrentGame(tacToeGame);
+
+                     ps.setVisible(true);
+                     ps.setIndexOfFirstPlayer(-1);
+                     ps.setIndexSecondPlayer(-1);
+
+
+                     switchTurn = 0;
+
+        /*TicTacToeGame ticTacToeGame = new TicTacToeGame();
         ticTacToeGame.setVisible(false);
         ticTacToeGame.dispose();
 
                      TicTacToeGame tacToeGame = new TicTacToeGame();
-                     tacToeGame.setVisible(true);
+                     tacToeGame.setVisible(true);*/
 
-                     switchTurn = 0;
 
-                     PlayerSelector reset3 = new PlayerSelector();
-                     reset3.setVisible(true);
-      }
+                     //PlayerSelector reset3 = new PlayerSelector();
+                    // reset3.setVisible(true);
+                 }
       else {
-                     people = PlayerSelector.players;
+                    /* people = PlayerSelector.players;
 
-                     player1 = new PlayerSelector();
-                     player1.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
-                     player1.updateLosses();
-                     JOptionPane.showMessageDialog(null,"Winner:\n" + player2.getUserbox2().getSelectedItem().toString(),"Winner",
+                     ps = new PlayerSelector();
+                     ps.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
+                     ps.updateLosses();
+                     JOptionPane.showMessageDialog(null,"Winner:\n" + ps.getUserbox2().getSelectedItem().toString(),"Winner",
                              JOptionPane.INFORMATION_MESSAGE);//Gets selected player for Player 1 from the PlayerSelector class.
 
-                     player2 = new PlayerSelector();
-                     player2.getUserbox2().setSelectedItem(people);
-                     player2.updateVictories();
-                     JOptionPane.showMessageDialog(null,"Runner-Up:\n" + player1.getUserbox().getSelectedItem().toString(),"Runner-Up",
+                     ps = new PlayerSelector();
+                     ps.getUserbox2().setSelectedItem(people);
+                     ps.updateVictories();
+                     JOptionPane.showMessageDialog(null,"Runner-Up:\n" + ps.getUserbox().getSelectedItem().toString(),"Runner-Up",
                              JOptionPane.INFORMATION_MESSAGE);
 
                      /*JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
                              "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
 
-                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
-                             "\nTotal Games Played: " + player1.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+            /*         JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
-                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player2.winsPercent(winsPercentage) + "%" +
-                             "\nTotal Games Played: " + player2.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+*/
+                     //JOptionPane.showMessageDialog(null,"Player 1's score: " + ps.toString());
 
-                     //JOptionPane.showMessageDialog(null,"Player 1's score: " + player1.toString());
-
-                    // JOptionPane.showMessageDialog(null,"Player 2's score: " + player2.toString());
+                     // JOptionPane.showMessageDialog(null,"Player 2's score: " + ps.toString());
 
 
+                     people = PlayerSelector.players;
 
-          JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
+                     ps = MainGameMenu.getCurrentPlayerSelector();
 
-          TicTacToeGame ticTacToeGame = new TicTacToeGame();
-          ticTacToeGame.setVisible(false);
-          ticTacToeGame.dispose();
+                     firstPlayer = (Person)ps.getUserbox().getItemAt(ps.getIndexFirstPlayer());
+                     secondPlayer = (Person)ps.getUserbox().getItemAt(ps.getIndexSecondPlayer());
+
+                     firstPlayer.updateLosses();
+                     secondPlayer.updateWins();
+
+
+                     JOptionPane.showMessageDialog(null,"Winner:\n" + secondPlayer,"Winner",
+                             JOptionPane.INFORMATION_MESSAGE);
+
+                     JOptionPane.showMessageDialog(null,"Runner-Up:\n" + firstPlayer,"Runner-Up",
+                             JOptionPane.INFORMATION_MESSAGE);
+
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  (double)firstPlayer.getWins() / firstPlayer.totalGames() * 100 /*ps.winsPercent(winsPercentage)*/ + "%" +
+                             "\nTotal Games Played: " + firstPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+
+
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  (double)secondPlayer.getWins() / secondPlayer.totalGames() * 100 + "%" + /*ps.winsPercent(winsPercentage)*/
+                             "\nTotal Games Played: " + secondPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+
+
+                     JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
+
+                     MainGameMenu.getCurrentGame().dispose();
+                     MainGameMenu.getCurrentGame().setVisible(false);
+
+                     TicTacToeGame tacToeGame = new TicTacToeGame();
+                     tacToeGame.setVisible(true);
+                     MainGameMenu.setCurrentGame(tacToeGame);
 
                      switchTurn = 0;
 
+          /*TicTacToeGame ticTacToeGame = new TicTacToeGame();
+          ticTacToeGame.setVisible(false);
+          ticTacToeGame.dispose();
+
           MainGameMenu mgm = new MainGameMenu();
-          mgm.setVisible(true);
+          mgm.setVisible(true);*/
 
 
-      }
+                 }
 
-    }
+        }
+
 
 
 
@@ -361,91 +492,151 @@ public class ButtonPresserXO extends JButton implements ActionListener{
      else if(switchTurn == 9) {
            repeat = JOptionPane.showConfirmDialog(null,"It's a draw! Great job to both players." +
                 "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
-                 if(repeat == JOptionPane.YES_OPTION) {
+                 if(repeat == JOptionPane.YES_OPTION)  {
 
-                     people = PlayerSelector.players;
+                    /* people = PlayerSelector.players;
 
-                     player1 = new PlayerSelector();
-                     player1.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
-                     player1.updateDraws();
-                     JOptionPane.showMessageDialog(null,player1.getUserbox().getSelectedItem().toString());//Gets selected player for Player 1 from the PlayerSelector class.
+                     ps = new PlayerSelector();
+                     ps.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
+                     ps.updateDraws();
+                     JOptionPane.showMessageDialog(null,ps.getUserbox().getSelectedItem().toString());//Gets selected player for Player 1 from the PlayerSelector class.
 
-                     player2 = new PlayerSelector();
-                     player2.getUserbox2().setSelectedItem(people);
-                     player2.updateDraws();
-                     JOptionPane.showMessageDialog(null,player2.getUserbox2().getSelectedItem().toString(),"Runner-Up",
+                     ps = new PlayerSelector();
+                     ps.getUserbox2().setSelectedItem(people);
+                     ps.updateDraws();
+                     JOptionPane.showMessageDialog(null,ps.getUserbox2().getSelectedItem().toString(),"Runner-Up",
                              JOptionPane.INFORMATION_MESSAGE);
 
 
 
-                     // player1.userbox.getSelectedItem();
-                     //player2.userbox2.getSelectedItem();
+                     // ps.userbox.getSelectedItem();
+                     //ps.userbox2.getSelectedItem();
                     /* JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
                      "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
 
-                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
-                             "\nTotal Games Played: " + player1.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+             /*        JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
 
-                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player2.winsPercent(winsPercentage) + "%" +
-                             "\nTotal Games Played: " + player2.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
-        TicTacToeGame ttt = new TicTacToeGame();
+
+*/
+
+
+                     people = PlayerSelector.players;
+
+                     ps = MainGameMenu.getCurrentPlayerSelector();
+
+                     firstPlayer = (Person)ps.getUserbox().getItemAt(ps.getIndexFirstPlayer());
+                     secondPlayer = (Person)ps.getUserbox().getItemAt(ps.getIndexSecondPlayer());
+
+                     firstPlayer.updateDraws();
+                     secondPlayer.updateDraws();
+
+
+                     JOptionPane.showMessageDialog(null,"It's a tie! Fair play to both players! " + firstPlayer + "\n" + secondPlayer,"Tie",JOptionPane.INFORMATION_MESSAGE);
+
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  (double)firstPlayer.getWins() / firstPlayer.totalGames() * 100 /*ps.winsPercent(winsPercentage)*/ + "%" +
+                             "\nTotal Games Played: " + firstPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+
+
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  (double)secondPlayer.getWins() / secondPlayer.totalGames() * 100 + "%" + /*ps.winsPercent(winsPercentage)*/
+                             "\nTotal Games Played: " + secondPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+
+                     MainGameMenu.getCurrentGame().dispose();
+                     MainGameMenu.getCurrentGame().setVisible(false);
+
+                     TicTacToeGame tacToeGame = new TicTacToeGame();
+                     tacToeGame.setVisible(true);
+                     MainGameMenu.setCurrentGame(tacToeGame);
+
+                     ps.setVisible(true);
+                     ps.setIndexOfFirstPlayer(-1);
+                     ps.setIndexSecondPlayer(-1);
+
+                     switchTurn = 0;
+
+        /*TicTacToeGame ttt = new TicTacToeGame();
         ttt.setVisible(false);
         ttt.dispose();
 
 
 
                      TicTacToeGame tacToeGame = new TicTacToeGame();
-                     tacToeGame.setVisible(true);
+                     tacToeGame.setVisible(true);*/
 
-                     switchTurn = 0;
+                     //PlayerSelector reset5 = new PlayerSelector();
+                     //reset5.setVisible(true);
 
-                     PlayerSelector reset5 = new PlayerSelector();
-                     reset5.setVisible(true);
-
-      }
+                 }
       else {
-
+/*
                      people = PlayerSelector.players;
 
-                     player1 = new PlayerSelector();
-                     player1.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
-                     player1.updateDraws();
-                     JOptionPane.showMessageDialog(null,player1.getUserbox().getSelectedItem().toString());//Gets selected player for Player 1 from the PlayerSelector class.
+                     ps = new PlayerSelector();
+                     ps.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
+                     ps.updateDraws();
+                     JOptionPane.showMessageDialog(null,ps.getUserbox().getSelectedItem().toString());//Gets selected player for Player 1 from the PlayerSelector class.
 
 
-                     player2 = new PlayerSelector();
-                     player2.getUserbox2().setSelectedItem(people);
-                     player2.updateDraws();
-                     JOptionPane.showMessageDialog(null,player2.getUserbox2().getSelectedItem().toString());
+                     ps = new PlayerSelector();
+                     ps.getUserbox2().setSelectedItem(people);
+                     ps.updateDraws();
+                     JOptionPane.showMessageDialog(null,ps.getUserbox2().getSelectedItem().toString());
 
-                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player1.winsPercent(winsPercentage) + "%" +
-                             "\nTotal Games Played: " + player1.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
-                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  player2.winsPercent(winsPercentage) + "%" +
-                             "\nTotal Games Played: " + player2.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
                      /*JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
                          "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
 
 
-          JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
+                     //     JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
 
-          TicTacToeGame ttt = new TicTacToeGame();
+         /* TicTacToeGame ttt = new TicTacToeGame();
           ttt.setVisible(false);
           ttt.dispose();
 
-                     switchTurn = 0;
-
           MainGameMenu TicTT = new MainGameMenu();
-          TicTT.setVisible(true);
+          TicTT.setVisible(true);*/
 
 
+                     people = PlayerSelector.players;
 
-      }
+                     ps = MainGameMenu.getCurrentPlayerSelector();
 
-    }
+                     firstPlayer = (Person)ps.getUserbox().getItemAt(ps.getIndexFirstPlayer());
+                     secondPlayer = (Person)ps.getUserbox().getItemAt(ps.getIndexSecondPlayer());
+
+                     firstPlayer.updateDraws();
+                     secondPlayer.updateDraws();
+
+                     JOptionPane.showMessageDialog(null,"It's a tie! Fair play to both players! " + firstPlayer + "\n" + secondPlayer,"Tie",JOptionPane.INFORMATION_MESSAGE);
+
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  (double)firstPlayer.getWins() / firstPlayer.totalGames() * 100 /*ps.winsPercent(winsPercentage)*/ + "%" +
+                             "\nTotal Games Played: " + firstPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+
+
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  (double)secondPlayer.getWins() / secondPlayer.totalGames() * 100 + "%" + /*ps.winsPercent(winsPercentage)*/
+                             "\nTotal Games Played: " + secondPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+
+
+                     MainGameMenu.getCurrentGame().dispose();
+                     MainGameMenu.getCurrentGame().setVisible(false);
+
+                     TicTacToeGame tacToeGame = new TicTacToeGame();
+                     tacToeGame.setVisible(true);
+                     MainGameMenu.setCurrentGame(tacToeGame);
+
+                     switchTurn = 0;
+                 }
+
+          }
     }
 
 }

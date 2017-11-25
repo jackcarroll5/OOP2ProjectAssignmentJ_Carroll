@@ -18,7 +18,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
     static ArrayList <Person>  players;//Array of users
     int count;//No of users in array
     JButton userAdd,play;
-
+    static TicTacToeGame currentGame; //Attribute to represent current game taking place in Tic Tac Toe
+   static PlayerSelector currentPlayerSelector; //Attribute to represent the current player selected
 
 
   public MainGameMenu()
@@ -103,11 +104,12 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
       //Switches to new game along with the player selector menu when the play button is pressed.
       play.addActionListener(e -> {
-          dispose();
-          PlayerSelector ps = new PlayerSelector();
-          ps.setVisible(true);
-          TicTacToeGame w = new TicTacToeGame();
-          w.setVisible(true);
+          //dispose();
+          setVisible(false);
+         currentPlayerSelector = new PlayerSelector();
+          currentPlayerSelector.setVisible(true);
+         currentGame = new TicTacToeGame();
+          currentGame.setVisible(true);
       });
 
       //Example of Players for the game to be added alongside the array list of the remaining users
@@ -203,9 +205,9 @@ public class MainGameMenu extends JFrame implements ActionListener{
               JOptionPane.ERROR_MESSAGE);
       newPlayer();
   }
-  player.setWins(0);
-  player.setLoss(0);
-  player.setDraws(0);
+  player.updateWins();
+  player.updateLosses();
+  player.updateDraws();
   JOptionPane.showMessageDialog(null,"This users's name has been added","User Added",
           JOptionPane.INFORMATION_MESSAGE);
      // player.setWins(Integer.parseInt(JOptionPane.showInputDialog("Please enter the starting number of wins(0 recommended)")));
@@ -347,8 +349,9 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
           PlayerSelector ps = new PlayerSelector();
           ps.setVisible(true);
-           TicTacToeGame w = new TicTacToeGame();
-           w.setVisible(true);
+          currentGame = new TicTacToeGame();
+          currentGame.setVisible(true);
+          MainGameMenu.setCurrentGame(currentGame);
 
      }
      //Method to load up user files when Load Menu item is pressed and shows the loaded users from the program
@@ -362,7 +365,24 @@ public class MainGameMenu extends JFrame implements ActionListener{
     }//End of actionPerformed method
 
 
+    public static void setCurrentGame(TicTacToeGame game){
+        currentGame = game;
+    }
 
+
+    public static TicTacToeGame getCurrentGame(){
+        return currentGame;
+    }
+
+
+  public static void setCurrentPlayerSelector(PlayerSelector p)
+  {
+      currentPlayerSelector = p;
+  }
+
+    public static PlayerSelector getCurrentPlayerSelector() {
+        return currentPlayerSelector;
+    }
 
     public static void main(String[] args)
     {
