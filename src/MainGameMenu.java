@@ -205,9 +205,11 @@ public class MainGameMenu extends JFrame implements ActionListener{
               JOptionPane.ERROR_MESSAGE);
       newPlayer();
   }
-  player.updateWins();
-  player.updateLosses();
-  player.updateDraws();
+  /*Automatically updates the wins,losses and draws to one each if implemented*/
+  //player.updateWins();
+  //player.updateLosses();
+ // player.updateDraws();
+
   JOptionPane.showMessageDialog(null,"This users's name has been added","User Added",
           JOptionPane.INFORMATION_MESSAGE);
      // player.setWins(Integer.parseInt(JOptionPane.showInputDialog("Please enter the starting number of wins(0 recommended)")));
@@ -229,7 +231,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
       JTextArea jta = new JTextArea();
       if(count > 0) {
           jta.setText("Users: \n\n");
-          for (int i = 1; i < players.size(); i++)//Loop of users with array list of users available for playing
+          for (int i = 0; i < players.size(); i++)//Loop of users with array list of users available for playing
              jta.append("User no: " + i + "\n" + players.get(i).toString() + "\n");
              JOptionPane.showMessageDialog(null,jta,"User List",JOptionPane.INFORMATION_MESSAGE);
       }

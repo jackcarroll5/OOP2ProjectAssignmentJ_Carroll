@@ -2,7 +2,7 @@
 import java.io.*;
 
 /**
- * This class will form the details of a person for the OOP2
+ * This class will form the details of a person/user for the OOP2
 * Project on the Tic Tac Toe game. It is an Instantiable class.
  * @author Jack Carroll
  * version 1.0*/
@@ -28,6 +28,7 @@ public class Person extends ButtonPresserXO implements Serializable{ //Serializa
         setName("");
     }//End of empty constructor
 
+
     /**Constructor method
      * @param name the player
      * @param wins of games
@@ -47,7 +48,7 @@ public class Person extends ButtonPresserXO implements Serializable{ //Serializa
     }
 
 
-    /**Mutator method to set the number of wins
+    /**Mutator method to update the number of wins
      *
      */
     public void updateWins() {
@@ -55,7 +56,7 @@ public class Person extends ButtonPresserXO implements Serializable{ //Serializa
     }
 
 
-    /**Mutator method to set the number of losses
+    /**Mutator method to update the number of losses
      *
      */
     public void updateLosses() {
@@ -63,12 +64,14 @@ public class Person extends ButtonPresserXO implements Serializable{ //Serializa
     }
 
 
-    /**Mutator method to set the number of draws
+    /**Mutator method to update the number of draws
      *
      */
     public void updateDraws() {
        draws++;
     }
+
+
 
     /**Accessor method to return the player's name
      *
@@ -78,6 +81,7 @@ public class Person extends ButtonPresserXO implements Serializable{ //Serializa
         return name;
     }
 
+
     /**Accessor method to return the number of wins for that player
      *
      * @return number of wins
@@ -86,6 +90,8 @@ public class Person extends ButtonPresserXO implements Serializable{ //Serializa
         return wins;
     }
 
+
+
     /**Accessor method to return the number of losses for that player
      *
      * @return number of losses
@@ -93,6 +99,8 @@ public class Person extends ButtonPresserXO implements Serializable{ //Serializa
     public int getLoss() {
         return losses;
     }
+
+
 
     /**Accessor method to return the number of draws for that player
      *
@@ -103,7 +111,10 @@ public class Person extends ButtonPresserXO implements Serializable{ //Serializa
     }
 
 
-
+    /*@Deprecated
+    Formerly interface methods for trying to update the wins, losses, draws and calculate the total number of games
+    played and the percentage of wins for the games.
+     */
     /**To set up the victories if the player wins and forming a percentage of victories
      * once the player gets 3 consecutive Xs or Os diagonally,vertically or horizontally in
      * a certain number of moves before nine moves are made and a draw occurs.*/
@@ -148,6 +159,9 @@ public class Person extends ButtonPresserXO implements Serializable{ //Serializa
     /**Creates method based on interface to increase the number of losses by
      * 1 if the player loses the game*/
     //@Override
+
+
+    /**Calculate the total number of games played for each player as the games progress*/
     public int totalGames() {
         return getWins() + getLoss() + getDraws();
     }
