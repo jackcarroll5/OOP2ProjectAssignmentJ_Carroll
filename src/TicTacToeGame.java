@@ -9,10 +9,26 @@ import java.awt.event.WindowEvent;
  * @author Jack Carroll
  * version 1.0*/
 
+//JB - removed all references to the interfaces PercentWinsAndLosses and PercentWins as their functionality is
+//contained within Person class
+//Removed all methods that were being overridden in these interfaces
+//added getters and setters to deal with keeping track of the indices of the first and second players in the combo-box
+//so they can be accessed elsewhere in the app and means you can update wins/losses/draws for a player and have that
+//render in the "new" combo-box (I'm really only hiding it and making it visible again)
+
 public class TicTacToeGame extends JFrame implements ActionListener {
     JMenu options;
     JPanel panel = new JPanel();//Panel for Tic Tac Toe Grid
     private static ButtonPresserXO XOButton[] = new ButtonPresserXO[9];//Buttons for pressing Xs and Os
+
+    /*Declares the numbers of the buttons where the victory conditions will apply to these arrays, when the user reaches these squares
+    with the Xs or Os*/
+    private static int[][] winRequirements = new int[][]{
+            {0,1,2},{3,4,5},{6,7,8}, //Horizontal cases
+            {0,4,8},{2,4,6},//Diagonal Cases
+            {0,3,6},{1,4,7},{2,4,6} // Vertical Cases
+    };
+    protected static boolean win = false;
 
     public TicTacToeGame() {
 
@@ -78,6 +94,9 @@ public class TicTacToeGame extends JFrame implements ActionListener {
                 setExtendedState(Frame.NORMAL);
             }
         });//End of Window Listener method for maximising the window of the frame.
+
+
+
     }//End of TicTacToeGame() class
 
     public void optMenu() {
@@ -93,13 +112,17 @@ public class TicTacToeGame extends JFrame implements ActionListener {
 
     }//End of optMenu() method
 
-    public static void setXOButton(ButtonPresserXO[] XOButton) {
+        /*Creates the win requirements represented by an array where the requirements are based on the 3 consecutive Xs and Os in a
+        * horizontal, vertical or diagonal way.*/
+
+
+   /* public static void setXOButton(ButtonPresserXO[] XOButton) {
         TicTacToeGame.XOButton = XOButton;
     }
 
     public static ButtonPresserXO[] getXOButton() {
         return XOButton;
-    }
+    }*/
 
     public static void main (String[] args){
             TicTacToeGame jfw = new TicTacToeGame();
@@ -108,6 +131,9 @@ public class TicTacToeGame extends JFrame implements ActionListener {
 
         @Override
         public void actionPerformed (ActionEvent e){
+
+
+
             if (e.getActionCommand().equals("Back")) {
                 dispose();//Switching to main menu when you press back by closing down game window and opening main menu window.
                 PlayerSelector playerSelector = new PlayerSelector();
@@ -124,4 +150,43 @@ public class TicTacToeGame extends JFrame implements ActionListener {
 
 
 
+
+    //Check for a win for player 1
+     /*Reference
+           Title: How do I close a JFrame while opening another one?
+           Author: Anon
+           Site Owner: stackoverflow.com
+           Date: 2011
+           Code version edited Nov 8'17 at 14:30
+           Availability: https://stackoverflow.com/questions/7256606/jdialog-setvisiblefalse-vs-dispose
+           (Accessed 7 November 2017)
+           Modified: Use dispose() based on JFrame extension
+                      Close down 1 JFrame when opening another JFrame*/
+    public static boolean isWin(boolean win) {
+            for(int i = 0; i <= 7; i++)
+    {
+        if (XOButton[winRequirements[i][0]].getText().equals(XOButton[winRequirements[i][1]].getText()) &&
+                XOButton[winRequirements[i][1]].getText().equals(XOButton[winRequirements[i][2]].getText()) &&
+                XOButton[winRequirements[i][0]].getText() != "")
+        {
+            win = true;
+        }
+        JOptionPane.showMessageDialog(null,"We have a winner!");
+    }
+        return win;
+    }
+    //Check for a win for player 2
+    public static boolean isWin1(boolean win) {
+        for(int i = 0; i <= 7; i++)
+        {
+            if (XOButton[winRequirements[i][0]].getText().equals(XOButton[winRequirements[i][1]].getText()) &&
+                    XOButton[winRequirements[i][1]].getText().equals(XOButton[winRequirements[i][2]].getText()) &&
+                    XOButton[winRequirements[i][0]].getText() != "")
+            {
+                win = true;
+            }
+            //JOptionPane.showMessageDialog(null,"We have a winner!");
+        }
+        return win;
+    }
 }//End of TicTacToeGame Class

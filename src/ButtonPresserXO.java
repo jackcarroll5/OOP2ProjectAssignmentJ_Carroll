@@ -7,6 +7,13 @@ import java.util.*;
  * @author Jack Carroll
  * version 1.0*/
 
+//JB - removed all references to the interfaces PercentWinsAndLosses and PercentWins as their functionality is
+//contained within Person class
+//Removed all methods that were being overridden in these interfaces
+//added getters and setters to deal with keeping track of the indices of the first and second players in the combo-box
+//so they can be accessed elsewhere in the app and means you can update wins/losses/draws for a player and have that
+//render in the "new" combo-box (I'm really only hiding it and making it visible again)
+
 /**An important class for determining the winner of the game and to display the percentage of games won and total games played at
  * the end of the game. Also updates the wins and losses for both players.*/
 
@@ -26,14 +33,15 @@ import java.util.*;
 public class ButtonPresserXO extends JButton implements ActionListener{
 
  private ImageIcon OIcon,XIcon;
-    Person user;
+    //Person user;
     int repeat = 100,wins = 0,losses = 0,draws = 0;
-    float winsPercentage;
+    //float winsPercentage;
     PlayerSelector ps;
    static ArrayList <Person> people;
    private static int switchTurn = 0;//Represents the player's turns
     //Represents cases for the numerous symbols of nothing,X and O.
-    ButtonPresserXO[] buttons = new ButtonPresserXO[9];
+
+    //ButtonPresserXO[] buttons = new ButtonPresserXO[9];
     Person firstPlayer, secondPlayer;
 
     public ButtonPresserXO()
@@ -57,13 +65,6 @@ public class ButtonPresserXO extends JButton implements ActionListener{
         /*Add X and O symbol when button is pressed.
         * Cases apply for the different symbols*/
         switchTurn++;
-
-
-
-
-
-
-
 
 
         /*Switching turns between players 1 and 2
@@ -94,7 +95,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                         JOptionPane.INFORMATION_MESSAGE);
 
             }
-            if (switchTurn % 2 == 0) {
+          else if (switchTurn % 2 == 0) {
                 setIcon(OIcon);
                 JOptionPane.showMessageDialog(null, "Player 1's Turn", "P1 Turn",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -102,10 +103,10 @@ public class ButtonPresserXO extends JButton implements ActionListener{
             }
 
 
-      /*If clause for winning the game if the player gets three xs or os in a diagonal,vertical or horizontal
+      /*If clause for winning the game if player 1 gets three xs in a diagonal,vertical or horizontal
        * row
        * The first player can end the game as early as five moves*/
-          if(switchTurn == 5 || switchTurn == 7 || switchTurn == 9)
+          if(TicTacToeGame.isWin(TicTacToeGame.win))
        {
        repeat = JOptionPane.showConfirmDialog(null,"Well Done! You have won this round. Pat on the back! "+
                "\nDo you want to play again","You Win!",JOptionPane.YES_NO_OPTION);
@@ -231,25 +232,6 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                     JOptionPane.showMessageDialog(null,"Runner-Up:\n" + secondPlayer,"Runner-Up",
                             JOptionPane.INFORMATION_MESSAGE);
 
-                    /*JOptionPane.showMessageDialog(null,"Winner:\n" + ps.getUserbox().getSelectedItem().toString(),"Winner",
-                            JOptionPane.INFORMATION_MESSAGE);*///Gets selected player for Player 1 from the PlayerSelector class.
-
-                    // ps.userbox.setSelectedItem(user);
-                   // ps.userbox2.setSelectedItem(user);
-
-                    //ps.setPlayers(people);
-                    //ps.getPlayers();
-
-                   /* ps = new PlayerSelector();
-                    ps.getUserbox2().setSelectedItem(people);
-                    ps.updateLosses();*/
-                    //JOptionPane.showMessageDialog(null,"Runner-Up:\n" + ps.getUserbox2().getSelectedItem().toString(),"Runner-Up",
-                            //JOptionPane.INFORMATION_MESSAGE);
-
-
-                   // ps.userbox.setSelectedItem(people);
-                    //ps.userbox2.setSelectedItem(people);
-                    //ps.winsPercentage(winsPercentage);
 
                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  (double)firstPlayer.getWins()/firstPlayer.totalGames()*100 + "%" +
                             "\nTotal Games Played: " + firstPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
@@ -259,16 +241,8 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                             "\nTotal Games Played: " + secondPlayer.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
 
 
-                    /*JOptionPane.showMessageDialog(null,"Wins percentage: " + ps.winsPercent(winsPercentage) + "%" +
-                    "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
-
-                    JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
-                            "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);*/
-
 
           JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
-                   /* JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
-                            "\nTotal Games Played: " + user.totalGames());*/
 
 
                     /*Should enable the game board to close and return to the main menu class where the TicTacToeGame class is disposed
@@ -290,10 +264,10 @@ public class ButtonPresserXO extends JButton implements ActionListener{
        }
 
 
-       /*If clause for losing the game if the player does not get three xs or os in a diagonal,vertical or horizontal
+       /*If clause for winning the game if player 1 gets three xs in a diagonal,vertical or horizontal
        * row
-       * The other player can win the game as erly as six moves*/
-        else if(switchTurn == 6 || switchTurn == 8)
+       * The second player can end the game as early as five moves*/
+        else if(TicTacToeGame.isWin1(TicTacToeGame.win))
         {
 
         //user.updateLosses();
@@ -454,8 +428,8 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
 
        /*If clause for a draw if no player gets three xs or os in a diagonal,vertical or horizontal
-       * row and ends up filling all of the squares*/
-     else if(switchTurn == 9) {
+       * row and ends up filling all of the 9 squares*/
+     else if(TicTacToeGame.win == false && switchTurn == 9) {
            repeat = JOptionPane.showConfirmDialog(null,"It's a draw! Great job to both players." +
                 "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
                  if(repeat == JOptionPane.YES_OPTION)  {
@@ -538,39 +512,6 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
                  }
       else {
-/*
-                     people = PlayerSelector.players;
-
-                     ps = new PlayerSelector();
-                     ps.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
-                     ps.updateDraws();
-                     JOptionPane.showMessageDialog(null,ps.getUserbox().getSelectedItem().toString());//Gets selected player for Player 1 from the PlayerSelector class.
-
-
-                     ps = new PlayerSelector();
-                     ps.getUserbox2().setSelectedItem(people);
-                     ps.updateDraws();
-                     JOptionPane.showMessageDialog(null,ps.getUserbox2().getSelectedItem().toString());
-
-                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
-                             "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
-
-                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
-                             "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
-
-                     /*JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
-                         "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
-
-
-                     //     JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
-
-         /* TicTacToeGame ttt = new TicTacToeGame();
-          ttt.setVisible(false);
-          ttt.dispose();
-
-          MainGameMenu TicTT = new MainGameMenu();
-          TicTT.setVisible(true);*/
-
 
                      people = PlayerSelector.players;
                      ps = MainGameMenu.getCurrentPlayerSelector();
@@ -602,6 +543,39 @@ public class ButtonPresserXO extends JButton implements ActionListener{
                      MainGameMenu.setCurrentGame(tacToeGame);
 
                      switchTurn = 0;
+
+                   /*  people = PlayerSelector.players;
+
+                     ps = new PlayerSelector();
+                     ps.getUserbox().setSelectedItem(people);//Based on the getUserbox() method introduced in PlayerSelector class
+                     ps.updateDraws();
+                     JOptionPane.showMessageDialog(null,ps.getUserbox().getSelectedItem().toString());//Gets selected player for Player 1 from the PlayerSelector class.
+
+
+                     ps = new PlayerSelector();
+                     ps.getUserbox2().setSelectedItem(people);
+                     ps.updateDraws();
+                     JOptionPane.showMessageDialog(null,ps.getUserbox2().getSelectedItem().toString());
+
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+
+                     JOptionPane.showMessageDialog(null,"Wins percentage: " +  ps.winsPercent(winsPercentage) + "%" +
+                             "\nTotal Games Played: " + ps.totalGames(),"Result",JOptionPane.INFORMATION_MESSAGE);
+
+                     /*JOptionPane.showMessageDialog(null,"Wins percentage: " +  user.winsPercentage(percentWins) +
+                         "\nTotal Games Played: " + user.totalGames(),"Wins Percentage",JOptionPane.INFORMATION_MESSAGE);*/
+
+
+                     //     JOptionPane.showMessageDialog(null,"Returning to the main menu","Main Menu Return",JOptionPane.INFORMATION_MESSAGE);
+
+         /* TicTacToeGame ttt = new TicTacToeGame();
+          ttt.setVisible(false);
+          ttt.dispose();
+
+          MainGameMenu TicTT = new MainGameMenu();
+          TicTT.setVisible(true);*/
+
                  }
 
           }

@@ -41,6 +41,7 @@ public class PlayerSelector extends JFrame implements ActionListener /*,PercentW
      /*User Items are added to the combo box using the enhanced for loop*/
 
 
+     //Adding dummy players to show off the instance of players
      Person p1 = new Person("John",0,0,0);
      Person p2 = new Person("Anna",0,0,0);
      Person p3 = new Person("Amy",0,0,0);
@@ -51,6 +52,8 @@ public class PlayerSelector extends JFrame implements ActionListener /*,PercentW
      players.add(p3);
      players.add(p4);
 
+
+     //Enhanced for loop to add the user array to the combobox
      for (Person p : players)
      {
          userbox.addItem(p);
@@ -61,20 +64,20 @@ public class PlayerSelector extends JFrame implements ActionListener /*,PercentW
          userbox2.addItem(p);
      }*/
 
-     userbox.setVisible(true);
-     //userbox2.setVisible(true); //Allow both combo boxes to appear.
+     userbox.setVisible(true);//Allowcombo box to appear.
+     //userbox2.setVisible(true);
 
      userbox.setSelectedIndex(0); //Presets first item of the first user added to the program
      //userbox2.setSelectedIndex(1);
 
-     userbox.getSelectedIndex();
+     userbox.getSelectedIndex();//Gets first item of the first user added to the program
      //userbox2.getSelectedIndex();
 
-     userbox.addActionListener(this);
+     userbox.addActionListener(this);//Adds action listener to userbox when a player is selected
      //userbox2.addActionListener(this);
 
-     add(userbox);
-     //add(userbox2); //Adding both combo boxes to the JFrame
+     add(userbox);//Add both combobox to the JFrame
+     //add(userbox2);
 
      //userbox2.setLocation(300,300);
 
@@ -146,6 +149,7 @@ public class PlayerSelector extends JFrame implements ActionListener /*,PercentW
        //userbox.getSelectedIndex();
 
 
+        /*To select player 1 and add the number of players selected for a 2 player game.*/
         if(numPlayerSelected == 0)
         {
            indexFirstPlayer = userbox.getSelectedIndex();
@@ -153,17 +157,24 @@ public class PlayerSelector extends JFrame implements ActionListener /*,PercentW
                     JOptionPane.INFORMATION_MESSAGE);
             numPlayerSelected++;
         }
+
+        /*Validate player 1 already selected if same name chosen again*/
          else
              if (userbox.getSelectedIndex() == indexFirstPlayer){
                  JOptionPane.showMessageDialog(null, "You have already selected \n" +  userbox.getSelectedItem().toString() + " as Player 1","Same Player Selection",
                          JOptionPane.INFORMATION_MESSAGE);
         }
+
+        /*To select player 2 for a 2 player game.*/
         else{
                  JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox.getSelectedItem().toString() + " as Player 2","Player 2 Selection",
                          JOptionPane.INFORMATION_MESSAGE);
                  numPlayerSelected++;
                 indexSecondPlayer = userbox.getSelectedIndex();
              }
+
+             /*To vanish the combobox and frame when all two players are selected and the number of players reset to zero
+             * for another game.*/
              if(numPlayerSelected == 2)
              {
                  dispose();
@@ -235,21 +246,26 @@ public class PlayerSelector extends JFrame implements ActionListener /*,PercentW
     }
 */
 
+
+  //Sets up the first player listed as an example before a game
   public void setIndexOfFirstPlayer(int index)
   {
      indexFirstPlayer = index;
   }
 
+    //Gets the first player listed as an example before a game
     public int getIndexFirstPlayer()
     {
         return indexFirstPlayer;
     }
 
+    //Sets the second player listed as an example before a game
     public void setIndexSecondPlayer(int index)
     {
         indexSecondPlayer = index;
     }
 
+    //Gets the second player listed as an example before a game
     public int getIndexSecondPlayer()
     {
         return indexSecondPlayer;

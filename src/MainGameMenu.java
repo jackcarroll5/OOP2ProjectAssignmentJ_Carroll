@@ -19,7 +19,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
     int count;//No of users in array
     JButton userAdd,play;
     static TicTacToeGame currentGame; //Attribute to represent current game taking place in Tic Tac Toe
-   static PlayerSelector currentPlayerSelector; //Attribute to represent the current player selected
+   static PlayerSelector currentPlayerSelector; //Attribute to represent the current player selected regardless of the player number
 
 
   public MainGameMenu()
@@ -42,8 +42,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//Default close operation where the app does not close when action performed
 
 
-
-    createGameMenu();//Adds menus to the MenuBar
+//Adds menus to the MenuBar
+    createGameMenu();
       createPlayerMenu();
       createFileMenu();
 
@@ -141,7 +141,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
   public void saveUser() throws IOException
   {
       File userFile = new File("Users.dat");
-      FileOutputStream fos = new FileOutputStream(userFile);
+      FileOutputStream fos = new FileOutputStream(userFile,false);
       ObjectOutputStream oos = new ObjectOutputStream(fos);
       oos.writeObject(players);
       oos.close();
@@ -198,13 +198,15 @@ public class MainGameMenu extends JFrame implements ActionListener{
   public void newPlayer()
   {
    Person player = new Person(); //Create new user by using an instance of Person.
+
   player.setName(JOptionPane.showInputDialog("Please enter a user name for registration"));
   if(player.getName().equals(""))
   {
       JOptionPane.showMessageDialog(null,"The person's name has not been entered. Please fill in a name!","No name",
               JOptionPane.ERROR_MESSAGE);
-      newPlayer();
+      newPlayer(); //Establishes the player with no wins, losses, draws and games in general.
   }
+
   /*Automatically updates the wins,losses and draws to one each if implemented*/
   //player.updateWins();
   //player.updateLosses();
@@ -220,6 +222,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
  players.add(player);
 
  count++; //Increase users by 1 until list reaches 5.
+
   }//End of newPlayer() method
 
 
@@ -296,7 +299,9 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-     if (e.getActionCommand().equals("Info")){ //If Info button pressed,Message shows up of how to play game
+
+     if (e.getActionCommand().equals("Info"))
+     { //If Info button pressed,Message shows up of how to play game
          JOptionPane.showMessageDialog(null,"How to play Tic Tac Toe?\n\n" +
          "The aim of the game is to get 3 consecutive Xs or 3 Os in a horizontal,vertical or a " +
                  "diagonal direction in a row to win the game.\nOne player uses the X while the other uses the O.\nIf no one gets the 3 in one direction and all " +
@@ -327,12 +332,12 @@ public class MainGameMenu extends JFrame implements ActionListener{
              JOptionPane.showMessageDialog(null,"Save Successful! File has been saved","Saved File",JOptionPane.INFORMATION_MESSAGE);
          }//End of try
 
-
           catch (IOException e1) {
              JOptionPane.showMessageDialog(null,"File could not be saved! Please" +
                      "check out console printout for further action","Save Failed!",JOptionPane.ERROR_MESSAGE);
              e1.printStackTrace();
          }//End of catch
+
      }//End of else if for saving array of users.
 
      else if(e.getActionCommand().equals("Play"))
@@ -349,10 +354,17 @@ public class MainGameMenu extends JFrame implements ActionListener{
            Modified: Use dispose() based on JFrame extension
                       Close down 1 JFrame when opening another JFrame*/
 
+
+           //Sets up the player selection menu and makes it visible.
           PlayerSelector ps = new PlayerSelector();
           ps.setVisible(true);
+
+
+          //Makes the new game visible.
           currentGame = new TicTacToeGame();
           currentGame.setVisible(true);
+
+          //Creates a new game
           MainGameMenu.setCurrentGame(currentGame);
 
      }
@@ -367,11 +379,12 @@ public class MainGameMenu extends JFrame implements ActionListener{
     }//End of actionPerformed method
 
 
+    //Sets up current game running to begin a new game
     public static void setCurrentGame(TicTacToeGame game){
         currentGame = game;
     }
 
-
+    //Gets current game running to dispose itself and end after the results of the running game are revealed and updated
     public static TicTacToeGame getCurrentGame(){
         return currentGame;
     }
@@ -382,6 +395,9 @@ public class MainGameMenu extends JFrame implements ActionListener{
       currentPlayerSelector = p;
   }
 
+
+
+  //Gets the list of players who are all part of the game list of players.
     public static PlayerSelector getCurrentPlayerSelector() {
         return currentPlayerSelector;
     }
