@@ -153,15 +153,16 @@ public class TicTacToeGame extends JFrame implements ActionListener {
 
     //Check for a win for player 1
      /*Reference
-           Title: How do I close a JFrame while opening another one?
+           Title: Java:Tutorial - Tic-Tac-Toe
            Author: Anon
-           Site Owner: stackoverflow.com
-           Date: 2011
-           Code version edited Nov 8'17 at 14:30
-           Availability: https://stackoverflow.com/questions/7256606/jdialog-setvisiblefalse-vs-dispose
-           (Accessed 7 November 2017)
-           Modified: Use dispose() based on JFrame extension
-                      Close down 1 JFrame when opening another JFrame*/
+           Site Owner: forum.codecall.net
+           Date: 2007
+           Code version edited Nov 28'17 at 15:00
+           Availability: http://forum.codecall.net/topic/36472-javatutorial-tic-tac-toe/page-3
+           (Accessed 28 November 2017)
+           Modified: Created two methods for checking the victory conditions for player 1 and 2
+           and edited the attribute names to make it my own original names to use them for the victory
+           conditions.*/
     public static boolean isWin(boolean win) {
             for(int i = 0; i <= 7; i++)
     {
@@ -174,7 +175,8 @@ public class TicTacToeGame extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null,"We have a winner!");
     }
         return win;
-    }
+    }//End of isWin() method
+
     //Check for a win for player 2
     public static boolean isWin1(boolean win) {
         for(int i = 0; i <= 7; i++)
@@ -188,5 +190,5 @@ public class TicTacToeGame extends JFrame implements ActionListener {
             //JOptionPane.showMessageDialog(null,"We have a winner!");
         }
         return win;
-    }
+    }//End of isWin1() method
 }//End of TicTacToeGame Class

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class PlayerSelector extends JFrame implements ActionListener /*,PercentWinsAndLosses,PercentWins*/ {
    JComboBox userbox,userbox2;
   static ArrayList <Person> players;
-  int wins, losses, draws, numPlayerSelected = 0;
+  int numPlayerSelected = 0;
   int indexFirstPlayer, indexSecondPlayer;
 
  public PlayerSelector()

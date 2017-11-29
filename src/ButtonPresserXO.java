@@ -34,7 +34,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
  private ImageIcon OIcon,XIcon;
     //Person user;
-    int repeat = 100,wins = 0,losses = 0,draws = 0;
+    int repeat = 100;
     //float winsPercentage;
     PlayerSelector ps;
    static ArrayList <Person> people;
