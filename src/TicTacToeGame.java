@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Objects;
 
 /**
  * @author Jack Carroll
@@ -17,8 +18,8 @@ import java.awt.event.WindowEvent;
 //render in the "new" combo-box (I'm really only hiding it and making it visible again)
 
 public class TicTacToeGame extends JFrame implements ActionListener {
-    JMenu options;
-    JPanel panel = new JPanel();//Panel for Tic Tac Toe Grid
+    private JMenu options;
+    private JPanel panel = new JPanel();//Panel for Tic Tac Toe Grid
     private static ButtonPresserXO XOButton[] = new ButtonPresserXO[9];//Buttons for pressing Xs and Os
 
     /*Declares the numbers of the buttons where the victory conditions will apply to these arrays, when the user reaches these squares
@@ -26,9 +27,13 @@ public class TicTacToeGame extends JFrame implements ActionListener {
     private static int[][] winRequirements = new int[][]{
             {0,1,2},{3,4,5},{6,7,8}, //Horizontal cases
             {0,4,8},{2,4,6},//Diagonal Cases
-            {0,3,6},{1,4,7},{2,4,6} // Vertical Cases
+            {0,3,6},{1,4,7},{2,5,8} // Vertical Cases
     };
     protected static boolean win = false;
+
+    static int no1 = 1;
+    static int no2 = 1;
+   static int no3 = 1;
 
     public TicTacToeGame() {
 
@@ -163,18 +168,21 @@ public class TicTacToeGame extends JFrame implements ActionListener {
            Modified: Created two methods for checking the victory conditions for player 1 and 2
            and edited the attribute names to make it my own original names to use them for the victory
            conditions.*/
-    public static boolean isWin(boolean win) {
-            for(int i = 0; i <= 7; i++)
-    {
-        if (XOButton[winRequirements[i][0]].getText().equals(XOButton[winRequirements[i][1]].getText()) &&
-                XOButton[winRequirements[i][1]].getText().equals(XOButton[winRequirements[i][2]].getText()) &&
-                XOButton[winRequirements[i][0]].getText() != "")
-        {
-            win = true;
+    public static boolean isWin(boolean victory) {
+
+        for (int i = 0; i <= 7; i++) {
+            if (XOButton[winRequirements[i][0]].getText().equals(XOButton[winRequirements[i][1]].getText()) &&
+                    XOButton[winRequirements[i][1]].getText().equals(XOButton[winRequirements[i][2]].getText()) &&
+                    !XOButton[winRequirements[i][0]].getText().equals("")) {
+
+                no1 = winRequirements[i][0];
+                no2 = winRequirements[i][1];
+                no3 = winRequirements[i][2];
+                JOptionPane.showMessageDialog(null, "We have a winner! Player 1");
+                victory = true;
+            }
         }
-        JOptionPane.showMessageDialog(null,"We have a winner!");
-    }
-        return win;
+         return victory;
     }//End of isWin() method
 
     //Check for a win for player 2
@@ -186,8 +194,9 @@ public class TicTacToeGame extends JFrame implements ActionListener {
                     XOButton[winRequirements[i][0]].getText() != "")
             {
                 win = true;
+                 JOptionPane.showMessageDialog(null,"We have a winner! Player 2");
             }
-            //JOptionPane.showMessageDialog(null,"We have a winner!");
+
         }
         return win;
     }//End of isWin1() method

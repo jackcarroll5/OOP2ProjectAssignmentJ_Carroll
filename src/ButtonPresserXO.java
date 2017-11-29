@@ -34,15 +34,15 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
  private ImageIcon OIcon,XIcon;
     //Person user;
-    int repeat = 100;
+    private int repeat = 100;
     //float winsPercentage;
-    PlayerSelector ps;
+    private PlayerSelector ps;
    static ArrayList <Person> people;
    private static int switchTurn = 0;//Represents the player's turns
     //Represents cases for the numerous symbols of nothing,X and O.
 
     //ButtonPresserXO[] buttons = new ButtonPresserXO[9];
-    Person firstPlayer, secondPlayer;
+    private Person firstPlayer, secondPlayer;
 
     public ButtonPresserXO()
     {
@@ -106,7 +106,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
       /*If clause for winning the game if player 1 gets three xs in a diagonal,vertical or horizontal
        * row
        * The first player can end the game as early as five moves*/
-          if(TicTacToeGame.isWin(TicTacToeGame.win))
+        if(TicTacToeGame.isWin(true))
        {
        repeat = JOptionPane.showConfirmDialog(null,"Well Done! You have won this round. Pat on the back! "+
                "\nDo you want to play again","You Win!",JOptionPane.YES_NO_OPTION);
@@ -429,7 +429,7 @@ public class ButtonPresserXO extends JButton implements ActionListener{
 
        /*If clause for a draw if no player gets three xs or os in a diagonal,vertical or horizontal
        * row and ends up filling all of the 9 squares*/
-     else if(TicTacToeGame.win == false && switchTurn == 9) {
+     else if(!TicTacToeGame.win && switchTurn == 9) {
            repeat = JOptionPane.showConfirmDialog(null,"It's a draw! Great job to both players." +
                 "\nDo you want to play again","Draw",JOptionPane.YES_NO_OPTION);
                  if(repeat == JOptionPane.YES_OPTION)  {

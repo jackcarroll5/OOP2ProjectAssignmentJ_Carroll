@@ -14,12 +14,12 @@ import java.util.*;
 
 public class MainGameMenu extends JFrame implements ActionListener{
 
-    JMenu gameMenu,playerMenu,fileMenu;
+    private JMenu gameMenu,playerMenu,fileMenu;
     static ArrayList <Person>  players;//Array of users
-    int count;//No of users in array
-    JButton userAdd,play;
-    static TicTacToeGame currentGame; //Attribute to represent current game taking place in Tic Tac Toe
-   static PlayerSelector currentPlayerSelector; //Attribute to represent the current player selected regardless of the player number
+   private int count;//No of users in array
+  private JButton userAdd,play;
+    private static TicTacToeGame currentGame; //Attribute to represent current game taking place in Tic Tac Toe
+   private static PlayerSelector currentPlayerSelector; //Attribute to represent the current player selected regardless of the player number
 
 
   public MainGameMenu()
