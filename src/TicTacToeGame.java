@@ -60,10 +60,12 @@ public class TicTacToeGame extends JFrame implements ActionListener {
 
         optMenu();//Method for options menu in effect
 
-        /*Adds the menu var to the top of the JFrame in this class*/
+
+        /*Adds the menu bar to the top of the JFrame in this class*/
         JMenuBar jmb = new JMenuBar();
         setJMenuBar(jmb);
         jmb.add(options);
+
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -84,6 +86,8 @@ public class TicTacToeGame extends JFrame implements ActionListener {
             }//End of windowClosing() void class
         });//End of Window Listener class for closing window of game.
 
+
+        /*Window Listener for minimizing the window during the game*/
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowIconified (WindowEvent e){
@@ -92,6 +96,7 @@ public class TicTacToeGame extends JFrame implements ActionListener {
             }
         });//End of Window Listener method for minimising the window of the frame.
 
+        /*Window Listener for maximizing the window during the game*/
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowDeiconified(WindowEvent e) {
@@ -100,11 +105,9 @@ public class TicTacToeGame extends JFrame implements ActionListener {
             }
         });//End of Window Listener method for maximising the window of the frame.
 
-
-
     }//End of TicTacToeGame() class
 
-    public void optMenu() {
+    private void optMenu() {
         options = new JMenu("Options");
 
         JMenuItem item = new JMenuItem("Back");
@@ -114,20 +117,8 @@ public class TicTacToeGame extends JFrame implements ActionListener {
         item = new JMenuItem("Quit");
         item.addActionListener(this);
         options.add(item);
-
     }//End of optMenu() method
 
-        /*Creates the win requirements represented by an array where the requirements are based on the 3 consecutive Xs and Os in a
-        * horizontal, vertical or diagonal way.*/
-
-
-   /* public static void setXOButton(ButtonPresserXO[] XOButton) {
-        TicTacToeGame.XOButton = XOButton;
-    }
-
-    public static ButtonPresserXO[] getXOButton() {
-        return XOButton;
-    }*/
 
     public static void main (String[] args){
             TicTacToeGame jfw = new TicTacToeGame();
@@ -137,15 +128,19 @@ public class TicTacToeGame extends JFrame implements ActionListener {
         @Override
         public void actionPerformed (ActionEvent e){
 
-
-
             if (e.getActionCommand().equals("Back")) {
-                dispose();//Switching to main menu when you press back by closing down game window and opening main menu window.
+                //Switching to main menu when you press back by closing down game window and opening main menu window.
+                 dispose();
                 PlayerSelector playerSelector = new PlayerSelector();
                 playerSelector.setVisible(false);
+                playerSelector.setIndexOfFirstPlayer(-1);
+                playerSelector.setIndexSecondPlayer(-1);
+                MainGameMenu.getCurrentGame().dispose();
+                MainGameMenu.getCurrentGame().setVisible(false);
                 MainGameMenu mnu = new MainGameMenu();
                 mnu.setVisible(true);
 
+              /*If the player clicks on the Quit menu item button.*/
             } else if (e.getActionCommand().equals("Quit")) {
                 JOptionPane.showMessageDialog(null, "Shutting the game down. End of Game! Goodbye!", "Quit", JOptionPane.WARNING_MESSAGE);
                 System.exit(0);
@@ -154,10 +149,11 @@ public class TicTacToeGame extends JFrame implements ActionListener {
         }//End of method for actionPerformed when pressing menu options.
 
 
-
-
-    //Check for a win for player 1
-     /*Reference
+    /**Check for a win for player 1 depending on diagonal, vertical or horizontal directions to win game
+     *@param victory for the player 1 when the diagonal, vertical or horizontal directions for 3 consecutive Xs are reached
+     * @return the win for player one once the X reaches the 3 consecutive Xs horizontally
+     * vertically or diagonally and display the output message through the ButtonPresserXO class*/
+    /* Reference
            Title: Java:Tutorial - Tic-Tac-Toe
            Author: Anon
            Site Owner: forum.codecall.net
@@ -178,26 +174,30 @@ public class TicTacToeGame extends JFrame implements ActionListener {
                 no1 = winRequirements[i][0];
                 no2 = winRequirements[i][1];
                 no3 = winRequirements[i][2];
-                JOptionPane.showMessageDialog(null, "We have a winner! Player 1");
+                JOptionPane.showMessageDialog(null, "We have a winner! Player 1","Game Over",JOptionPane.INFORMATION_MESSAGE);
                 victory = true;
             }
         }
          return victory;
     }//End of isWin() method
 
-    //Check for a win for player 2
-    public static boolean isWin1(boolean win) {
+    /**Check for a win for player 2 depending on diagonal, vertical or horizontal directions to win game.
+     * @param wins for the player 2 when the diagonal, vertical or horizontal directions for 3 consecutive Xs are reached.
+     * @return the victory for player 2 and display the output message through the ButtonPresserXO class*/
+    public static boolean isWin1(boolean wins) {
         for(int i = 0; i <= 7; i++)
         {
             if (XOButton[winRequirements[i][0]].getText().equals(XOButton[winRequirements[i][1]].getText()) &&
                     XOButton[winRequirements[i][1]].getText().equals(XOButton[winRequirements[i][2]].getText()) &&
-                    XOButton[winRequirements[i][0]].getText() != "")
+                    !XOButton[winRequirements[i][0]].getText().equals(""))
             {
-                win = true;
-                 JOptionPane.showMessageDialog(null,"We have a winner! Player 2");
+                no1 = winRequirements[i][0];
+                no2 = winRequirements[i][1];
+                no3 = winRequirements[i][2];
+                 JOptionPane.showMessageDialog(null,"We have a winner! Player 2","End Game",JOptionPane.INFORMATION_MESSAGE);
+                 wins = true;
             }
-
         }
-        return win;
+        return wins;
     }//End of isWin1() method
 }//End of TicTacToeGame Class

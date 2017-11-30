@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.*;
 
 /**
+ * This class sets up the main menu of Xs and Os with menu items for playing the game, registering new players and loading / saving
+ * files of users.
 * @author Jack Carroll
         * version 1.0*/
 
@@ -60,13 +62,17 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
       play = new JButton("Play Game");
       play.setPreferredSize(new Dimension(4,25));
-      add(play,BorderLayout.PAGE_START);//Place the play game button at the top of the frame just below the menu bar.
+
+      //Place the play game button at the top of the frame just below the menu bar.
+      add(play,BorderLayout.PAGE_START);
 
 
 
   userAdd = new JButton("Add User");
    userAdd.setPreferredSize(new Dimension(10,25));
-    add(userAdd,BorderLayout.SOUTH);//Place the add user game button at the bottom of the frame.
+
+   //Place the add user game button at the bottom of the frame.
+    add(userAdd,BorderLayout.SOUTH);
 
 
 
@@ -79,6 +85,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
 
 
+     /*Signals when the close button is pressed so the program can ask the user if you want to quit the game.*/
     addWindowListener(new WindowAdapter() {
       @Override
       /*When the window is closing, user given a choice to keep playing the game and keep
@@ -113,8 +120,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
       });
 
       //Example of Players for the game to be added alongside the array list of the remaining users
-      players.add(new Person("Jake",0,0,0));
-      players.add(new Person("Emily",0,0,0));
+      players.add(new Person("Jake",1,0,0));
+      players.add(new Person("Emily",1,0,0));
 
       addWindowListener(new WindowAdapter() {
           @Override
@@ -138,7 +145,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
   /*Initiate process to save the user file for future use of the game
   * by placing the user players array into Users.dat*/
-  public void saveUser() throws IOException
+  private void saveUser() throws IOException
   {
       File userFile = new File("Users.dat");
       FileOutputStream fos = new FileOutputStream(userFile,false);
@@ -150,7 +157,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
 
   /*Loads array of users from Users.dat file*/
-  public void load()
+  private void load()
   {
       count = 1;
      try {
@@ -186,7 +193,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
 
 
-  public void newSys(){
+  private void newSys(){
      players = new ArrayList<>(); //Form new player array list to be displayed and list them later on
 
   }//End of newSys() Class
@@ -195,7 +202,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
 
   //Method to register new player for game
-  public void newPlayer()
+  private void newPlayer()
   {
    Person player = new Person(); //Create new user by using an instance of Person.
 
@@ -229,7 +236,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
 
   //Show list of players in JTextArea
-  public void showUser()
+  private void showUser()
   {
       JTextArea jta = new JTextArea();
       if(count > 0) {
@@ -246,8 +253,8 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
 
 
-  //Create the Game menu segment containing the items to play the game and display the rules of the game
- public void createGameMenu(){
+  /**Create the Game menu segment containing the items to play the game and display the rules of the game*/
+ private void createGameMenu(){
       //Creating the Game menu
   gameMenu = new JMenu("Game");
 
@@ -262,7 +269,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
 
 
-    public void createPlayerMenu(){
+   private void createPlayerMenu(){
         //Creating the Player menu
         playerMenu = new JMenu("User");
 
@@ -282,7 +289,7 @@ public class MainGameMenu extends JFrame implements ActionListener{
 
 
 
-    public void createFileMenu(){
+    private void createFileMenu(){
         //Creating the File menu
         fileMenu = new JMenu("File");
 
@@ -379,25 +386,33 @@ public class MainGameMenu extends JFrame implements ActionListener{
     }//End of actionPerformed method
 
 
-    //Sets up current game running to begin a new game
+    /**Sets up current game running to begin a new game
+     * @param game being played at the moment*/
     public static void setCurrentGame(TicTacToeGame game){
         currentGame = game;
     }
 
-    //Gets current game running to dispose itself and end after the results of the running game are revealed and updated
+    /**Gets current game running to dispose itself and end after the results of the running game are revealed and updated
+     *
+     * @return the current game being played
+     */
     public static TicTacToeGame getCurrentGame(){
         return currentGame;
     }
 
 
+    /**Sets the players who are part of the game
+     * @param p of the player currently selected for the game*/
   public static void setCurrentPlayerSelector(PlayerSelector p)
   {
       currentPlayerSelector = p;
   }
 
 
-
-  //Gets the list of players who are all part of the game list of players.
+    /**Gets the players who are part of the game
+     *
+     * @return the current player selected for the game
+     */
     public static PlayerSelector getCurrentPlayerSelector() {
         return currentPlayerSelector;
     }

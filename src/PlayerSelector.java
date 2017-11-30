@@ -126,14 +126,13 @@ public class PlayerSelector extends JFrame implements ActionListener /*,PercentW
 
 
 
-    /*Allows the user to retrieve the selected player from the combo box to be used in the ButtonPresserXO Class*/
+    /**Allows the user to retrieve the selected player from the combo box to be used in the ButtonPresserXO Class
+     *
+    *@return combobox for the player selection menu*/
     public JComboBox getUserbox() {
         return userbox;
     }
 
-    public JComboBox getUserbox2() {
-        return userbox2;
-    }
 
     /*Intended to select player and save its details while the game is played
             * Player 2 should then be selected
@@ -167,7 +166,7 @@ public class PlayerSelector extends JFrame implements ActionListener /*,PercentW
 
         /*To select player 2 for a 2 player game.*/
         else{
-                 JOptionPane.showMessageDialog(null, "You have selected \n" +  userbox.getSelectedItem().toString() + " as Player 2","Player 2 Selection",
+                 JOptionPane.showMessageDialog(null, "You have chosen \n" +  userbox.getSelectedItem().toString() + " as Player 2","Player 2 Selection",
                          JOptionPane.INFORMATION_MESSAGE);
                  numPlayerSelected++;
                 indexSecondPlayer = userbox.getSelectedIndex();
@@ -247,25 +246,29 @@ public class PlayerSelector extends JFrame implements ActionListener /*,PercentW
 */
 
 
-  //Sets up the first player listed as an example before a game
+  /**Sets up the first player listed as an example in the combobox before a game
+    *@param index of first player in combobox*/
   public void setIndexOfFirstPlayer(int index)
   {
      indexFirstPlayer = index;
   }
 
-    //Gets the first player listed as an example before a game
+    /**Gets the first player listed as an example in the combobox before a game
+    *@return index of first player in combobox menu of player selection */
     public int getIndexFirstPlayer()
     {
         return indexFirstPlayer;
     }
 
-    //Sets the second player listed as an example before a game
+    /**Sets the second player listed as an example in the combobox before a game
+    *@param index of second player in combobox*/
     public void setIndexSecondPlayer(int index)
     {
         indexSecondPlayer = index;
     }
 
-    //Gets the second player listed as an example before a game
+    /**Gets the second player listed as an example in the combobox before a game
+    *@return index of second player in combobox menu of player selection*/
     public int getIndexSecondPlayer()
     {
         return indexSecondPlayer;

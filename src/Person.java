@@ -14,7 +14,7 @@ import java.io.*;
 //application and are doing more harm than good
 
 public class Person extends ButtonPresserXO implements Serializable{ //Serializable required for saving
-    //attributes
+    /**attributes*/
     private String name;
     private int wins;
     private int losses;
@@ -115,10 +115,7 @@ public class Person extends ButtonPresserXO implements Serializable{ //Serializa
     Formerly interface methods for trying to update the wins, losses, draws and calculate the total number of games
     played and the percentage of wins for the games.
      */
-    /**To set up the victories if the player wins and forming a percentage of victories
-     * once the player gets 3 consecutive Xs or Os diagonally,vertically or horizontally in
-     * a certain number of moves before nine moves are made and a draw occurs.*/
-   /* @Override
+    /* @Override
     public float winsPercent(float percent) {
         setWins(getWins() /  (getWins() + getLoss() + getDraws()) * 100);
         return percent;
@@ -131,37 +128,30 @@ public class Person extends ButtonPresserXO implements Serializable{ //Serializa
 
 
 
-    /**Establishing interface method for incrementing the number of victories
-     * for a player by 1 if the player wins.*/
-   /* public void updateVictories() {
+    /* public void updateVictories() {
         setWins(getWins() + 1);
     }*/
 
 
 
-    /**Creates method based on interface to increase the number of losses by
-     * 1 if the player loses the game*/
-   /* public void updateLosses() {
+    /* public void updateLosses() {
         setLoss(getLoss() + 1);
     }*/
 
 
 
-    /**Creates method based on interface to increase the number of draws by
-     * 1 if the player loses the game*/
-   /* @Override
+    /* @Override
     public void updateDraws() {
         setDraws(getDraws() + 1);
     }/*
 
 
-
     /**Creates method based on interface to increase the number of losses by
      * 1 if the player loses the game*/
-    //@Override
 
 
-    /**Calculate the total number of games played for each player as the games progress*/
+    /**Calculate the total number of games played for each player as the games progress
+     * @return total number of games*/
     public int totalGames() {
         return getWins() + getLoss() + getDraws();
     }
@@ -174,5 +164,6 @@ public class Person extends ButtonPresserXO implements Serializable{ //Serializa
     @Override
     public String toString() {
         return String.format("Name: %4s  Wins:%3d  Losses:%3d  Draws:%3d",getName(),getWins(),getLoss(),getDraws());
-    }
-}//End of class
+    }/**End of toString() method*/
+
+}/**End of class*/
